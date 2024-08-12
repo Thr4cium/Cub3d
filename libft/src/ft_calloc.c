@@ -1,13 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mguy <mguy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/12 08:24:17 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/12 08:36:10 by rolamber         ###   ########.fr       */
+/*   Created: 2023/11/09 17:31:38 by mguy              #+#    #+#             */
+/*   Updated: 2024/01/17 08:44:07 by mguy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../libft.h"
+
+void	*ft_calloc(size_t EltCount, size_t EltSize)
+{
+	void	*temp;
+
+	temp = malloc(EltCount * EltSize);
+	if (temp == NULL)
+		return (NULL);
+	ft_bzero(temp, EltCount * EltSize);
+	return (temp);
+}
