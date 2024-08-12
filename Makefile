@@ -6,7 +6,7 @@
 #    By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/12 08:27:52 by rolamber          #+#    #+#              #
-#    Updated: 2024/08/12 08:35:51 by rolamber         ###   ########.fr        #
+#    Updated: 2024/08/12 10:36:49 by rolamber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ NAME = cub3D
 
 SRC_DIR = srcs/
 OBJ_DIR = objs/
-INC_DIR = include/
+INC_DIR = headers/
 LIB_DIR = libft/
 
 SRC = $(addsuffix .c, $(addprefix srcs/exec/, $(EXEC))) \
