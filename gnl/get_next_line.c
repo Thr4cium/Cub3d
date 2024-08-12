@@ -6,11 +6,11 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 11:15:18 by rolamber          #+#    #+#             */
-/*   Updated: 2024/01/13 19:23:08 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/12 13:19:27 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../headers/get_next_line.h"
 
 char	*buffswap(char *buffer)
 {
@@ -28,7 +28,7 @@ char	*buffswap(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
-	final_buffer = ft_calloc(sizeof(char), (ft_strlen(buffer) - i + 1));
+	final_buffer = ftt_calloc(sizeof(char), (ft_strlen(buffer) - i + 1));
 	if (!final_buffer)
 		return (NULL);
 	i++;
@@ -43,7 +43,7 @@ char	*buff_join(char *buffer, char *next_buff)
 {
 	char	*new_buff;
 
-	new_buff = ft_strjoin(buffer, next_buff);
+	new_buff = ftt_strjoin(buffer, next_buff);
 	free(buffer);
 	return (new_buff);
 }
@@ -60,12 +60,12 @@ char	*ft_line(char *buffer)
 	{
 		if (buffer[i] == '\n')
 		{
-			line = ft_substr(buffer, 0, i);
+			line = ftt_substr(buffer, 0, i);
 			return (line);
 		}
 		i++;
 	}
-	line = ft_substr(buffer, 0, ft_strlen(buffer));
+	line = ftt_substr(buffer, 0, ftt_strlen(buffer));
 	return (line);
 }
 
@@ -75,9 +75,9 @@ char	*buffcheck(char *buffer, int fd)
 	int		end_or_error;
 
 	if (!buffer)
-		buffer = ft_calloc(sizeof(char), 1);
+		buffer = ftt_calloc(sizeof(char), 1);
 	end_or_error = 1;
-	next_buff = ft_calloc(sizeof(char), BUFFER_SIZE + 1);
+	next_buff = ftt_calloc(sizeof(char), BUFFER_SIZE + 1);
 	while (end_or_error > 0 && !ft_strsearch(buffer, '\n'))
 	{
 		end_or_error = read(fd, next_buff, BUFFER_SIZE);

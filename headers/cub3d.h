@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/12 10:38:29 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/12 13:21:59 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,3 +18,23 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <errno.h>
+
+typedef struct s_map
+{
+    int		res_x;
+    int		res_y;
+    char	*no_texture;
+    char	*so_texture;
+    char	*we_texture;
+    char	*ea_texture;
+    char	*s_texture;
+    char	**map;
+    int		map_x;
+    int		map_y;
+}				t_map;
+
+typedef struct s_game
+{
+    t_map	*map;
+}				t_game;

@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 10:42:22 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/12 10:52:46 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/12 13:20:06 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ int	check_texture_information(t_map *map)
 }
 
 int	check_map_information(t_map *map)
+{
+
+}
+
+int	check_path(char *path)
 {
 
 }

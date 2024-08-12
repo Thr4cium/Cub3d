@@ -6,13 +6,13 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 11:16:09 by rolamber          #+#    #+#             */
-/*   Updated: 2024/01/13 19:29:49 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/12 13:19:23 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../headers/get_next_line.h"
 
-size_t	ft_strlen(const char *str)
+size_t	ftt_strlen(const char *str)
 {
 	size_t	i;
 
@@ -22,7 +22,7 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ftt_strjoin(char const *s1, char const *s2)
 {
 	char	*str;
 	int		i;
@@ -30,7 +30,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (!s1 || !s2)
 		return (NULL);
-	str = ft_calloc(sizeof(char), ft_strlen(s1) + ft_strlen(s2) + 1);
+	str = ft_calloc(sizeof(char), ftt_strlen(s1) + ftt_strlen(s2) + 1);
 	if (!str)
 		return (NULL);
 	i = -1;
@@ -56,7 +56,7 @@ int	ft_strsearch(char *s1, char c)
 	return (0);
 }
 
-char	*ft_substr(char *s1, int start, int end)
+char	*ftt_substr(char *s1, int start, int end)
 {
 	char	*str;
 	int		i;
@@ -64,7 +64,7 @@ char	*ft_substr(char *s1, int start, int end)
 	i = 0;
 	if (!s1 || !s1[0])
 		return (NULL);
-	str = ft_calloc(sizeof(char), (end - start + 2));
+	str = ftt_calloc(sizeof(char), (end - start + 2));
 	if (!str)
 		return (NULL);
 	while (start <= end)
@@ -76,7 +76,7 @@ char	*ft_substr(char *s1, int start, int end)
 	return (str);
 }
 
-void	*ft_calloc(size_t count, size_t size)
+void	*ftt_calloc(size_t count, size_t size)
 {
 	char	*buff;
 	size_t	i;
