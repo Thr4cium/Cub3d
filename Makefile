@@ -6,14 +6,14 @@
 #    By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/12 08:27:52 by rolamber          #+#    #+#              #
-#    Updated: 2024/08/12 10:36:49 by rolamber         ###   ########.fr        #
+#    Updated: 2024/08/12 13:01:55 by rolamber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-LDFLAGS = -L$(LIB_DIR) -lm
+LDFLAGS = -Lmlx_linux -lmlx -L/usr/lib -lXext -lX11 -lm -Llibft -lft -L. -lgnl
 AR = ar rcs
 
 NAME = cub3D
@@ -21,31 +21,23 @@ NAME = cub3D
 SRC_DIR = srcs/
 OBJ_DIR = objs/
 INC_DIR = headers/
-LIB_DIR = libft/
+GNL_DIR = gnl/
 
-SRC = $(addsuffix .c, $(addprefix srcs/exec/, $(EXEC))) \
-	  $(addsuffix .c, $(addprefix srcs/env/, $(ENV))) \
-	  $(addsuffix .c, $(addprefix srcs/tools/, $(TOOLS))) \
-	  $(addsuffix .c, $(addprefix srcs/, $(OTHER))) \
-	  $(addsuffix .c, $(addprefix srcs/lexer_parser/, $(LEXER_PARSER))) \
-	  $(addsuffix .c, $(addprefix srcs/lexer_parser_utils/, $(LEXER_PARSER_UTILS)))
-
+SRC = $(addsuffix .c, $(addprefix srcs/, $(a completer)))
 
 OBJ = $(SRC:.c=.o)
 DEP = $(OBJ:.o=.d)
+
+GNL = get_next_line.c get_next_line_utils.c
+GNL_OBJS = $(GNL:.c=.o)
 
 all: $(NAME)
 
 
 $(NAME): $(OBJ)
 	@make -C $(LIB_DIR) > /dev/null
-	$(CC) $(LDFLAGS) -o $@ $^ -lft -lncurses -lreadline
-	@echo $(LINE1)
-	@echo $(LINE2)
-	@echo $(LINE3)
-	@echo $(LINE4)
-	@echo $(LINE5)
-	@echo $(LINE6)
+	$(AR) libgnl.a $(GNL_OBJS)
+	$(CC) $(LDFLAGS) -o $@ $^
 
 %.o: %.c
 	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@ -g3
@@ -57,6 +49,7 @@ clean:
 	@echo "🧹 ${LIB_DIR}"
 	rm -rf $(OBJ)
 	rm -rf $(DEP)
+	rm -rf $(GNL_OBJS)
 	@echo "CLEAN"
 
 fclean: clean
