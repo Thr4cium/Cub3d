@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/13 12:00:40 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/13 13:54:02 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ typedef struct s_map
 	char	*so_texture;
 	char	*we_texture;
 	char	*ea_texture;
-	char	*s_texture;
 	char	**map;
+	int		ground_color;
+	int 	sky_color;
 	int		map_x;
 	int		map_y;
 }				t_map;

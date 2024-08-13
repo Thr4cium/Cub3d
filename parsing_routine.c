@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 10:42:22 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/13 12:07:05 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/13 14:30:00 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,24 @@ int	get_texture_information(t_map *map, int fd)
 	while (line)
 	{
 		if (ft_strncmp(line, "NO", 2))
-			map->no_texture = ft_strdup(line + 3);
+			map->no_texture = ft_strdup(line + 2);
 		else if (ft_strncmp(line, "SO", 2))
-			map->so_texture = ft_strdup(line + 3);
+			map->so_texture = ft_strdup(line + 2);
 		else if (ft_strncmp(line, "WE", 2))
-			map->we_texture = ft_strdup(line + 3);
+			map->we_texture = ft_strdup(line + 2);
 		else if (ft_strncmp(line, "EA", 2))
-			map->ea_texture = ft_strdup(line + 3);
-		else if (ft_strncmp(line, "S", 1))
-			map->s_texture = ft_strdup(line + 2);
-		else if (!is_line_only_empty(line))
+			map->ea_texture = ft_strdup(line + 2);
+		else if (ft_strncmp(line, "C" , 2))
+			map->sky_color = rgb_to_int(line);
+		else if (ft_strncmp(line, "F ", 2))
+			map->ground_color = rgb_to_int(line);
+		else if (!is_line_only_empty(line) && !is_line_is_map(line))
 			return (printf("wrong texture information\n"), -1);
 		if (are_texture_filled(map))
 			return (0);
 		line = get_next_line(fd);
 	}
+	return (printf("no texture informations found\n"), -1);
 }
 
 int	get_map_information(t_map *map)
@@ -76,7 +79,6 @@ t_map   *init_map(void)
 	map->so_texture = NULL;
 	map->we_texture = NULL;
 	map->ea_texture = NULL;
-	map->s_texture = NULL;
 	map->map = NULL;
 	map->map_x = 0;
 	map->map_y = 0;
@@ -100,12 +102,39 @@ int	check_path(char *path)
 free_all(t_game *game)
 {
 	free(game->map);
-	
 }
 
 bool are_texture_filled(t_map *map)
 {
-	if (!map->no_texture || !map->so_texture || !map->we_texture || !map->ea_texture || !map->s_texture)
+	if (!map->no_texture || !map->so_texture || !map->we_texture || !map->ea_texture \
+			|| map->ground_color == 0 || map->sky_color == 0)
 		return (false);
 	return (true);
+}
+
+bool	is_line_only_empty(char *line)
+{
+	int i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != '\n')
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+bool	is_line_is_map(char *line)
+{
+	if (strchr(line, '0') || strchr(line, '1') || strchr(line, 'N') \
+		|| strchr(line, 'S') || strchr(line, 'W') || strchr(line, 'E'))
+		return (true);
+	return (false);
+}
+
+int	rgb_to_int(char *line)
+{
+
 }
