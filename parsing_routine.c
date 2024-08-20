@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 10:42:22 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/19 15:15:22 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/20 15:45:39 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int get_information(char *path, t_map *map)
 		return (-1);
 	if (check_texture_information(map) == -1)
 		return (-1);
-	if (get_map_information(map) == -1)
+	if (get_map_information(map, fd) == -1)
 		return (-1);
 }
 
@@ -66,9 +66,22 @@ int	get_texture_information(t_map *map, int fd)
 	return (printf("Error : no texture informations found\n"), -1);
 }
 
-int	get_map_information(t_map *map)
+int	get_map_information(t_map *map, int fd)
 {
+	char	*line;
+	char 	*trimmed_line;
 
+	line = get_next_line(fd);
+
+	while (line)
+	{
+		trimmed_line = ft_strtrim(line, "\n");
+		map->map = ft_realloc	
+		free(line);
+		line = get_next_line(fd);
+	}
+	free(line);
+	
 }
 
 t_map   *init_map(void)
