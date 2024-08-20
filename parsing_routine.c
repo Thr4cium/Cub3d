@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 10:42:22 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/20 16:17:18 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/20 17:25:44 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,53 @@ char **map_addline(char **map, char *line)
 
 int	check_map_information(t_map *map)
 {
-	while(map->map && *map->map)
+	char **tmp;
+	int i;
+	int j;
+
+	if (!map->map)
+		return (printf("Error : no map information\n"), -1);
+	tmp = map->map;
+	j = 0;
+	i = 0;
+	while (tmp[i])
 	{
-		if (!is_line_only_map(*map->map))
+		if  (ft_strsearch(tmp[i], 'N') == 1 || ft_strsearch(tmp[i], 'S') == 1 \
+			|| ft_strsearch(tmp[i], 'W') == 1 || ft_strsearch(tmp[i], 'E') == 1)
+			j++;
+		if (j > 1)
+			return (printf("Error : too many player starting points\n"), -1);
+		if (!is_line_only_map(tmp))
 			return (printf("Error : wrong map information\n"), -1);
+		i++;
 	}
+	if (check_map_validity(map) == -1)
+		return (-1);
+	return (0);
+}
+
+int	check_map_validity(t_map *map)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (map->map[i])
+	{
+		j = 0;
+		while (map->map[i][j])
+		{
+			if (map->map[i][j] == '0')
+			{
+				if (map->map[i][j + 1] == ' ' || map->map[i][j - 1] == ' ' \
+					|| map->map[i + 1][j] == ' ' || map->map[i - 1][j] == ' ')
+					return (printf("Error : map is not closed\n"), -1);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }
 
 int	check_path(char *path)
