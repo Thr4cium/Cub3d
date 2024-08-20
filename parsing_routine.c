@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 10:42:22 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/20 17:25:44 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/20 17:30:43 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,26 @@ int	check_path(char *path)
 
 }
 
-free_all(t_game *game)
+void	free_all(t_game *game)
 {
-	free(game->map);
+	int i;
+
+	i = 0;
+	while (game->map->map[i])
+	{
+		free(game->map->map[i]);
+		i++;
+	}
+	if (game->map->map)
+		free(game->map->map);
+	if (game->map->no_texture)
+		free(game->map->no_texture);
+	if (game->map->so_texture)
+		free(game->map->so_texture);
+	if (game->map->we_texture)
+		free(game->map->we_texture);
+	if (game->map->ea_texture)
+		free(game->map->ea_texture);
+	if (game->map)
+		free(game->map);
 }
