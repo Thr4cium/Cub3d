@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:02:43 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/20 16:03:43 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/20 16:16:59 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,15 @@ bool	is_line_is_map(char *line)
 		|| strchr(line, 'S') || strchr(line, 'W') || strchr(line, 'E'))
 		return (true);
 	return (false);
+}
+bool    is_line_only_map(char *line)
+{
+    while (*line)
+    {
+        if (*line != ' ' && *line != '1' && *line != '0' && *line != 'N' \
+            && *line != 'S' && *line != 'W' && *line != 'E')
+            return (false);
+        line++;
+    }
+    return (true);
 }

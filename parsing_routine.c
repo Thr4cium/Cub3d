@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 10:42:22 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/20 16:08:58 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/20 16:17:18 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,11 @@ char **map_addline(char **map, char *line)
 
 int	check_map_information(t_map *map)
 {
-
+	while(map->map && *map->map)
+	{
+		if (!is_line_only_map(*map->map))
+			return (printf("Error : wrong map information\n"), -1);
+	}
 }
 
 int	check_path(char *path)

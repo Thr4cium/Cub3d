@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:24:17 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/12 13:07:21 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/20 16:18:46 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ int main(char **av, int ac)
         return (printf("Error\nInvalid number of arguments\n"), 1);
     init_game_struct(&game);
     if (parsing(av[1], &game) == -1)
+    {
+        free_all(&game);
         return (1, printf("Error\nParsing failed\n"));
+    }
     return (0);
 }
