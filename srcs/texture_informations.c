@@ -6,11 +6,11 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:01:09 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/20 16:02:15 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/21 15:36:31 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/cub3d.h"
+#include "../headers/cub3d.h"
 
 int	get_texture_information(t_map *map, int fd)
 {

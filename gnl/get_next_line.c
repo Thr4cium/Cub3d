@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 11:15:18 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/12 13:19:27 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/21 16:07:37 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*buffswap(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
-	final_buffer = ftt_calloc(sizeof(char), (ft_strlen(buffer) - i + 1));
+	final_buffer = ftt_calloc(sizeof(char), (ftt_strlen(buffer) - i + 1));
 	if (!final_buffer)
 		return (NULL);
 	i++;

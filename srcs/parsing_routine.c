@@ -6,11 +6,11 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 10:42:22 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/21 15:29:21 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/21 15:44:33 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/cub3d.h"
+#include "../headers/cub3d.h"
 
 int	parsing(char *path, t_game *game)
 {
@@ -20,6 +20,7 @@ int	parsing(char *path, t_game *game)
 		return (-1);
 	if (get_information(path, game->map) == -1)
 		return (-1);
+	return (0);
 }
 
 int get_information(char *path, t_map *map)
@@ -49,7 +50,7 @@ int	get_map_information(t_map *map, int fd)
 
 	while (line)
 	{
-		while (is_line_empty(line))
+		while (is_line_only_empty(line))
 		{
 			free(line);
 			line = get_next_line(fd);
@@ -78,7 +79,7 @@ char **map_addline(char **map, char *line)
 			i++;
 	new_map = ft_calloc(sizeof(char *) , i + 2);
 	if (!new_map)
-		return (NULL);
+		return (NULL);	
 	i = 0;
 	while (map[i])
 	{
@@ -109,7 +110,7 @@ int	check_map_information(t_map *map)
 			j++;
 		if (j > 1)
 			return (printf("Error : too many player starting points\n"), -1);
-		if (!is_line_only_map(tmp))
+		if (!is_line_only_map(tmp[i]))
 			return (printf("Error : wrong map information\n"), -1);
 		i++;
 	}
@@ -146,7 +147,7 @@ int	check_path(char *path)
 {
 	int fd;
 
-	if (ft_strsearch(&path[ft_strlen(path) - 3], ".cub") == 0)
+	if (ft_strnstr(&path[ft_strlen(path) - 4], ".cub", 4) == NULL)
 		return (printf("Error : wrong file extension\n"), -1);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)

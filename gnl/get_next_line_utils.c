@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 11:16:09 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/12 13:19:23 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/21 16:08:42 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ftt_strjoin(char const *s1, char const *s2)
 
 	if (!s1 || !s2)
 		return (NULL);
-	str = ft_calloc(sizeof(char), ftt_strlen(s1) + ftt_strlen(s2) + 1);
+	str = ftt_calloc(sizeof(char), ftt_strlen(s1) + ftt_strlen(s2) + 1);
 	if (!str)
 		return (NULL);
 	i = -1;

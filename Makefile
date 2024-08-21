@@ -6,14 +6,14 @@
 #    By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/12 08:27:52 by rolamber          #+#    #+#              #
-#    Updated: 2024/08/21 15:31:42 by rolamber         ###   ########.fr        #
+#    Updated: 2024/08/21 17:54:07 by rolamber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-
+# -Lmlx_linux -lmlx -L/usr/lib -lXext -lX11 -lm
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-LDFLAGS = -Lmlx_linux -lmlx -L/usr/lib -lXext -lX11 -lm -Llibft -lft -L. -lgnl
+LDFLAGS = -Llibft -lft -L. -lgnl
 AR = ar rcs
 
 NAME = cub3D
@@ -22,23 +22,25 @@ SRC_DIR = srcs/
 OBJ_DIR = objs/
 INC_DIR = headers/
 GNL_DIR = gnl/
+LIB_DIR = libft/
 
 SRC = $(addsuffix .c, $(addprefix srcs/, $(PARSING)))
+PARSING = parsing_routine parsing_tools texture_informations main
 
 OBJ = $(SRC:.c=.o)
 DEP = $(OBJ:.o=.d)
 
-GNL = get_next_line.c get_next_line_utils.c
+GNL = $(addsuffix .c, $(addprefix gnl/, $(GNL_SRCS)))
+GNL_SRCS = get_next_line get_next_line_utils
 GNL_OBJS = $(GNL:.c=.o)
-PARSING = map_information parsing_routine parsing_tools texture_informations
 
 all: $(NAME)
 
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(GNL_OBJS)
 	@make -C $(LIB_DIR) > /dev/null
-	$(AR) libgnl.a $(GNL_OBJS)
-	$(CC) $(LDFLAGS) -o $@ $^
+	$(AR) libgnl.a $(GNL_OBJS) 
+	$(CC) $(OBJ) $(LDFLAGS) -o $@
 
 %.o: %.c
 	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@ -g3
@@ -57,6 +59,7 @@ fclean: clean
 	@make fclean -C $(LIB_DIR) > /dev/null
 	@echo "🧹 ${LIB_DIR}"
 	@rm -f $(NAME)
+	@rm -f libgnl.a
 	@echo "FCLEAN"
 
 re: fclean all

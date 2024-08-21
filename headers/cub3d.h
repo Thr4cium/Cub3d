@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/21 15:26:27 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/21 17:42:03 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <unistd.h>
 # include <errno.h>
 # include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 
 typedef struct s_map
 {
@@ -41,7 +43,7 @@ typedef struct s_game
 	t_map	*map;
 }				t_game;
 
-#endif
+
 
 // main
 
@@ -74,3 +76,5 @@ int check_texture_information(t_map *map);
 int	check_color_information(t_map *map);
 int	rgb_to_int(char *line);
 int rgb_to_int_tool(int j, char *colorm, int rgb);
+
+#endif

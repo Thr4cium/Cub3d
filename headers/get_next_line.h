@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 11:15:38 by rolamber          #+#    #+#             */
-/*   Updated: 2024/01/13 17:12:44 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/21 16:06:55 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 # endif
 
 char	*get_next_line(int fd);
-size_t	ft_strlen(const char *str);
-char	*ft_strjoin(char const *s1, char const *s2);
+size_t	ftt_strlen(const char *str);
+char	*ftt_strjoin(char const *s1, char const *s2);
 int		ft_strsearch(char *s1, char c);
-char	*ft_substr(char *s1, int start, int end);
-void	*ft_calloc(size_t count, size_t size);
+char	*ftt_substr(char *s1, int start, int end);
+void	*ftt_calloc(size_t count, size_t size);
 
 #endif
