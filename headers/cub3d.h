@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/13 13:54:02 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/21 15:26:27 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,3 +42,35 @@ typedef struct s_game
 }				t_game;
 
 #endif
+
+// main
+
+void	init_game_struct(t_game *game);
+void	print_map_info(t_game *game);
+
+// parsing_routine
+
+int		parsing(char *path, t_game *game);
+int		get_information(char *path, t_map *map);
+int		get_map_information(t_map *map, int fd);
+char	**map_addline(char **map, char *line);
+int		check_map_information(t_map *map);
+int		check_map_validity(t_map *map);
+void	free_all(t_game *game);
+int		check_path(char *path);
+
+// parsing_tools
+
+t_map	*init_map(void);
+bool	are_texture_filled(t_map *map);
+bool	is_line_only_empty(char *line);
+bool	is_line_is_map(char *line);
+bool	is_line_only_map(char *line);
+
+// texture_informations
+
+int	get_texture_information(t_map *map, int fd);
+int check_texture_information(t_map *map);
+int	check_color_information(t_map *map);
+int	rgb_to_int(char *line);
+int rgb_to_int_tool(int j, char *colorm, int rgb);

@@ -6,7 +6,7 @@
 #    By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/12 08:27:52 by rolamber          #+#    #+#              #
-#    Updated: 2024/08/12 13:01:55 by rolamber         ###   ########.fr        #
+#    Updated: 2024/08/21 15:31:42 by rolamber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,13 +23,14 @@ OBJ_DIR = objs/
 INC_DIR = headers/
 GNL_DIR = gnl/
 
-SRC = $(addsuffix .c, $(addprefix srcs/, $(a completer)))
+SRC = $(addsuffix .c, $(addprefix srcs/, $(PARSING)))
 
 OBJ = $(SRC:.c=.o)
 DEP = $(OBJ:.o=.d)
 
 GNL = get_next_line.c get_next_line_utils.c
 GNL_OBJS = $(GNL:.c=.o)
+PARSING = map_information parsing_routine parsing_tools texture_informations
 
 all: $(NAME)
 
