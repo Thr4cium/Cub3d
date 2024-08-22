@@ -6,11 +6,24 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:01:09 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/21 15:36:31 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/22 17:26:14 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
+
+char *ft_strdup_trim(char *line)
+{
+	char *trimmed_line;
+	char *ret;
+
+	trimmed_line = ft_strtrim(line, "\n");
+	if (!trimmed_line)
+		return (NULL);
+	ret = ft_strdup(trimmed_line);
+	free(trimmed_line);
+	return (ret);
+}
 
 int	get_texture_information(t_map *map, int fd)
 {
@@ -19,18 +32,18 @@ int	get_texture_information(t_map *map, int fd)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (ft_strncmp(line, "NO", 2))
-			map->no_texture = ft_strdup(line + 2);
-		else if (ft_strncmp(line, "SO", 2))
-			map->so_texture = ft_strdup(line + 2);
-		else if (ft_strncmp(line, "WE", 2))
-			map->we_texture = ft_strdup(line + 2);
-		else if (ft_strncmp(line, "EA", 2))
-			map->ea_texture = ft_strdup(line + 2);
-		else if (ft_strncmp(line, "C" , 2))
-			map->sky_color = rgb_to_int(line);
-		else if (ft_strncmp(line, "F ", 2))
-			map->ground_color = rgb_to_int(line);
+		if (ft_strncmp(line, "NO", 2) == 0)
+			map->no_texture = ft_strdup_trim(line + 3);
+		else if (ft_strncmp(line, "SO", 2) == 0)
+			map->so_texture = ft_strdup_trim(line + 3);
+		else if (ft_strncmp(line, "WE", 2) == 0)
+			map->we_texture = ft_strdup_trim(line + 3);
+		else if (ft_strncmp(line, "EA", 2) == 0)
+			map->ea_texture = ft_strdup_trim(line + 3);
+		else if (ft_strncmp(line, "C " , 2) == 0)
+			map->sky_color = rgb_to_int(line + 1);
+		else if (ft_strncmp(line, "F ", 2) == 0)
+			map->ground_color = rgb_to_int(line + 1);
 		else if (!is_line_only_empty(line) && !is_line_is_map(line))
 			return (free(line), printf("Error : wrong texture information\n"), -1);
 		if (are_texture_filled(map))
@@ -45,18 +58,23 @@ int	check_texture_information(t_map *map)
 {
 	int fd;
 
+	printf("here\n");
+	printf("no_texture : %s\n", map->no_texture);
 	fd = open(map->no_texture, O_RDONLY);
 	if (fd == -1)
 		return (perror("open"), -1);
 	close(fd);
+	printf("so_texture : %s\n", map->so_texture);
 	fd = open(map->so_texture, O_RDONLY);
 	if (fd == -1)
 		return (perror("open"), -1);
 	close(fd);
+	printf("we_texture : %s\n", map->we_texture);
 	fd = open(map->we_texture, O_RDONLY);
 	if (fd == -1)
 		return (perror("open"), -1);
 	close(fd);
+	printf("ea_texture : %s\n", map->ea_texture);
 	fd = open(map->ea_texture, O_RDONLY);
 	if (fd == -1)
 		return (perror("open"), -1);
@@ -85,6 +103,7 @@ int	rgb_to_int(char *line)
 	i = 0;
 	j = 0;
 	rgb = 0;
+	printf("line rgb %s\n", line);
 	while (*line && j < 3)
 	{
 		while (*line != ',' && i  < 3)
@@ -99,6 +118,7 @@ int	rgb_to_int(char *line)
 		j++;
 		line++;
 	}
+	printf("rgb : %d\n", rgb);
 	return (rgb);
 }
 

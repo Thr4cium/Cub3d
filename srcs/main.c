@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:24:17 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/21 17:23:36 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/22 17:33:27 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ int main(int ac, char **av)
         free_all(&game);
         return (printf("Error\nParsing failed\n"), 1);
     }
+    free_all(&game);
     return (0);
 }

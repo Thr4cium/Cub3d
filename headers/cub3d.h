@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/21 17:42:03 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/22 17:53:20 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ typedef struct s_map
 	char	**map;
 	int		ground_color;
 	int 	sky_color;
-	int		map_x;
-	int		map_y;
+	size_t		map_x;
+	size_t		map_y;
 }				t_map;
 
 typedef struct s_game
@@ -60,6 +60,8 @@ int		check_map_information(t_map *map);
 int		check_map_validity(t_map *map);
 void	free_all(t_game *game);
 int		check_path(char *path);
+void	actualise_map(t_map *map);
+
 
 // parsing_tools
 
@@ -71,10 +73,12 @@ bool	is_line_only_map(char *line);
 
 // texture_informations
 
-int	get_texture_information(t_map *map, int fd);
-int check_texture_information(t_map *map);
-int	check_color_information(t_map *map);
-int	rgb_to_int(char *line);
-int rgb_to_int_tool(int j, char *colorm, int rgb);
+int		get_texture_information(t_map *map, int fd);
+int 	check_texture_information(t_map *map);
+int		check_color_information(t_map *map);
+int		rgb_to_int(char *line);
+int		rgb_to_int_tool(int j, char *colorm, int rgb);
+char	*ft_strdup_trim(char *line);
+
 
 #endif

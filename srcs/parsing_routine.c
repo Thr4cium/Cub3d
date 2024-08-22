@@ -6,11 +6,34 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 10:42:22 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/21 15:44:33 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/22 18:09:14 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
+
+void	actualise_map(t_map *map)
+{
+	size_t i;
+	size_t j;
+	size_t max;
+
+	i = 0;
+	max = 0;
+	while (map->map[i])
+	{
+		j = 0;
+		while (map->map[i][j])
+			j++;
+		if (j > max)
+			max = j;
+		i++;
+	}
+	map->map_y = i;
+	printf("map_y : %zu\n", map->map_y);
+	map->map_x = max;
+	printf("map_x : %zu\n", map->map_x);
+}
 
 int	parsing(char *path, t_game *game)
 {
@@ -47,7 +70,6 @@ int	get_map_information(t_map *map, int fd)
 	char 	*trimmed_line;
 
 	line = get_next_line(fd);
-
 	while (line)
 	{
 		while (is_line_only_empty(line))
@@ -55,16 +77,18 @@ int	get_map_information(t_map *map, int fd)
 			free(line);
 			line = get_next_line(fd);
 		}
+		printf("here %s\n", line);
 		trimmed_line = ft_strtrim(line, "\n");
 		if (!trimmed_line)
 			return (perror("malloc"), -1);
 		map->map = map_addline(map->map, trimmed_line);
+		free(line);
 		if (!map->map)
 			return (perror("malloc"), -1);
-		free(line);
 		line = get_next_line(fd);
 	}
 	free(line);
+	actualise_map(map);
 	return (0);
 }
 
@@ -73,6 +97,7 @@ char **map_addline(char **map, char *line)
 	int i;
 	char **new_map;
 
+	printf("line : %s\n", line);
 	i = 0;
 	if (map)
 		while (map[i])
@@ -81,10 +106,13 @@ char **map_addline(char **map, char *line)
 	if (!new_map)
 		return (NULL);	
 	i = 0;
-	while (map[i])
+	if (map)
 	{
-		new_map[i] = map[i];
-		i++;
+		while (map[i])
+		{
+			new_map[i] = map[i];
+			i++;
+		}
 	}
 	new_map[i] = line;
 	new_map[i + 1] = NULL;
@@ -121,8 +149,8 @@ int	check_map_information(t_map *map)
 
 int	check_map_validity(t_map *map)
 {
-	int i;
-	int j;
+	size_t i;
+	size_t j;
 
 	i = 0;
 	while (map->map[i])
@@ -130,8 +158,12 @@ int	check_map_validity(t_map *map)
 		j = 0;
 		while (map->map[i][j])
 		{
-			if (map->map[i][j] == '0')
+			if ((j == 0 || j == ft_strlen(map->map[i]) - 1) && map->map[i][j] == '0')
+				return (printf("Error : map is not closed\n"), -1);
+			else if (map->map[i][j] == '0')
 			{
+				if (i == 0 || i == map->map_y - 1)
+					return (printf("Error : map is not closed\n"), -1);
 				if (map->map[i][j + 1] == ' ' || map->map[i][j - 1] == ' ' \
 					|| map->map[i + 1][j] == ' ' || map->map[i - 1][j] == ' ')
 					return (printf("Error : map is not closed\n"), -1);
