@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/27 16:24:03 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/27 17:05:51 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # include <math.h>
 # include "../libft/libft.h"
 # include "get_next_line.h"
+# include <mlx.h>
+# include "../libmlx/mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -23,6 +25,8 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <math.h>
+
+# define PI 3.1415926535
 
 typedef struct s_map
 {
@@ -99,10 +103,16 @@ char	*ft_strdup_trim(char *line);
 
 // display_game
 int		display_game(t_game *game);
-void	print_minimap(t_game *game)
+void	print_minimap(t_game *game);
+void    print_player(t_game *game, int x, int y, int r);
+void    draw_line(t_game *game, int x, int y, double x1, double y1);
+
 
 // init_vectors
 void    init_vectors(t_game *game);
 void    init_dir_vectors(t_game *game);
+
+// map_information
+void	get_player_initial_position(t_game *game);
 
 #endif

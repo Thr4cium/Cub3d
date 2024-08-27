@@ -6,14 +6,14 @@
 #    By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/12 08:27:52 by rolamber          #+#    #+#              #
-#    Updated: 2024/08/27 16:26:48 by rolamber         ###   ########.fr        #
+#    Updated: 2024/08/27 17:09:10 by rolamber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # -Lmlx_linux -lmlx -L/usr/lib -lXext -lX11 -lm
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-LDFLAGS = -Llibft -lft -L. -lgnl -lm -lbsd -lmlx -lXext -lX11 -g3
+LDFLAGS = -Llibft -lft -L. -lgnl -lm -lbsd -Llibmlx -lmlx -lXext -lX11 -g3
 AR = ar rcs
 
 NAME = cub3D
@@ -25,7 +25,7 @@ GNL_DIR = gnl/
 LIB_DIR = libft/
 
 SRC = $(addsuffix .c, $(addprefix srcs/, $(PARSING)))
-PARSING = parsing_routine parsing_tools texture_informations main init_vectors display_game
+PARSING = parsing_routine parsing_tools texture_informations main init_vectors display_game map_information
 
 OBJ = $(SRC:.c=.o)
 DEP = $(OBJ:.o=.d)
@@ -43,7 +43,7 @@ $(NAME): $(OBJ) $(GNL_OBJS)
 	$(CC) $(OBJ) $(LDFLAGS) -o $@
 
 %.o: %.c
-	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@ -g3
+	$(CC) $(CFLAGS) -I $(INC_DIR) -Ilibmlx -c $< -o $@ -g3
 
 -include $(DEP)
 

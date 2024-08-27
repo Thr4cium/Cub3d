@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:41:39 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/27 16:07:14 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/27 16:34:12 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void    init_vectors(t_game *game)
 {
     init_dir_vectors(game);
-   
 }
 
 void    init_dir_vectors(t_game *game)
