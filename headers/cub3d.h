@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/27 17:05:51 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/27 17:24:03 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ typedef	struct s_img
 void	game_loop(t_game *game);
 void	init_game_struct(t_game *game);
 void	print_map_info(t_game *game);
+int		end_game(t_game *game);
+void	init_mlx(t_game *game);
+
 
 // parsing_routine
 
