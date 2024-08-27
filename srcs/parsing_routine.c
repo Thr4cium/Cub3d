@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 10:42:22 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/22 18:09:14 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/27 16:27:20 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int get_information(char *path, t_map *map)
 		return (-1);
 	if (check_map_information(map) == -1)\
 		return (-1);
+	get_player_position(map->map);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/22 17:53:20 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/27 16:24:03 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <math.h>
 
 typedef struct s_map
 {
@@ -41,12 +42,28 @@ typedef struct s_map
 typedef struct s_game
 {
 	t_map	*map;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	void	*mlx_ptr;
+	void	*win_ptr;
 }				t_game;
+
+typedef	struct s_img
+{
+	void	*img_ptr;
+	char	*addr;
+	int		width;
+	int		height;
+}			t_img;
 
 
 
 // main
-
+void	game_loop(t_game *game);
 void	init_game_struct(t_game *game);
 void	print_map_info(t_game *game);
 
@@ -80,5 +97,12 @@ int		rgb_to_int(char *line);
 int		rgb_to_int_tool(int j, char *colorm, int rgb);
 char	*ft_strdup_trim(char *line);
 
+// display_game
+int		display_game(t_game *game);
+void	print_minimap(t_game *game)
+
+// init_vectors
+void    init_vectors(t_game *game);
+void    init_dir_vectors(t_game *game);
 
 #endif

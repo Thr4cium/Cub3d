@@ -1,38 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_information.c                                  :+:      :+:    :+:   */
+/*   init_vectors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 16:18:59 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/27 16:27:17 by rolamber         ###   ########.fr       */
+/*   Created: 2024/08/27 14:41:39 by rolamber          #+#    #+#             */
+/*   Updated: 2024/08/27 16:07:14 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
 
-void    get_player_initial_position(t_game *game)
+void    init_vectors(t_game *game)
 {
+    init_dir_vectors(game);
+   
+}
+
+void    init_dir_vectors(t_game *game)
+{
+    char **temp;
     int i;
     int j;
 
+    temp = game->map->map;
     i = 0;
     j = 0;
-    while (game->map->map[i])
+    while (temp[i])
     {
-        j = 0;
-        while (game->map->map[i][j])
+        while(temp[i][j])
         {
-            if (game->map->map[i][j] == 'N' ||game->map->map[i][j] == 'S' \
-                || game->map->map[i][j] == 'E' || game->map->map[i][j] == 'W')
-            {
-                game->pos_x = (double)j;
-                game->pos_y = (double)i;
-                return ;
-            }
+            if (temp[i][j] == 'N' || temp[i][j] == 'S')
+                game->dir_x = 0;               
+            if (temp [i][j] == 'E')
+                game->dir_x = 1;
+            if (temp [i][j] == 'W')
+                game->dir_x = -1;
             j++;
         }
-        i++;
     }
 }
