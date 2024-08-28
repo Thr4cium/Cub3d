@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/28 17:22:38 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/28 19:57:21 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ char	*ft_strdup_trim(char *line);
 int		display_game(t_game *game);
 void	print_minimap(t_game *game);
 void    print_player(t_game *game, int x, int y, int r);
+void    draw_round(t_game *game, double x, double y, int r, int color);
+
 // void    draw_line(t_game *game, int x, int y, double x1, double y1);
 void    set_window_color(t_game *game, int color);
 void    draw_tile(t_game *game, double start_x, double start_y, int color);
