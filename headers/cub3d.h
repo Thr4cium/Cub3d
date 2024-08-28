@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/27 17:24:03 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/28 17:22:38 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@
 # include <fcntl.h>
 # include <math.h>
 
+# define SCREEN_WIDTH 1920
+# define SCREEN_HEIGHT 1080
 # define PI 3.1415926535
-
+# define MINIMAP_RANGE 5
 typedef struct s_map
 {
 	int		res_x;
@@ -54,6 +56,9 @@ typedef struct s_game
 	double	plane_y;
 	void	*mlx_ptr;
 	void	*win_ptr;
+	int		tile_size;
+	double  center_x;
+	double  center_y;
 }				t_game;
 
 typedef	struct s_img
@@ -108,7 +113,9 @@ char	*ft_strdup_trim(char *line);
 int		display_game(t_game *game);
 void	print_minimap(t_game *game);
 void    print_player(t_game *game, int x, int y, int r);
-void    draw_line(t_game *game, int x, int y, double x1, double y1);
+// void    draw_line(t_game *game, int x, int y, double x1, double y1);
+void    set_window_color(t_game *game, int color);
+void    draw_tile(t_game *game, double start_x, double start_y, int color);
 
 
 // init_vectors

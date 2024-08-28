@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 10:42:22 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/27 16:35:27 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/28 15:17:34 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	parsing(char *path, t_game *game)
 	if (get_information(path, game->map) == -1)
 		return (-1);
 	get_player_initial_position(game);
+	game->tile_size = SCREEN_WIDTH / game->map->map_x;
 	return (0);
 }
 

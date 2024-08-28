@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:24:17 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/27 17:32:20 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/28 15:19:01 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void    init_game_struct(t_game *game)
 void init_mlx(t_game *game)
 {
     game->mlx_ptr = mlx_init();
-    game->win_ptr = mlx_new_window(game->mlx_ptr, 800, 600, "Cub3D");
+    game->win_ptr = mlx_new_window(game->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D");
 }
 
 void game_loop(t_game *game)
