@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:41:39 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/27 16:34:12 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/08/29 14:55:27 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,21 @@ void    init_dir_vectors(t_game *game)
     j = 0;
     while (temp[i])
     {
+        j = 0;
         while(temp[i][j])
         {
             if (temp[i][j] == 'N' || temp[i][j] == 'S')
-                game->dir_x = 0;               
+            {
+                game->dir_y = 1;
+                if (temp[i][j] == 'N')
+                    game->dir_y = -1;
+            }
             if (temp [i][j] == 'E')
                 game->dir_x = 1;
             if (temp [i][j] == 'W')
                 game->dir_x = -1;
             j++;
         }
+        i++;
     }
 }

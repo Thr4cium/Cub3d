@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 10:42:22 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/28 15:17:34 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/02 13:09:55 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ void	actualise_map(t_map *map)
 		i++;
 	}
 	map->map_y = i;
-	printf("map_y : %zu\n", map->map_y);
 	map->map_x = max;
-	printf("map_x : %zu\n", map->map_x);
 }
 
 int	parsing(char *path, t_game *game)
@@ -45,6 +43,7 @@ int	parsing(char *path, t_game *game)
 		return (-1);
 	get_player_initial_position(game);
 	game->tile_size = SCREEN_WIDTH / game->map->map_x;
+	init_vectors(game);
 	return (0);
 }
 

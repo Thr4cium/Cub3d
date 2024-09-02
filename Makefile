@@ -6,13 +6,13 @@
 #    By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/12 08:27:52 by rolamber          #+#    #+#              #
-#    Updated: 2024/08/28 17:10:33 by rolamber         ###   ########.fr        #
+#    Updated: 2024/09/02 12:38:15 by rolamber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # -Lmlx_linux -lmlx -L/usr/lib -lXext -lX11 -lm
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror 
 LDFLAGS = -Llibft -lft -L. -lgnl -lm -lbsd -Llibmlx -lmlx -lXext -lX11 -g3
 AR = ar rcs
 
@@ -25,7 +25,7 @@ GNL_DIR = gnl/
 LIB_DIR = libft/
 
 SRC = $(addsuffix .c, $(addprefix srcs/, $(PARSING)))
-PARSING = parsing_routine parsing_tools texture_informations main init_vectors display_game map_information
+PARSING = parsing_routine parsing_tools texture_informations main init_vectors display_game map_information movement
 
 OBJ = $(SRC:.c=.o)
 DEP = $(OBJ:.o=.d)

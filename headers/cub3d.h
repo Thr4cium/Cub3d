@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/28 19:57:21 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/02 14:23:13 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 # include "get_next_line.h"
 # include <mlx.h>
 # include "../libmlx/mlx.h"
+# include "../libmlx/mlx_int.h"
 # include <stdio.h>
+# include <X11/keysym.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <errno.h>
@@ -30,6 +32,7 @@
 # define SCREEN_HEIGHT 1080
 # define PI 3.1415926535
 # define MINIMAP_RANGE 5
+
 typedef struct s_map
 {
 	int		res_x;
@@ -59,17 +62,25 @@ typedef struct s_game
 	int		tile_size;
 	double  center_x;
 	double  center_y;
+	bool	key_pressed;
+	bool	keys[256];
 }				t_game;
 
-typedef	struct s_img
+typedef	struct s_my_img
 {
 	void	*img_ptr;
 	char	*addr;
 	int		width;
 	int		height;
-}			t_img;
+}			t_my_img;
 
-
+typedef enum e_move
+{
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
+}				t_move;
 
 // main
 void	game_loop(t_game *game);
@@ -114,8 +125,9 @@ int		display_game(t_game *game);
 void	print_minimap(t_game *game);
 void    print_player(t_game *game, int x, int y, int r);
 void    draw_round(t_game *game, double x, double y, int r, int color);
+int		my_mlx_pixel_put(void *mlx, void *win, int x, int y, int color);
 
-// void    draw_line(t_game *game, int x, int y, double x1, double y1);
+void    draw_line(t_game *game, int x, int y, int color);
 void    set_window_color(t_game *game, int color);
 void    draw_tile(t_game *game, double start_x, double start_y, int color);
 
@@ -126,5 +138,11 @@ void    init_dir_vectors(t_game *game);
 
 // map_information
 void	get_player_initial_position(t_game *game);
+
+// movement
+int		update_game(t_game *game);
+int		key_input(int keycode, t_game *game);
+int		key_release(int keycode, t_game *game);
+void    move(t_game *game, t_move move);
 
 #endif
