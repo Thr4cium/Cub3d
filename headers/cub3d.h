@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/03 16:30:10 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/03 16:42:18 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,14 +126,15 @@ char	*ft_strdup_trim(char *line);
 // display_game
 int		display_game(t_game *game);
 void	print_minimap(t_game *game);
-void    print_player(t_game *game, int x, int y, int r);
-void    draw_round(t_game *game, double x, double y, int r, int color);
-int		secure_my_mlx_pixel_put(t_my_img *img, int x, int y, int color);
-void	my_mlx_pixel_put(t_my_img *img, int x, int y, int color);
-
+void    draw_tile(t_game *game, double start_x, double start_y, int color);
 void    draw_line(t_game *game, int x, int y, int color);
 void    set_window_color(t_game *game, int color);
-void    draw_tile(t_game *game, double start_x, double start_y, int color);
+
+// display_utils
+void	my_mlx_pixel_put(t_my_img *img, int x, int y, int color);
+int		secure_my_mlx_pixel_put(t_my_img *img, int x, int y, int color);
+void    print_player(t_game *game, int x, int y, int r);
+void    draw_round(t_game *game, double x, double y, int r, int color);
 
 
 // init_vectors

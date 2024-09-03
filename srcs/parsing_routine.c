@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 10:42:22 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/03 16:27:14 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/03 16:45:12 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,8 +211,6 @@ void	free_all(t_game *game)
 		free(game->map->ea_texture);
 	if (game->map)
 		free(game->map);
-	if (game->img->addr)
-		free(game->img->addr);
 	if (game->img)
 		free(game->img);
 	if (game->mlx_ptr)

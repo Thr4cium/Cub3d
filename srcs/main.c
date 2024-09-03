@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:24:17 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/03 16:35:02 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/03 16:43:35 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ void game_loop(t_game *game)
 
 int end_game(t_game *game)
 {
+    mlx_destroy_image(game->mlx_ptr, game->img->ptr);
     mlx_destroy_window(game->mlx_ptr, game->win_ptr);
     mlx_destroy_display(game->mlx_ptr);
-    mlx_destroy_image(game->mlx_ptr, game->img->ptr);
     free_all(game);
     exit(0);
 }
