@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/02 14:23:13 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/03 16:30:10 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,15 @@
 # define PI 3.1415926535
 # define MINIMAP_RANGE 5
 
+typedef	struct s_my_img
+{
+	void	*ptr;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int 	endian;
+}			t_my_img;
+
 typedef struct s_map
 {
 	int		res_x;
@@ -50,7 +59,8 @@ typedef struct s_map
 
 typedef struct s_game
 {
-	t_map	*map;
+	t_map		*map;
+	t_my_img	*img;
 	double	pos_x;
 	double	pos_y;
 	double	dir_x;
@@ -66,13 +76,6 @@ typedef struct s_game
 	bool	keys[256];
 }				t_game;
 
-typedef	struct s_my_img
-{
-	void	*img_ptr;
-	char	*addr;
-	int		width;
-	int		height;
-}			t_my_img;
 
 typedef enum e_move
 {
@@ -125,7 +128,8 @@ int		display_game(t_game *game);
 void	print_minimap(t_game *game);
 void    print_player(t_game *game, int x, int y, int r);
 void    draw_round(t_game *game, double x, double y, int r, int color);
-int		my_mlx_pixel_put(void *mlx, void *win, int x, int y, int color);
+int		secure_my_mlx_pixel_put(t_my_img *img, int x, int y, int color);
+void	my_mlx_pixel_put(t_my_img *img, int x, int y, int color);
 
 void    draw_line(t_game *game, int x, int y, int color);
 void    set_window_color(t_game *game, int color);

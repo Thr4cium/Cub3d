@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 16:06:33 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/02 14:36:22 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/03 16:32:22 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int display_game(t_game *game)
     print_minimap(game);
     print_player(game, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 41);
     draw_line(game, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0x0090EE90);
+    mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img->ptr, 0, 0);
     //print_rays(game);
     return (0);
 }
@@ -34,7 +35,7 @@ void    set_window_color(t_game *game, int color)
         j = 0;
         while (j < SCREEN_HEIGHT)
         {
-            mlx_pixel_put(game->mlx_ptr, game->win_ptr, i, j, color);
+            my_mlx_pixel_put(game->img, i, j, color);
             j++;
         }
         i++;
@@ -82,10 +83,18 @@ void    draw_line(t_game *game, int x, int y, int color)
     i = 0;
     while (i < 60)
     {
-        mlx_pixel_put(game->mlx_ptr, game->win_ptr, x + game->dir_x * i, y + game->dir_y * i, color);
+        my_mlx_pixel_put(game->img, x + game->dir_x * i, y + game->dir_y * i, color);
         i++;
     }
 }
+void	my_mlx_pixel_put(t_my_img *img, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
+
 
 void    draw_tile(t_game *game, double start_x, double start_y, int color)
 {
@@ -102,7 +111,7 @@ void    draw_tile(t_game *game, double start_x, double start_y, int color)
         j = 0;
         while (j < game->tile_size)
         {
-            my_mlx_pixel_put(game->mlx_ptr, game->win_ptr, start_x + i, start_y + j, color);
+            secure_my_mlx_pixel_put(game->img, start_x + i, start_y + j, color);
             j++;
         }
         i++;
@@ -125,24 +134,24 @@ void    draw_round(t_game *game, double x, double y, int r, int color)
         if (x1 <= 0)
             while(x1 <= 0)
             {
-                mlx_pixel_put(game->mlx_ptr, game->win_ptr, x + x1, y + y1, color);
+                my_mlx_pixel_put(game->img, x + x1, y + y1, color);
                 x1++;
             }
         else
             while (x1 > 0)
             {
-                mlx_pixel_put(game->mlx_ptr, game->win_ptr, x + x1, y + y1, color);
+                my_mlx_pixel_put(game->img, x + x1, y + y1, color);
                 x1--;
             }
         i += 0.1;
     }
 }
 
-int my_mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color)
+int secure_my_mlx_pixel_put(t_my_img *img, int x, int y, int color)
 {
     if (x >= 0 && x > SCREEN_WIDTH / 3 && x < ((SCREEN_WIDTH * 2 )/ 3) && y >= 0 && y > SCREEN_HEIGHT / 3)
     { 
-        mlx_pixel_put(mlx_ptr, win_ptr, x, y, color);
+        my_mlx_pixel_put(img, x, y, color);
         return (0);
     }
     return ( -1);

@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:24:17 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/02 12:39:51 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/03 16:35:02 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,17 @@ void    init_game_struct(t_game *game)
 
 void init_mlx(t_game *game)
 {
+    t_my_img *img;
+
+    img = malloc(sizeof(t_my_img));
+    if (!img)
+        return ;
+    game->img = img;
     game->mlx_ptr = mlx_init();
     game->win_ptr = mlx_new_window(game->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D");
+    img->ptr = mlx_new_image(game->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
+    printf("here  BROOOOOO\n");
+    img->addr =  mlx_get_data_addr(img->ptr, &img->bits_per_pixel, &img->line_length, &img->endian);
 }
 
 void game_loop(t_game *game)
@@ -50,6 +59,7 @@ int end_game(t_game *game)
 {
     mlx_destroy_window(game->mlx_ptr, game->win_ptr);
     mlx_destroy_display(game->mlx_ptr);
+    mlx_destroy_image(game->mlx_ptr, game->img->ptr);
     free_all(game);
     exit(0);
 }
