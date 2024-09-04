@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:59:18 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/04 15:31:46 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/04 17:28:17 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ int key_release(int keycode, t_game *game)
 }
 void    move(t_game *game, t_move move)
 {
-    if (move == UP)
+    if (move == UP && !is_there_wall(game, UP))
     {
-       game->pos_x += game->dir_x * 0.1;
-       game->pos_y += game->dir_y * 0.1;
+        game->pos_x += game->dir_x * 0.1;
+        game->pos_y += game->dir_y * 0.1;
     }
-    if (move == DOWN)
+    if (move == DOWN && !is_there_wall(game, DOWN))
     {
         game->pos_x -= game->dir_x * 0.1;
         game->pos_y -= game->dir_y * 0.1;
@@ -70,4 +70,26 @@ void    move(t_game *game, t_move move)
         game->dir_x = (game->dir_x * cos(-PI / 90) - game->dir_y * sin(-PI / 90));
         game->dir_y = (game->dir_x * sin(-PI / 90) + game->dir_y * cos(-PI / 90));
     }
+}
+
+bool    is_there_wall(t_game *game, t_move move)
+{
+    int x;
+    int y;
+
+    x = game->pos_x + game->dir_x * 0.1;
+    y = game->pos_y + game->dir_y * 0.1;
+    if (move == UP)
+    {
+        x = game->pos_x + game->dir_x * 0.1;
+        y = game->pos_y + game->dir_y * 0.1;
+    }
+    if (move == DOWN)
+    {
+        x = game->pos_x - game->dir_x * 0.1;
+        y = game->pos_y - game->dir_y * 0.1;
+    }
+    if (game->map->map[(int)y][(int)x] == '1')
+        return (true);
+    return (false);
 }

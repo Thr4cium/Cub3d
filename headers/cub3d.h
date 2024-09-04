@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/04 16:28:38 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/04 17:35:27 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,8 @@ int		update_game(t_game *game);
 int		key_input(int keycode, t_game *game);
 int		key_release(int keycode, t_game *game);
 void    move(t_game *game, t_move move);
+bool    is_there_wall(t_game *game, t_move move);
+
 
 // minimap_rays
 void	print_rays(t_game *game);

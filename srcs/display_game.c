@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 16:06:33 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/04 16:46:14 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/04 17:35:33 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,16 @@ void    print_minimap(t_game *game)
 {
     double start_x;
     double start_y;
-
     
     start_x = (int)game->pos_x - MINIMAP_RANGE;
     start_y = (int)game->pos_y - MINIMAP_RANGE;
-    if (start_x < 0)
-        start_x = 0;
     if (start_y < 0)
         start_y = 0;
     while (game->map->map[(int)start_y] && start_y < game->pos_y + MINIMAP_RANGE)
     {
         start_x = (int)(game->pos_x - MINIMAP_RANGE);
+        if (start_x < 0)
+            start_x = 0;
         while (game->map->map[(int)start_y][(int)start_x] && start_x < game->pos_x + MINIMAP_RANGE)
         {
             if (game->map->map[(int)start_y][(int)start_x] == '1')
