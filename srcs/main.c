@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:24:17 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/03 16:43:35 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/04 17:46:25 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void init_mlx(t_game *game)
     game->mlx_ptr = mlx_init();
     game->win_ptr = mlx_new_window(game->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D");
     img->ptr = mlx_new_image(game->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
-    printf("here  BROOOOOO\n");
     img->addr =  mlx_get_data_addr(img->ptr, &img->bits_per_pixel, &img->line_length, &img->endian);
 }
 

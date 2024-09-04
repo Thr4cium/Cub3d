@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 16:06:33 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/04 17:35:33 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/04 17:36:16 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,7 @@ void    print_minimap(t_game *game)
         while (game->map->map[(int)start_y][(int)start_x] && start_x < game->pos_x + MINIMAP_RANGE)
         {
             if (game->map->map[(int)start_y][(int)start_x] == '1')
-            {
-                printf("start_x : %f pos x %f\n", start_x , game->pos_x);
-                printf ("start_y : %f pos y %f\n", start_y, game->pos_y);
                 draw_tile(game, start_x - game->pos_x, start_y - game->pos_y, 0x0077B5FE);
-            }
             start_x+= 1;
         }
         start_y+= 1;
