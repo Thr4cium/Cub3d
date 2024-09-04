@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 16:06:33 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/03 16:38:31 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/04 16:46:14 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 int display_game(t_game *game)
 {
     set_window_color(game, 0x00303030);
+    print_minimap_background(game, 0x00808080);
     print_minimap(game);
-    print_player(game, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 41);
-    draw_line(game, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0x0090EE90);
+    print_player(game, SCREEN_WIDTH / 7.1, SCREEN_HEIGHT / 5.8, 20);
+    draw_line(game, SCREEN_WIDTH / 7.1, SCREEN_HEIGHT / 5.8, 0x0090EE90);
+    print_rays(game);
     mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img->ptr, 0, 0);
-    //print_rays(game);
     return (0);
 }
 
@@ -76,7 +77,7 @@ void    draw_line(t_game *game, int x, int y, int color)
     int i;
 
     i = 0;
-    while (i < 60)
+    while (i < 120)
     {
         my_mlx_pixel_put(game->img, x + game->dir_x * i, y + game->dir_y * i, color);
         i++;
@@ -88,8 +89,8 @@ void    draw_tile(t_game *game, double start_x, double start_y, int color)
     int     i;
     int     j;
 
-    double center_x = (double)SCREEN_WIDTH / 2;
-    double center_y = SCREEN_HEIGHT / 2;
+    double center_x = SCREEN_WIDTH / 7.1;
+    double center_y = SCREEN_HEIGHT / 5.8;
     start_x = (double)(center_x + start_x * game->tile_size);
     start_y = (double)(center_y + start_y * game->tile_size);
     i = 0;

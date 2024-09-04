@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 16:35:56 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/03 16:38:03 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/04 16:57:48 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	my_mlx_pixel_put(t_my_img *img, int x, int y, int color)
 
 int secure_my_mlx_pixel_put(t_my_img *img, int x, int y, int color)
 {
-    if (x >= 0 && x > SCREEN_WIDTH / 3 && x < ((SCREEN_WIDTH * 2 )/ 3) && y >= 0 && y > SCREEN_HEIGHT / 3)
+    if (x >= 0 && x > 30 && x < (SCREEN_WIDTH / 4 + 30) && y >= 0 && y > 10  && y < (SCREEN_HEIGHT / 3))
     { 
         my_mlx_pixel_put(img, x, y, color);
         return (0);
@@ -62,4 +62,28 @@ void    draw_round(t_game *game, double x, double y, int r, int color)
 void    print_player(t_game *game, int x, int y, int r)
 {
     draw_round(game, x, y, r, 0x00FF0000);
+}
+
+void    print_minimap_background(t_game *game, int color)
+{
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    while (j < SCREEN_HEIGHT / 3)
+    {
+        i = 0;
+        while (i < SCREEN_WIDTH / 4 + 30)
+        {
+            if (i == 31 || j == 11 || j == SCREEN_HEIGHT / 3 - 1)
+                secure_my_mlx_pixel_put(game->img, i, j, 0x00FFFFFF);
+            else
+                secure_my_mlx_pixel_put(game->img, i, j, color);
+            i++;
+        }
+        if (j > 10)
+            my_mlx_pixel_put(game->img, i, j, 0x00FFFFFF);
+        j++;
+    }
 }

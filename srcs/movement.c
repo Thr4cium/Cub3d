@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:59:18 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/02 13:54:18 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/04 15:31:46 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ void    move(t_game *game, t_move move)
     }
     if (move == RIGHT)
     {
-        game->dir_x = (game->dir_x * cos(PI / 180) - game->dir_y * sin(PI / 180));
-        game->dir_y = (game->dir_x * sin(PI /180) + game->dir_y * cos(PI / 180));
+        game->dir_x = (game->dir_x * cos(PI / 90) - game->dir_y * sin(PI / 90));
+        game->dir_y = (game->dir_x * sin(PI / 90) + game->dir_y * cos(PI / 90));
     }
     if (move == LEFT)
     {
-        game->dir_x = (game->dir_x * cos(-PI / 180) - game->dir_y * sin(-PI / 180));
-        game->dir_y = (game->dir_x * sin(-PI / 180) + game->dir_y * cos(-PI / 180));
+        game->dir_x = (game->dir_x * cos(-PI / 90) - game->dir_y * sin(-PI / 90));
+        game->dir_y = (game->dir_x * sin(-PI / 90) + game->dir_y * cos(-PI / 90));
     }
 }

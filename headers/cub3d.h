@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/03 16:42:18 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/04 16:28:38 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ void	my_mlx_pixel_put(t_my_img *img, int x, int y, int color);
 int		secure_my_mlx_pixel_put(t_my_img *img, int x, int y, int color);
 void    print_player(t_game *game, int x, int y, int r);
 void    draw_round(t_game *game, double x, double y, int r, int color);
-
+void    print_minimap_background(t_game *game, int color);
 
 // init_vectors
 void    init_vectors(t_game *game);
@@ -149,5 +149,8 @@ int		update_game(t_game *game);
 int		key_input(int keycode, t_game *game);
 int		key_release(int keycode, t_game *game);
 void    move(t_game *game, t_move move);
+
+// minimap_rays
+void	print_rays(t_game *game);
 
 #endif
