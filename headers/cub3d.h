@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/04 17:35:27 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/05 16:56:54 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,19 @@
 # define SCREEN_HEIGHT 1080
 # define PI 3.1415926535
 # define MINIMAP_RANGE 5
+
+typedef struct s_ray
+{
+	double sideDistX;
+	double sideDistY;
+	double deltaDistX;
+	double deltaDistY;
+	double perpWallDist;
+	int		mapX;
+	int		mapY;
+	int		stepX;
+	int		stepY;
+}	t_ray;
 
 typedef	struct s_my_img
 {
