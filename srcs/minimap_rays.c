@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 16:39:59 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/11 17:25:19 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/11 18:26:14 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ void    define_wall_line(t_game *game, t_ray *ray, int x, int color)
     int drawStart;
     int drawEnd;
 
+    ray->perpWallDist *= (cos(PI / 4 - (x * (PI / 2) / SCREEN_WIDTH)));
     lineHeight = (int)(SCREEN_HEIGHT / ray->perpWallDist);
     drawStart = -lineHeight / 2 + SCREEN_HEIGHT / 2;
     if (drawStart < 0)
