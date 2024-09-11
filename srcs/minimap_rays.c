@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 16:39:59 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/05 17:04:27 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/11 16:53:43 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void    print_rays(t_game *game)
         my_mlx_pixel_put(game->img, x0 + xdir * i, y0 + ydir * i, 0x0000FF00);
         i++;
     }
+    ray_casting(game);
 }
 
 void    ray_casting(t_game *game)
@@ -54,59 +55,110 @@ void    ray_casting(t_game *game)
     {
         Vdir_x = (game->dir_x * cos(angle_increment * i) - game->dir_y * sin(angle_increment * i));
         Vdir_y = (game->dir_x * sin(angle_increment * i) + game->dir_y * cos(angle_increment * i));
-        if (ray_cast(game, Vdir_x, Vdir_y) == -1)
+        if (ray_cast(game, Vdir_x, Vdir_y, i) == -1)
             return ;
         i++;
     }
 }
 
-int ray_cast(t_game *game, double Vdir_x, double Vdir_y)
+int ray_cast(t_game *game, double Vdir_x, double Vdir_y, int i)
 {
-    t_ray ray;
+    t_ray *ray;
 
     ray = calloc(1, sizeof(t_ray));
     if (ray == NULL)
         return -1;
     init_ray(game, ray, Vdir_x, Vdir_y);
+    dda_algorithm(game, ray);
+    define_wall_line(game, ray, i, 0x00FFFF00);
+    free(ray);
     return (0);
 }
 
-void    init_ray(t_game *game, t_ray ray, double Vdir_x, double Vdir_y)
+void    init_ray(t_game *game, t_ray *ray, double Vdir_x, double Vdir_y)
 {
-    ray.mapX = (int)game->pos_x;
-    ray.mapY = (int)game->pos_y;
+    ray->mapX = (int)game->pos_x;
+    ray->mapY = (int)game->pos_y;
     if (Vdir_x == 0)
-        ray.deltaDistX = 1e30;
+        ray->deltaDistX = 1e30;
     else
-        ray.deltaDistX = fabs(1 / Vdir_x);
+        ray->deltaDistX = fabs(1 / Vdir_x);
     if (Vdir_y == 0)
-        ray.deltaDistY = 1e30;
+        ray->deltaDistY = 1e30;
     else
-        ray.deltaDistY = fabs(1 / Vdir_y);
+        ray->deltaDistY = fabs(1 / Vdir_y);
     init_ray2(game, ray, Vdir_x, Vdir_y);
-  
 }
 
-void    init_ray2(t_game *game, t_ray ray, double Vdir_x, double Vdir_y)
+void    init_ray2(t_game *game, t_ray *ray, double Vdir_x, double Vdir_y)
 {
     if (Vdir_x < 0)
     {
-        ray.stepX = -1;
-        ray.sideDistX = (game->pos_x - ray.mapX) * ray.deltaDistX;
+        ray->stepX = -1;
+        ray->sideDistX = (game->pos_x - ray->mapX) * ray->deltaDistX;
     }
     else
     {
-        ray.stepX = 1;
-        ray.sideDistX = (ray.mapX + 1.0 - posX) * ray.deltaDistX;
+        ray->stepX = 1;
+        ray->sideDistX = (ray->mapX + 1.0 - game->pos_x) * ray->deltaDistX;
     }
     if (Vdir_y < 0)
     {
-        ray.stepY = -1;
-        ray.sideDistY = (game->pos_y - ray.mapY) * ray.deltaDistY;
+        ray->stepY = -1;
+        ray->sideDistY = (game->pos_y - ray->mapY) * ray->deltaDistY;
     }
     else
     {
-        ray.stepY = 1;
-        ray.sideDistY = (ray.mapY + 1.0 - game->pos_y) * ray.deltaDistY;
+        ray->stepY = 1;
+        ray->sideDistY = (ray->mapY + 1.0 - game->pos_y) * ray->deltaDistY;
+    }
+}
+
+void    dda_algorithm(t_game *game, t_ray *ray)
+{
+    bool hit;
+    int side;
+
+    side = 0;
+    hit = false;
+    while (hit == false)
+    {
+        if (ray->sideDistX < ray->sideDistY)
+        {
+            ray->sideDistX += ray->deltaDistX;
+            ray->mapX += ray->stepX;
+            side = 0;
+        }
+        else
+        {
+            ray->sideDistY += ray->deltaDistY;
+            ray->mapY += ray->stepY;
+            side = 1;
+        }
+        if (game->map->map[ray->mapY][ray->mapX] == '1')
+            hit = true;
+    }
+    ray->perpWallDist = (ray->sideDistY - ray->deltaDistY);
+    if (side == 0) // axe des X
+        ray->perpWallDist = (ray->sideDistX - ray->deltaDistX);
+}
+
+void    define_wall_line(t_game *game, t_ray *ray, int x, int color)
+{
+    int lineHeight;
+    int drawStart;
+    int drawEnd;
+
+    lineHeight = (int)(SCREEN_HEIGHT / ray->perpWallDist);
+    drawStart = -lineHeight / 2 + SCREEN_HEIGHT / 2;
+    if (drawStart < 0)
+        drawStart = 0;
+    drawEnd = lineHeight / 2 + SCREEN_HEIGHT / 2;
+    if (drawEnd >= SCREEN_HEIGHT)
+        drawEnd = SCREEN_HEIGHT - 1;
+    while (drawStart < drawEnd)
+    {
+        secure_my_mlx_pixel_put2(game->img, x, drawStart, color);
+        drawStart++;
     }
 }

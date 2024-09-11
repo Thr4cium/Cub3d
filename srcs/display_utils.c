@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 16:35:56 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/04 17:20:18 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/11 16:46:24 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ int secure_my_mlx_pixel_put(t_my_img *img, int x, int y, int color)
         return (0);
     }
     return ( -1);
+}
+
+int secure_my_mlx_pixel_put2(t_my_img *img, int x, int y, int color)
+{
+    if (x >= 0 && x > 30 && x < (SCREEN_WIDTH / 4 + 30) && y >= 0 && y > 10  && y < (SCREEN_HEIGHT / 3))
+        return ( -1);
+    my_mlx_pixel_put(img, x, y, color);
+    return (0);
 }
 
 void    draw_round(t_game *game, double x, double y, int r, int color)
