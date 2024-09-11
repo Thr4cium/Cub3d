@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 16:39:59 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/11 16:53:43 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/11 17:25:19 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,19 @@ void    print_rays(t_game *game)
 void    ray_casting(t_game *game)
 {
     int i;
+    double baseVdir_x;
+    double baseVdir_y;
     double Vdir_x;
     double Vdir_y;
     double angle_increment = (PI / 2) / SCREEN_WIDTH;
 
     i = 0;
-    Vdir_x = (game->dir_x * cos(-PI / 2) - game->dir_y * sin(-PI / 2));
-    Vdir_y = (game->dir_x * sin(-PI / 2) + game->dir_y * cos(-PI / 2));
+    baseVdir_x = (game->dir_x * cos(-PI / 4) - game->dir_y * sin(-PI / 4));
+    baseVdir_y = (game->dir_x * sin(-PI / 4) + game->dir_y * cos(-PI / 4));
     while (i < SCREEN_WIDTH)
     {
-        Vdir_x = (game->dir_x * cos(angle_increment * i) - game->dir_y * sin(angle_increment * i));
-        Vdir_y = (game->dir_x * sin(angle_increment * i) + game->dir_y * cos(angle_increment * i));
+        Vdir_x = (baseVdir_x * cos(angle_increment * i) - baseVdir_y * sin(angle_increment * i));
+        Vdir_y = (baseVdir_x * sin(angle_increment * i) + baseVdir_y * cos(angle_increment * i));
         if (ray_cast(game, Vdir_x, Vdir_y, i) == -1)
             return ;
         i++;
