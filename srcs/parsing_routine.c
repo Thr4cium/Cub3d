@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 10:42:22 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/03 16:45:12 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:41:38 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ int	check_map_information(t_map *map)
 			return (printf("Error : wrong map information\n"), -1);
 		i++;
 	}
-	if (check_map_validity(map) == -1)
+	if (check_map_validity(map) == -1 || check_map_validity_bis(map) == -1)
 		return (-1);
 	return (0);
 }
@@ -171,6 +171,54 @@ int	check_map_validity(t_map *map)
 			}
 			j++;
 		}
+		i++;
+	}
+	return (0);
+}
+
+int	check_map_validity_bis(t_map *map)
+{
+	size_t i;
+	size_t j;
+
+	i = 0;
+	if (case_first_last_line(map) == -1)
+		return (printf("Error : map is not closed\n"), -1);
+	while (map->map[i])
+	{
+		j = 0;
+		while (map->map[i][j])
+		{
+			if (i != ft_strlen(map->map[i]) - 1 && i != 0)
+			{
+				if (map->map[i][j] == '0' && ft_strlen(map->map[i - 1]) <= j)
+					return (printf("Error : map is not closed\n"), -1);
+				if (map->map[i][j] == '0' && ft_strlen(map->map[i + 1]) <= j)
+					return (printf("Error : map is not closed\n"), -1);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+int case_first_last_line(t_map *map)
+{
+	size_t i;
+
+	i = 0;
+	while (map->map[0][i])
+	{
+		if (map->map[0][i] == '0' && ft_strlen(map->map[1]) <= i)
+			return (-1);
+		i++;
+	}
+	i = 0;
+	while (map->map[map->map_y - 1][i])
+	{
+		if (map->map[map->map_y - 1][i] == '0' && ft_strlen(map->map[map->map_y - 2]) <= i)
+			return (-1);
 		i++;
 	}
 	return (0);

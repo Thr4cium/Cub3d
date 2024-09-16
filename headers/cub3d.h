@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/16 17:51:28 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:41:53 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ int		get_map_information(t_map *map, int fd);
 char	**map_addline(char **map, char *line);
 int		check_map_information(t_map *map);
 int		check_map_validity(t_map *map);
+int		check_map_validity_bis(t_map *map);
+int		case_first_last_line(t_map *map);
 void	free_all(t_game *game);
 int		check_path(char *path);
 void	actualise_map(t_map *map);
