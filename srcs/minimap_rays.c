@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 16:39:59 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/11 18:26:14 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:51:16 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,9 +159,28 @@ void    define_wall_line(t_game *game, t_ray *ray, int x, int color)
     drawEnd = lineHeight / 2 + SCREEN_HEIGHT / 2;
     if (drawEnd >= SCREEN_HEIGHT)
         drawEnd = SCREEN_HEIGHT - 1;
+    draw_ground_and_sky(game, x, drawStart, drawEnd);
     while (drawStart < drawEnd)
     {
         secure_my_mlx_pixel_put2(game->img, x, drawStart, color);
         drawStart++;
+    }
+}
+
+void    draw_ground_and_sky(t_game *game, int x, int drawStart, int drawEnd)
+{
+    int i;
+
+    i = 0;
+    while (i < drawStart)
+    {
+        secure_my_mlx_pixel_put2(game->img, x, i, game->map->sky_color);
+        i++;
+    }
+    i = drawEnd;
+    while (i < SCREEN_HEIGHT)
+    {
+        secure_my_mlx_pixel_put2(game->img, x, i, game->map->ground_color);
+        i++;
     }
 }

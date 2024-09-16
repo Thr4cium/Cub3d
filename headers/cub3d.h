@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/11 18:32:19 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:51:28 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,8 @@ void    init_ray(t_game *game, t_ray *ray, double Vdir_x, double Vdir_y);
 void    init_ray2(t_game *game, t_ray *ray, double Vdir_x, double Vdir_y);
 void    dda_algorithm(t_game *game, t_ray *ray);
 void    define_wall_line(t_game *game, t_ray *ray, int x, int color);
+void    draw_ground_and_sky(t_game *game, int x, int drawStart, int drawEnd);
+
 
 
 #endif

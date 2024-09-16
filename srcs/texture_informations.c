@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:01:09 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/22 17:26:14 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:10:38 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	check_texture_information(t_map *map)
 {
 	int fd;
 
-	printf("here\n");
 	printf("no_texture : %s\n", map->no_texture);
 	fd = open(map->no_texture, O_RDONLY);
 	if (fd == -1)
@@ -103,14 +102,13 @@ int	rgb_to_int(char *line)
 	i = 0;
 	j = 0;
 	rgb = 0;
-	printf("line rgb %s\n", line);
 	while (*line && j < 3)
 	{
-		while (*line != ',' && i  < 3)
+		while (*line != ',' && *line != '\n' && i  < 3)
 		{
 			if (!ft_isdigit(*line))
 				return (printf("Error : wrong color information\n"), -1);	
-			color[i++] = *line;
+			color[i++] = *line++;
 		}
 		rgb = rgb_to_int_tool(j, color, rgb);
 		ft_bzero(color, 4);
@@ -118,7 +116,6 @@ int	rgb_to_int(char *line)
 		j++;
 		line++;
 	}
-	printf("rgb : %d\n", rgb);
 	return (rgb);
 }
 
