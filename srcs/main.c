@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:24:17 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/04 17:46:25 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/16 19:59:47 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void game_loop(t_game *game)
     mlx_hook(game->win_ptr, 17, 0, &end_game, game);
     mlx_hook(game->win_ptr, KeyPress, KeyPressMask, &key_input, game);
     mlx_hook(game->win_ptr, KeyRelease, KeyReleaseMask, &key_release, game);
+    // mlx_mouse_hook(game->win_ptr, &mouse_input, game);
     mlx_loop_hook(game->mlx_ptr, &update_game, game);
     mlx_loop(game->mlx_ptr);
 }

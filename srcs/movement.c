@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:59:18 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/04 17:43:42 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/16 20:12:01 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,18 @@
 
 int update_game(t_game *game)
 {
+    int x;
+    int y;
+
+    x = 0;
+    y = 0;
+    mlx_mouse_hide(game->mlx_ptr, game->win_ptr);
+    mlx_mouse_get_pos(game->mlx_ptr, game->win_ptr, &x, &y);
+    if (x > SCREEN_WIDTH / 2)
+        move(game, RIGHT);
+    if (x < SCREEN_WIDTH / 2)
+        move(game, LEFT);
+    mlx_mouse_move(game->mlx_ptr, game->win_ptr, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
     if (game->keys[XK_w])
         move(game, UP);
     if (game->keys[XK_s])
@@ -26,6 +38,18 @@ int update_game(t_game *game)
     return (0);
 }
 
+// int mouse_input(int button, int x, int y, t_game *game)
+// {
+//     (void)button;
+//     mlx_mouse_hide(game->mlx_ptr, game->win_ptr);
+//     printf("mouse pose : %d %d\n", x, y);
+//     if (x > SCREEN_WIDTH / 2)
+//         move(game, RIGHT);
+//     if (x < SCREEN_WIDTH / 2)
+//         move(game, LEFT);
+//     mlx_mouse_move(game->mlx_ptr, game->win_ptr, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+//     return (0);
+// }
 
 int key_input(int keycode, t_game *game)
 {
