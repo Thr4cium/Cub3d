@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/16 19:44:23 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/17 16:48:02 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ int		mouse_input(int button, int x, int y, t_game *game);
 int		key_input(int keycode, t_game *game);
 int		key_release(int keycode, t_game *game);
 void    move(t_game *game, t_move move);
+void    move_mouse(t_game *game, t_move move);
 bool    is_there_wall(t_game *game, t_move move);
 
 
