@@ -6,11 +6,13 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:59:18 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/17 17:12:22 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/17 19:03:36 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
+
+https://www.perplexity.ai/search/-0.CzAX5XTQO4wIPWQmF5.w
 
 int update_game(t_game *game)
 {
@@ -26,9 +28,9 @@ int update_game(t_game *game)
     return (0);
 }
 
- int mouse_input(int button, int x, int y, t_game *game)
- {
-    (void)button;
+int mouse_input(int x, int y, t_game *game)
+{
+    printf("Mouse position: %d, %d\n", x, y);
     mlx_mouse_hide(game->mlx_ptr, game->win_ptr);
     mlx_mouse_get_pos(game->mlx_ptr, game->win_ptr, &x, &y);
     if (x > SCREEN_WIDTH / 2)
@@ -37,7 +39,7 @@ int update_game(t_game *game)
         move(game, LEFT);
     mlx_mouse_move(game->mlx_ptr, game->win_ptr, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
     return (0);
- }
+}
 
 int key_input(int keycode, t_game *game)
 {
