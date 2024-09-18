@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:59:18 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/18 17:39:42 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:50:22 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ void    move_mouse(t_game *game, t_move move, int delta_x)
 {
     double old_dir_x;
 
-    printf("%d \n", delta_x);
     if (delta_x < 0)
         delta_x = -delta_x;
     if (move == RIGHT)

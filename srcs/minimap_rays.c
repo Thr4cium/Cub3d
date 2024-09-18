@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 16:39:59 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/16 18:50:41 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:48:34 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,14 @@ void    ray_casting(t_game *game)
 
 int ray_cast(t_game *game, double Vdir_x, double Vdir_y, int i)
 {
-    t_ray *ray;
+    t_ray ray;
 
-    ray = calloc(1, sizeof(t_ray));
-    if (ray == NULL)
-        return -1;
-    init_ray(game, ray, Vdir_x, Vdir_y);
-    dda_algorithm(game, ray);
-    define_wall_line(game, ray, i, 0x00FFFF00);
-    free(ray);
+    // ray = calloc(1, sizeof(t_ray));
+    // if (ray == NULL)
+    //     return -1;
+    init_ray(game, &ray, Vdir_x, Vdir_y);
+    dda_algorithm(game, &ray);
+    define_wall_line(game, &ray, i, 0x00FFFF00);
     return (0);
 }
 
