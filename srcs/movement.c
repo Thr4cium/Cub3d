@@ -6,16 +6,17 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:59:18 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/17 19:03:36 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:39:42 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
 
-https://www.perplexity.ai/search/-0.CzAX5XTQO4wIPWQmF5.w
-
 int update_game(t_game *game)
 {
+    int delta_x;
+
+    delta_x = process_mouse_motion(game);
     if (game->keys[XK_w])
         move(game, UP);
     if (game->keys[XK_s])
@@ -24,22 +25,48 @@ int update_game(t_game *game)
         move(game, LEFT);
     if (game->keys[XK_d])
         move(game, RIGHT);
+    if (game->mouse_x == -1)
+        move_mouse(game, LEFT, delta_x);
+    else if (game->mouse_x == 1)
+        move_mouse(game, RIGHT, delta_x);
     display_game(game);
     return (0);
 }
 
-int mouse_input(int x, int y, t_game *game)
+int process_mouse_motion(t_game *game)
 {
-    printf("Mouse position: %d, %d\n", x, y);
+    int x;
+    int y;
+    int delta_x;
+    static int last_x = SCREEN_WIDTH / 2;
+
+    x = 0;
+    y = 0;
     mlx_mouse_hide(game->mlx_ptr, game->win_ptr);
     mlx_mouse_get_pos(game->mlx_ptr, game->win_ptr, &x, &y);
-    if (x > SCREEN_WIDTH / 2)
-        move(game, RIGHT);
-    if (x < SCREEN_WIDTH / 2)
-        move(game, LEFT);
-    mlx_mouse_move(game->mlx_ptr, game->win_ptr, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-    return (0);
+    delta_x = x - last_x;
+    if (delta_x > 0)
+        game->mouse_x = 1;
+    else if (delta_x < 0)
+        game->mouse_x = -1;
+    else
+        game->mouse_x = 0;
+    last_x = x;
+    if (x >= SCREEN_WIDTH - 100 || x <= 100)
+    {
+        mlx_mouse_move(game->mlx_ptr, game->win_ptr, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+        last_x = SCREEN_WIDTH / 2;
+    }
+    return (delta_x);
 }
+// int mouse_input(int x, int y, t_game *game)
+// {
+//     mlx_mouse_hide(game->mlx_ptr, game->win_ptr);
+//     mlx_mouse_get_pos(game->mlx_ptr, game->win_ptr, &x, &y);
+    
+//     mlx_mouse_move(game->mlx_ptr, game->win_ptr, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+//     return (0);
+// }
 
 int key_input(int keycode, t_game *game)
 {
@@ -63,23 +90,26 @@ int key_release(int keycode, t_game *game)
     return (0);
 }
 
-// void    move_mouse(t_game *game, t_move move)
-// {
-//     double old_dir_x;
-    
-//     if (move == RIGHT)
-//     {
-//         old_dir_x = game->dir_x;
-//         game->dir_x = (game->dir_x * cos(PI /4) - game->dir_y * sin(PI /4));
-//         game->dir_y = (old_dir_x * sin(PI /4) + game->dir_y * cos(PI /4));
-//     }
-//     if (move == LEFT)
-//     {
-//         old_dir_x = game->dir_x;
-//         game->dir_x = (game->dir_x * cos(-PI /4) - game->dir_y * sin(-PI /4));
-//         game->dir_y = (old_dir_x * sin(-PI /4) + game->dir_y * cos(-PI /4));
-//     }
-// }
+void    move_mouse(t_game *game, t_move move, int delta_x)
+{
+    double old_dir_x;
+
+    printf("%d \n", delta_x);
+    if (delta_x < 0)
+        delta_x = -delta_x;
+    if (move == RIGHT)
+    {
+        old_dir_x = game->dir_x;
+        game->dir_x = (game->dir_x * cos(PI / 720 * delta_x) - game->dir_y * sin(PI / 720 * delta_x));
+        game->dir_y = (old_dir_x * sin(PI / 720 * delta_x) + game->dir_y * cos(PI / 720 * delta_x));
+    }
+    if (move == LEFT)
+    {
+        old_dir_x = game->dir_x;
+        game->dir_x = (game->dir_x * cos(-PI / 720 * delta_x) - game->dir_y * sin(-PI / 720 * delta_x));
+        game->dir_y = (old_dir_x * sin(-PI / 720 * delta_x) + game->dir_y * cos(-PI / 720 * delta_x));
+    }
+}
 
 void    move(t_game *game, t_move move)
 {

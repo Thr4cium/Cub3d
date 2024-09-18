@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:24:17 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/17 18:55:31 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/18 16:32:55 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void    init_game_struct(t_game *game)
 {
     int i;
 
+    game->mouse_x = 0;
     game->map = NULL;
     game->pos_x = 0;
     game->pos_y = 0;
@@ -50,7 +51,8 @@ void game_loop(t_game *game)
     mlx_hook(game->win_ptr, 17, 0, &end_game, game);
     mlx_hook(game->win_ptr, KeyPress, KeyPressMask, &key_input, game);
     mlx_hook(game->win_ptr, KeyRelease, KeyReleaseMask, &key_release, game);
-    mlx_hook(game->win_ptr, MotionNotify, PointerMotionMask, &mouse_input, game);
+    // mlx_hook(game->win_ptr, MotionNotify, PointerMotionMask, &mouse_input, game);
+    //mlx_mouse_hook(game->win_ptr, &mouse_input, game);
     mlx_loop_hook(game->mlx_ptr, &update_game, game);
     mlx_loop(game->mlx_ptr);
 }
