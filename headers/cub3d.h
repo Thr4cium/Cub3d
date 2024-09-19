@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/18 17:48:34 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/19 05:37:34 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,27 @@ typedef struct s_map
 	size_t		map_y;
 }				t_map;
 
+typedef strct s_texture
+{
+	void	*ptr;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+}			t_texture;
+
 typedef struct s_game
 {
 	t_map		*map;
 	t_my_img	*img;
+	void	*win_ptr;
+	void	*mlx_ptr;
+	t_texture		*so_img;
+	t_texture		*no_img;
+	t_texture		*we_img;
+	t_texture		*ea_img;
 	double		mouse_x;
 	double	pos_x;
 	double	pos_y;
@@ -81,8 +98,6 @@ typedef struct s_game
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
-	void	*mlx_ptr;
-	void	*win_ptr;
 	int		tile_size;
 	double  center_x;
 	double  center_y;
@@ -159,7 +174,11 @@ void    init_vectors(t_game *game);
 void    init_dir_vectors(t_game *game);
 
 // map_information
-void	get_player_initial_position(t_game *game);
+void		get_player_initial_position(t_game *game);
+t_texure	*create_texture(t_game *game, char *path);
+void		*load_image(char *path, int *width, int *height, t_game *game);
+int			access_texture(char *path);
+int			load_textures(t_game *game);
 
 // movement
 int		update_game(t_game *game);
