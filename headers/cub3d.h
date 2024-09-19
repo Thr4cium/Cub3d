@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/19 10:36:26 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/19 12:25:12 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,16 @@ typedef struct s_ray
 	double deltaDistX;
 	double deltaDistY;
 	double perpWallDist;
+	double wallX;
+	double Vdir_x;
+	double Vdir_y;
 	int		mapX;
 	int		mapY;
 	int		stepX;
 	int		stepY;
 	int		side;
+	int		drawStart;
+	int		drawEnd;
 }	t_ray;
 
 typedef	struct s_my_img

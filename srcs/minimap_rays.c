@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 16:39:59 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/19 10:36:47 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/19 12:23:42 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ void    init_ray(t_game *game, t_ray *ray, double Vdir_x, double Vdir_y)
 {
     ray->mapX = (int)game->pos_x;
     ray->mapY = (int)game->pos_y;
+    ray->stepY = 0;
+    ray->stepX = 0;
     if (Vdir_x == 0)
         ray->deltaDistX = 1e30;
     else
@@ -85,6 +87,8 @@ void    init_ray(t_game *game, t_ray *ray, double Vdir_x, double Vdir_y)
         ray->deltaDistY = 1e30;
     else
         ray->deltaDistY = fabs(1 / Vdir_y);
+    ray->Vdir_x = Vdir_x;
+    ray->Vdir_y = Vdir_y;
     init_ray2(game, ray, Vdir_x, Vdir_y);
 }
 
@@ -144,22 +148,40 @@ void    dda_algorithm(t_game *game, t_ray *ray)
 void    define_wall_line(t_game *game, t_ray *ray, int x, int color)
 {
     int lineHeight;
-    int drawStart;
-    int drawEnd;
 
+    if (ray->side == 0) 
+        ray->wallX = game->pos_y + ray->perpWallDist * ray->Vdir_y;
+    else
+        ray->wallX = game->pos_x + ray->perpWallDist * ray->Vdir_x;
+    ray->wallX -= floor(ray->wallX);
     ray->perpWallDist *= (cos(PI / 4 - (x * (PI / 2) / SCREEN_WIDTH)));
     lineHeight = (int)(SCREEN_HEIGHT / ray->perpWallDist);
-    drawStart = -lineHeight / 2 + SCREEN_HEIGHT / 2;
-    if (drawStart < 0)
-        drawStart = 0;
-    drawEnd = lineHeight / 2 + SCREEN_HEIGHT / 2;
-    if (drawEnd >= SCREEN_HEIGHT)
-        drawEnd = SCREEN_HEIGHT - 1;
-    draw_ground_and_sky(game, x, drawStart, drawEnd);
-    while (drawStart < drawEnd)
+    ray->drawStart = -lineHeight / 2 + SCREEN_HEIGHT / 2;
+    if (ray->drawStart < 0)
+        ray->drawStart = 0;
+    ray->drawEnd = lineHeight / 2 + SCREEN_HEIGHT / 2;
+    if (ray->drawEnd >= SCREEN_HEIGHT)
+        ray->drawEnd = SCREEN_HEIGHT - 1;
+    draw_ground_and_sky(game, x, ray->drawStart, ray->drawEnd);
+    draw_scaled_wall(game, x, ray);
+}
+
+void    draw_scaled_wall(t_game *game, int x, t_ray *ray)
+{
+    int color;
+    
+    while (ray->drawStart < ray->drawEnd)
     {
-        secure_my_mlx_pixel_put2(game->img, x, drawStart, color);
-        drawStart++;
+        if (ray->side == 1 && ray->stepY == -1)
+            color = get_color(game->no_img, ray);
+        else if (ray->side == 1 && ray->stepY == 1)
+            color = get_color(game->so_img, ray);
+        else if (ray->side == 0 && ray->stepX == -1)
+            color = get_color(game->so_img, ray);
+        else if (ray->side == 0 && ray->stepX == 1)
+            color = get_color(game->so_img, ray);
+        secure_my_mlx_pixel_put2(game->img, x, ray->drawStart, color);
+        ray->drawStart++;
     }
 }
 

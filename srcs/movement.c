@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:59:18 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/18 17:50:22 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/19 11:42:57 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,6 @@ int process_mouse_motion(t_game *game)
     }
     return (delta_x);
 }
-// int mouse_input(int x, int y, t_game *game)
-// {
-//     mlx_mouse_hide(game->mlx_ptr, game->win_ptr);
-//     mlx_mouse_get_pos(game->mlx_ptr, game->win_ptr, &x, &y);
-    
-//     mlx_mouse_move(game->mlx_ptr, game->win_ptr, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-//     return (0);
-// }
 
 int key_input(int keycode, t_game *game)
 {
