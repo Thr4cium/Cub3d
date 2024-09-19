@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 16:39:59 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/18 17:48:34 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/19 10:36:47 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,6 @@ int ray_cast(t_game *game, double Vdir_x, double Vdir_y, int i)
 {
     t_ray ray;
 
-    // ray = calloc(1, sizeof(t_ray));
-    // if (ray == NULL)
-    //     return -1;
     init_ray(game, &ray, Vdir_x, Vdir_y);
     dda_algorithm(game, &ray);
     define_wall_line(game, &ray, i, 0x00FFFF00);
@@ -128,19 +125,19 @@ void    dda_algorithm(t_game *game, t_ray *ray)
         {
             ray->sideDistX += ray->deltaDistX;
             ray->mapX += ray->stepX;
-            side = 0;
+            ray->side = 0;
         }
         else
         {
             ray->sideDistY += ray->deltaDistY;
             ray->mapY += ray->stepY;
-            side = 1;
+            ray->side = 1;
         }
         if (game->map->map[ray->mapY][ray->mapX] == '1')
             hit = true;
     }
     ray->perpWallDist = (ray->sideDistY - ray->deltaDistY);
-    if (side == 0) // axe des X
+    if (ray->side == 0) // axe des X
         ray->perpWallDist = (ray->sideDistX - ray->deltaDistX);
 }
 

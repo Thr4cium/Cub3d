@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 16:18:59 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/19 05:36:38 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/19 10:20:50 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void    get_player_initial_position(t_game *game)
     }
 }
 
-t_texure *create_texture(t_game *game, char *path)
+t_texture *create_texture(t_game *game, char *path)
 {
     t_texture *texture;
 
@@ -76,13 +76,17 @@ void	*load_image(char *path, int *width, int *height, t_game *game)
 	void	*ptr;
 
 	ptr = mlx_xpm_file_to_image(game->mlx_ptr, path, width, height);
-	if (!ptr)
+    if (!ptr)
+    {
+        free_all(game);
 		end_game(game);
-	return (ptr);
+    }
+    return (ptr);
 }
 
 int load_textures(t_game *game)
 {
+
     if (access_texture(game->map->no_texture) < 0)
         return (-1);
     if (access_texture(game->map->so_texture) < 0)
@@ -91,16 +95,17 @@ int load_textures(t_game *game)
         return (-1);
     if (access_texture(game->map->ea_texture) < 0)
         return (-1);
-    game->no_texture = create_texture(game, game->map->no_texture);
-    if (!game->no_texture)
+    game->no_img = create_texture(game, game->map->no_texture);
+    if (!game->no_img)
         return (perror("malloc no texture failed\n"), -1);
-    game->so_texture = create_texture(game, game->map->so_texture);
-    if (!game->so_texture)
+    game->so_img = create_texture(game, game->map->so_texture);
+    if (!game->so_img)
         return (perror("malloc no texture failed\n"), -1);
-    game->we_texture = create_texture(game, game->map->we_texture);
-    if (!game->we_texture)
+    game->we_img = create_texture(game, game->map->we_texture);
+    if (!game->we_img)
         return (perror("malloc no texture failed\n"), -1);
-    game->ea_texture = create_texture(game, game->map->ea_texture);
-    if (!game->ea_texture)
+    game->ea_img = create_texture(game, game->map->ea_texture);
+    if (!game->ea_img)
         return (perror("malloc no texture failed\n"), -1);
+    return (0);
 }

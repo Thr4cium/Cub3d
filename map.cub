@@ -1,9 +1,9 @@
-NO textures/north_texture.xpm
+NO textures/honey.xpm
 
-SO textures/south_texture.xpm
+SO textures/lava.xpm
 
-WE textures/west_texture.xpm
-EA textures/east_texture.xpm
+WE textures/tree.xpm
+EA textures/wall_brick.xpm
 
 
 F 211,211,211

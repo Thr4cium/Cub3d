@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:24:17 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/19 05:36:32 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/19 10:20:22 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,12 @@ int main(int ac, char **av)
         free_all(&game);
         return (printf("Error\nParsing failed\n"), 1);
     }
+    init_mlx(&game);
     if (load_textures(&game) == -1)
     {
         free_all(&game);
         return (printf("Error\nLoading textures failed\n"), 1);
     }
-    init_mlx(&game);
     game_loop(&game);
     free_all(&game);
     return (0);

@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/19 05:37:34 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/19 10:36:26 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_ray
 	int		mapY;
 	int		stepX;
 	int		stepY;
+	int		side;
 }	t_ray;
 
 typedef	struct s_my_img
@@ -70,7 +71,7 @@ typedef struct s_map
 	size_t		map_y;
 }				t_map;
 
-typedef strct s_texture
+typedef struct s_texture
 {
 	void	*ptr;
 	char	*addr;
@@ -175,7 +176,7 @@ void    init_dir_vectors(t_game *game);
 
 // map_information
 void		get_player_initial_position(t_game *game);
-t_texure	*create_texture(t_game *game, char *path);
+t_texture	*create_texture(t_game *game, char *path);
 void		*load_image(char *path, int *width, int *height, t_game *game);
 int			access_texture(char *path);
 int			load_textures(t_game *game);
