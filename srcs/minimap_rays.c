@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 16:39:59 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/24 13:48:04 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/25 00:16:56 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void    init_ray(t_game *game, t_ray *ray, double Vdir_x, double Vdir_y)
     ray->mapY = (int)game->pos_y;
     ray->stepY = 0;
     ray->stepX = 0;
+    ray->side = 0;
     if (Vdir_x == 0)
         ray->deltaDistX = 1e30;
     else
@@ -119,9 +120,7 @@ void    init_ray2(t_game *game, t_ray *ray, double Vdir_x, double Vdir_y)
 void    dda_algorithm(t_game *game, t_ray *ray)
 {
     bool hit;
-    int side;
 
-    side = 0;
     hit = false;
     while (hit == false)
     {
