@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 16:18:59 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/19 10:20:50 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/24 10:44:29 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_texture *create_texture(t_game *game, char *path)
     texture->addr = mlx_get_data_addr(texture->ptr, &texture->bits_per_pixel, &texture->line_length, &texture->endian);
     if (!texture->addr)
         return (free(texture), NULL);
+    printf("texture loaded %p\n", texture->ptr);
     return (texture);
 }
 
@@ -107,5 +108,7 @@ int load_textures(t_game *game)
     game->ea_img = create_texture(game, game->map->ea_texture);
     if (!game->ea_img)
         return (perror("malloc no texture failed\n"), -1);
+    mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->no_img->ptr, 0, 0);
+    sleep(2);
     return (0);
 }

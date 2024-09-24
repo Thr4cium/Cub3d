@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 16:39:59 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/19 12:23:42 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/24 10:58:09 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ void    dda_algorithm(t_game *game, t_ray *ray)
 
 void    define_wall_line(t_game *game, t_ray *ray, int x, int color)
 {
+    (void) color;
     int lineHeight;
 
     if (ray->side == 0) 
@@ -169,19 +170,24 @@ void    define_wall_line(t_game *game, t_ray *ray, int x, int color)
 void    draw_scaled_wall(t_game *game, int x, t_ray *ray)
 {
     int color;
-    
+    int delta;
+    int i;
+
+    delta = ray->drawEnd - ray->drawStart;
+    i = 0;
     while (ray->drawStart < ray->drawEnd)
     {
         if (ray->side == 1 && ray->stepY == -1)
-            color = get_color(game->no_img, ray);
+            color = get_color(game->no_img, ray, i, delta);
         else if (ray->side == 1 && ray->stepY == 1)
-            color = get_color(game->so_img, ray);
+            color = get_color(game->so_img, ray, i, delta);
         else if (ray->side == 0 && ray->stepX == -1)
-            color = get_color(game->so_img, ray);
+            color = get_color(game->we_img, ray, i, delta);
         else if (ray->side == 0 && ray->stepX == 1)
-            color = get_color(game->so_img, ray);
+            color = get_color(game->ea_img, ray, i, delta);
         secure_my_mlx_pixel_put2(game->img, x, ray->drawStart, color);
         ray->drawStart++;
+        i++;
     }
 }
 
@@ -201,4 +207,23 @@ void    draw_ground_and_sky(t_game *game, int x, int drawStart, int drawEnd)
         secure_my_mlx_pixel_put2(game->img, x, i, game->map->ground_color);
         i++;
     }
+}
+
+int get_color(t_texture *texture, t_ray *ray, int x, int delta)
+{
+    char *ptr;
+    int color;
+    int texX;
+    int texY;
+    
+    texX = ray->wallX * texture->width;
+    if(ray->side == 0 && ray->Vdir_x > 0) 
+        texX = texture->width - texX - 1;
+    if(ray->side == 1 && ray->Vdir_y < 0) 
+        texX = texture->width - texX - 1;
+    texY = x * (texture->height / delta);
+    // printf("texX = %d, texY = %d\n", texX, texY);
+    ptr = texture->addr + (texY * texture->line_length + texX * (texture->bits_per_pixel / 8));
+    color = *(unsigned int*)ptr;
+    return (color);
 }
