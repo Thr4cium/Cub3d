@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 16:39:59 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/24 13:03:27 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:48:04 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,11 +158,7 @@ void    define_wall_line(t_game *game, t_ray *ray, int x, int color)
     ray->perpWallDist *= (cos(PI / 4 - (x * (PI / 2) / SCREEN_WIDTH)));
     lineHeight = (int)(SCREEN_HEIGHT / ray->perpWallDist);
     ray->drawStart = -lineHeight / 2 + SCREEN_HEIGHT / 2;
-    if (ray->drawStart < 0)
-        ray->drawStart = 0;
     ray->drawEnd = lineHeight / 2 + SCREEN_HEIGHT / 2;
-    if (ray->drawEnd >= SCREEN_HEIGHT)
-        ray->drawEnd = SCREEN_HEIGHT - 1;
     draw_ground_and_sky(game, x, ray->drawStart, ray->drawEnd);
     draw_scaled_wall(game, x, ray);
 }
@@ -175,6 +171,10 @@ void    draw_scaled_wall(t_game *game, int x, t_ray *ray)
 
     delta = ray->drawEnd - ray->drawStart;
     i = 0;
+    if (ray->drawStart < 0)
+        ray->drawStart = 0;
+    if (ray->drawEnd >= SCREEN_HEIGHT)
+        ray->drawEnd = SCREEN_HEIGHT - 1;
     while (ray->drawStart < ray->drawEnd)
     {
         if (ray->side == 1 && ray->stepY == -1)

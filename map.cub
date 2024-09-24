@@ -1,4 +1,4 @@
-NO textures/honey.xpm
+NO textures/man_prison.xpm
 
 SO textures/lava.xpm
 
@@ -6,7 +6,7 @@ WE textures/tree.xpm
 EA textures/wall_brick.xpm
 
 
-F 211,211,211
+F 1,0,0
 
 C 173,216,230
 
