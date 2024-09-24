@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 16:39:59 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/24 10:58:09 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:03:27 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,12 +217,11 @@ int get_color(t_texture *texture, t_ray *ray, int x, int delta)
     int texY;
     
     texX = ray->wallX * texture->width;
-    if(ray->side == 0 && ray->Vdir_x > 0) 
+    if(ray->side == 0 && ray->Vdir_x > 0)
         texX = texture->width - texX - 1;
     if(ray->side == 1 && ray->Vdir_y < 0) 
         texX = texture->width - texX - 1;
-    texY = x * (texture->height / delta);
-    // printf("texX = %d, texY = %d\n", texX, texY);
+    texY = x * texture->height / delta;
     ptr = texture->addr + (texY * texture->line_length + texX * (texture->bits_per_pixel / 8));
     color = *(unsigned int*)ptr;
     return (color);
