@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 16:39:59 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/25 00:16:56 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/25 11:53:20 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,14 +167,17 @@ void    draw_scaled_wall(t_game *game, int x, t_ray *ray)
     int color;
     int delta;
     int i;
+    int end;
 
     delta = ray->drawEnd - ray->drawStart;
-    i = 0;
     if (ray->drawStart < 0)
         ray->drawStart = 0;
+    i = 0;
     if (ray->drawEnd >= SCREEN_HEIGHT)
-        ray->drawEnd = SCREEN_HEIGHT - 1;
-    while (ray->drawStart < ray->drawEnd)
+        end = SCREEN_HEIGHT - 1;
+    else
+        end = ray->drawEnd;
+    while (ray->drawStart < end)
     {
         if (ray->side == 1 && ray->stepY == -1)
             color = get_color(game->no_img, ray, i, delta);
@@ -185,8 +188,8 @@ void    draw_scaled_wall(t_game *game, int x, t_ray *ray)
         else if (ray->side == 0 && ray->stepX == 1)
             color = get_color(game->ea_img, ray, i, delta);
         secure_my_mlx_pixel_put2(game->img, x, ray->drawStart, color);
-        ray->drawStart++;
         i++;
+        ray->drawStart++;
     }
 }
 
@@ -214,13 +217,20 @@ int get_color(t_texture *texture, t_ray *ray, int x, int delta)
     int color;
     int texX;
     int texY;
+    int y;
     
     texX = ray->wallX * texture->width;
     if(ray->side == 0 && ray->Vdir_x > 0)
         texX = texture->width - texX - 1;
     if(ray->side == 1 && ray->Vdir_y < 0) 
         texX = texture->width - texX - 1;
-    texY = x * texture->height / delta;
+    if (delta > SCREEN_HEIGHT)
+    {
+        y = ((delta - SCREEN_HEIGHT) / 2) * texture->height / delta;
+        texY = y + x * texture->height / delta;
+    }
+    else
+        texY = x * texture->height / delta;
     ptr = texture->addr + (texY * texture->line_length + texX * (texture->bits_per_pixel / 8));
     color = *(unsigned int*)ptr;
     return (color);
