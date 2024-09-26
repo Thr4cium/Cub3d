@@ -6,11 +6,10 @@
 #    By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/12 08:27:52 by rolamber          #+#    #+#              #
-#    Updated: 2024/09/26 08:43:18 by rolamber         ###   ########.fr        #
+#    Updated: 2024/09/26 10:27:07 by rolamber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# -Lmlx_linux -lmlx -L/usr/lib -lXext -lX11 -lm
 CC = cc
 CFLAGS = -Wall -Wextra -Werror 
 LDFLAGS = -Llibft -lft -L. -lgnl -lm -lbsd -Llibmlx -lmlx -lXext -lX11 -g3
