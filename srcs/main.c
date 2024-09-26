@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:24:17 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/19 10:20:22 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/26 08:19:48 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,6 @@ void game_loop(t_game *game)
     mlx_hook(game->win_ptr, KeyRelease, KeyReleaseMask, &key_release, game);
     mlx_loop_hook(game->mlx_ptr, &update_game, game);
     mlx_loop(game->mlx_ptr);
-}
-
-int end_game(t_game *game)
-{
-    mlx_destroy_image(game->mlx_ptr, game->img->ptr);
-    mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-    mlx_destroy_display(game->mlx_ptr);
-    free_all(game);
-    exit(0);
 }
 
 void print_map_info(t_game *game)

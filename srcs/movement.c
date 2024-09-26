@@ -6,32 +6,11 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:59:18 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/19 11:42:57 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/26 08:34:50 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
-
-int update_game(t_game *game)
-{
-    int delta_x;
-
-    delta_x = process_mouse_motion(game);
-    if (game->keys[XK_w])
-        move(game, UP);
-    if (game->keys[XK_s])
-        move(game, DOWN);
-    if (game->keys[XK_a])
-        move(game, LEFT);
-    if (game->keys[XK_d])
-        move(game, RIGHT);
-    if (game->mouse_x == -1)
-        move_mouse(game, LEFT, delta_x);
-    else if (game->mouse_x == 1)
-        move_mouse(game, RIGHT, delta_x);
-    display_game(game);
-    return (0);
-}
 
 int process_mouse_motion(t_game *game)
 {
@@ -128,26 +107,4 @@ void    move(t_game *game, t_move move)
         game->dir_x = (game->dir_x * cos(-PI / 45) - game->dir_y * sin(-PI / 45));
         game->dir_y = (old_dir_x * sin(-PI / 45) + game->dir_y * cos(-PI / 45));
     }
-}
-
-bool    is_there_wall(t_game *game, t_move move)
-{
-    int x;
-    int y;
-
-    x = game->pos_x + game->dir_x * 0.1;
-    y = game->pos_y + game->dir_y * 0.1;
-    if (move == UP)
-    {
-        x = game->pos_x + game->dir_x * 0.1;
-        y = game->pos_y + game->dir_y * 0.1;
-    }
-    if (move == DOWN)
-    {
-        x = game->pos_x - game->dir_x * 0.1;
-        y = game->pos_y - game->dir_y * 0.1;
-    }
-    if (game->map->map[(int)y][(int)x] == '1')
-        return (true);
-    return (false);
 }

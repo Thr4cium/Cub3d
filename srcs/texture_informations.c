@@ -6,24 +6,12 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:01:09 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/16 18:10:38 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/26 08:18:58 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
 
-char *ft_strdup_trim(char *line)
-{
-	char *trimmed_line;
-	char *ret;
-
-	trimmed_line = ft_strtrim(line, "\n");
-	if (!trimmed_line)
-		return (NULL);
-	ret = ft_strdup(trimmed_line);
-	free(trimmed_line);
-	return (ret);
-}
 
 int	get_texture_information(t_map *map, int fd)
 {

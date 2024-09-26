@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/24 10:14:06 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/26 08:39:34 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,26 +121,49 @@ typedef enum e_move
 }				t_move;
 
 // main
-void	game_loop(t_game *game);
 void	init_game_struct(t_game *game);
-void	print_map_info(t_game *game);
-int		end_game(t_game *game);
 void	init_mlx(t_game *game);
+void	game_loop(t_game *game);
+void	print_map_info(t_game *game);
 
+// display_game
+int		display_game(t_game *game);
+void    set_window_color(t_game *game, int color);
+void	print_minimap(t_game *game);
+void    draw_line(t_game *game, int x, int y, int color);
+void    draw_tile(t_game *game, double start_x, double start_y, int color);
 
-// parsing_routine
+// display_utils
+int		secure_my_mlx_pixel_put(t_my_img *img, int x, int y, int color);
+int		secure_my_mlx_pixel_put2(t_my_img *img, int x, int y, int color);
+void    draw_round(t_game *game, double x, double y, int r, int color);
+void    print_player(t_game *game, int x, int y, int r);
+void    print_minimap_background(t_game *game, int color);
 
-int		parsing(char *path, t_game *game);
-int		get_information(char *path, t_map *map);
-int		get_map_information(t_map *map, int fd);
-char	**map_addline(char **map, char *line);
+// init_vectors
+void    init_vectors(t_game *game);
+void    init_dir_vectors(t_game *game);
+
+// movement
+int		process_mouse_motion(t_game *game);
+int		key_input(int keycode, t_game *game);
+int		key_release(int keycode, t_game *game);
+void    move(t_game *game, t_move move);
+void    move_mouse(t_game *game, t_move move, int delta);
+
+// parsing routine bis
 int		check_map_information(t_map *map);
 int		check_map_validity(t_map *map);
 int		check_map_validity_bis(t_map *map);
 int		case_first_last_line(t_map *map);
-void	free_all(t_game *game);
 int		check_path(char *path);
+
+// parsing_routine
 void	actualise_map(t_map *map);
+int		parsing(char *path, t_game *game);
+int		get_information(char *path, t_map *map);
+int		get_map_information(t_map *map, int fd);
+char	**map_addline(char **map, char *line);
 
 
 // parsing_tools
@@ -151,64 +174,43 @@ bool	is_line_only_empty(char *line);
 bool	is_line_is_map(char *line);
 bool	is_line_only_map(char *line);
 
-// texture_informations
+// ray_cast utils
+void    dda_algorithm(t_game *game, t_ray *ray);
+void    define_wall_line(t_game *game, t_ray *ray, int x, int color);
+void    draw_scaled_wall(t_game *game, int x, t_ray *ray);
+void    draw_ground_and_sky(t_game *game, int x, int drawStart, int drawEnd);
+int		get_color(t_texture *texture, t_ray *ray, int x, int delta);
 
-int		get_texture_information(t_map *map, int fd);
-int 	check_texture_information(t_map *map);
-int		check_color_information(t_map *map);
-int		rgb_to_int(char *line);
-int		rgb_to_int_tool(int j, char *colorm, int rgb);
-char	*ft_strdup_trim(char *line);
-
-// display_game
-int		display_game(t_game *game);
-void	print_minimap(t_game *game);
-void    draw_tile(t_game *game, double start_x, double start_y, int color);
-void    draw_line(t_game *game, int x, int y, int color);
-void    set_window_color(t_game *game, int color);
-
-// display_utils
-void	my_mlx_pixel_put(t_my_img *img, int x, int y, int color);
-int		secure_my_mlx_pixel_put(t_my_img *img, int x, int y, int color);
-int		secure_my_mlx_pixel_put2(t_my_img *img, int x, int y, int color);
-void    print_player(t_game *game, int x, int y, int r);
-void    draw_round(t_game *game, double x, double y, int r, int color);
-void    print_minimap_background(t_game *game, int color);
-
-// init_vectors
-void    init_vectors(t_game *game);
-void    init_dir_vectors(t_game *game);
-
-// map_information
-void		get_player_initial_position(t_game *game);
-t_texture	*create_texture(t_game *game, char *path);
-void		*load_image(char *path, int *width, int *height, t_game *game);
-int			access_texture(char *path);
-int			load_textures(t_game *game);
-
-// movement
-int		update_game(t_game *game);
-// int		mouse_input(int x, int y, t_game *game);
-int		process_mouse_motion(t_game *game);
-int		key_input(int keycode, t_game *game);
-int		key_release(int keycode, t_game *game);
-void    move(t_game *game, t_move move);
-void    move_mouse(t_game *game, t_move move, int delta);
-bool    is_there_wall(t_game *game, t_move move);
-
-
-// minimap_rays
+// ray cast
 void	print_rays(t_game *game);
 void    ray_casting(t_game *game);
 int		ray_cast(t_game *game, double Vdir_x, double Vdir_y, int i);
 void    init_ray(t_game *game, t_ray *ray, double Vdir_x, double Vdir_y);
 void    init_ray2(t_game *game, t_ray *ray, double Vdir_x, double Vdir_y);
-void    dda_algorithm(t_game *game, t_ray *ray);
-void    define_wall_line(t_game *game, t_ray *ray, int x, int color);
-void    draw_ground_and_sky(t_game *game, int x, int drawStart, int drawEnd);
-void    draw_scaled_wall(t_game *game, int x, t_ray *ray);
-int		get_color(t_texture *texture, t_ray *ray, int x, int delta);
 
+// render
+bool    is_there_wall(t_game *game, t_move move);
+int		update_game(t_game *game);
 
+// texture_informations
+int		get_texture_information(t_map *map, int fd);
+int 	check_texture_information(t_map *map);
+int		check_color_information(t_map *map);
+int		rgb_to_int(char *line);
+int		rgb_to_int_tool(int j, char *colorm, int rgb);
+
+// texture_loading
+void		get_player_initial_position(t_game *game);
+t_texture	*create_texture(t_game *game, char *path);
+int			access_texture(char *path);
+void		*load_image(char *path, int *width, int *height, t_game *game);
+int			load_textures(t_game *game);
+
+// utils
+char	*ft_strdup_trim(char *line);
+void    free_textures(t_game *game);
+int		end_game(t_game *game);
+void	my_mlx_pixel_put(t_my_img *img, int x, int y, int color);
+void	free_all(t_game *game);
 
 #endif

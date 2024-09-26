@@ -6,19 +6,11 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 16:35:56 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/11 16:46:24 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/26 08:28:07 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
-
-void	my_mlx_pixel_put(t_my_img *img, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
 
 int secure_my_mlx_pixel_put(t_my_img *img, int x, int y, int color)
 {

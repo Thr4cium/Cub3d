@@ -6,7 +6,7 @@
 #    By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/12 08:27:52 by rolamber          #+#    #+#              #
-#    Updated: 2024/09/04 15:28:00 by rolamber         ###   ########.fr        #
+#    Updated: 2024/09/26 08:43:18 by rolamber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,10 @@ INC_DIR = headers/
 GNL_DIR = gnl/
 LIB_DIR = libft/
 
-SRC = $(addsuffix .c, $(addprefix srcs/, $(PARSING)))
-PARSING = parsing_routine parsing_tools texture_informations main init_vectors display_game map_information movement display_utils minimap_rays
+SRC = $(addsuffix .c, $(addprefix srcs/, $(PARSING) $(RAYCAST) $(DISPLAY)))
+PARSING = parsing_routine parsing_routine_bis parsing_tools texture_informations main init_vectors
+RAYCAST = ray_cast_utils ray_cast texture_loading
+DISPLAY = display_game render movement display_utils utils
 OBJ = $(SRC:.c=.o)
 DEP = $(OBJ:.o=.d)
 
