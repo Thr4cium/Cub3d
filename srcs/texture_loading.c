@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 16:18:59 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/26 10:19:10 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:22:02 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ t_texture	*create_texture(t_game *game, char *path)
 		&texture->bits_per_pixel, &texture->line_length, &texture->endian);
 	if (!texture->addr)
 		return (free(texture), NULL);
-	printf("texture loaded %p\n", texture->ptr);
 	return (texture);
 }
 

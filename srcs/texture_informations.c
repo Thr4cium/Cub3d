@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:01:09 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/26 10:17:19 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:22:11 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,18 @@ int	check_texture_information(t_map *map)
 {
 	int	fd;
 
-	printf("no_texture : %s\n", map->no_texture);
 	fd = open(map->no_texture, O_RDONLY);
 	if (fd == -1)
 		return (perror("open"), -1);
 	close(fd);
-	printf("so_texture : %s\n", map->so_texture);
 	fd = open(map->so_texture, O_RDONLY);
 	if (fd == -1)
 		return (perror("open"), -1);
 	close(fd);
-	printf("we_texture : %s\n", map->we_texture);
 	fd = open(map->we_texture, O_RDONLY);
 	if (fd == -1)
 		return (perror("open"), -1);
 	close(fd);
-	printf("ea_texture : %s\n", map->ea_texture);
 	fd = open(map->ea_texture, O_RDONLY);
 	if (fd == -1)
 		return (perror("open"), -1);

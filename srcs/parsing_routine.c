@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 10:42:22 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/26 09:45:31 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:22:15 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int	get_map_information(t_map *map, int fd)
 			free(line);
 			line = get_next_line(fd);
 		}
-		printf("here %s\n", line);
 		trimmed_line = ft_strtrim(line, "\n");
 		if (!trimmed_line)
 			return (perror("malloc"), -1);
@@ -97,7 +96,6 @@ char	**map_addline(char **map, char *line)
 	int		i;
 	char	**new_map;
 
-	printf("line : %s\n", line);
 	i = 0;
 	if (map)
 		while (map[i])
