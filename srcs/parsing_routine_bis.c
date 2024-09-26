@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:17:12 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/26 08:17:41 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/26 09:44:18 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	check_map_information(t_map *map)
 {
-	char **tmp;
-	int i;
-	int j;
+	char	**tmp;
+	int		i;
+	int		j;
 
 	if (!map->map)
 		return (printf("Error : no map information\n"), -1);
@@ -25,7 +25,7 @@ int	check_map_information(t_map *map)
 	i = 0;
 	while (tmp[i])
 	{
-		if  (ft_strsearch(tmp[i], 'N') == 1 || ft_strsearch(tmp[i], 'S') == 1 \
+		if (ft_strsearch(tmp[i], 'N') == 1 || ft_strsearch(tmp[i], 'S') == 1 \
 			|| ft_strsearch(tmp[i], 'W') == 1 || ft_strsearch(tmp[i], 'E') == 1)
 			j++;
 		if (j > 1)
@@ -41,8 +41,8 @@ int	check_map_information(t_map *map)
 
 int	check_map_validity(t_map *map)
 {
-	size_t i;
-	size_t j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	while (map->map[i])
@@ -50,7 +50,8 @@ int	check_map_validity(t_map *map)
 		j = 0;
 		while (map->map[i][j])
 		{
-			if ((j == 0 || j == ft_strlen(map->map[i]) - 1) && map->map[i][j] == '0')
+			if ((j == 0 || j == ft_strlen(map->map[i]) - 1) \
+				&& map->map[i][j] == '0')
 				return (printf("Error : map is not closed\n"), -1);
 			else if (map->map[i][j] == '0')
 			{
@@ -69,8 +70,8 @@ int	check_map_validity(t_map *map)
 
 int	check_map_validity_bis(t_map *map)
 {
-	size_t i;
-	size_t j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	if (case_first_last_line(map) == -1)
@@ -94,9 +95,9 @@ int	check_map_validity_bis(t_map *map)
 	return (0);
 }
 
-int case_first_last_line(t_map *map)
+int	case_first_last_line(t_map *map)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (map->map[0][i])
@@ -108,7 +109,8 @@ int case_first_last_line(t_map *map)
 	i = 0;
 	while (map->map[map->map_y - 1][i])
 	{
-		if (map->map[map->map_y - 1][i] == '0' && ft_strlen(map->map[map->map_y - 2]) <= i)
+		if (map->map[map->map_y - 1][i] == '0' \
+			&& ft_strlen(map->map[map->map_y - 2]) <= i)
 			return (-1);
 		i++;
 	}
@@ -117,7 +119,7 @@ int case_first_last_line(t_map *map)
 
 int	check_path(char *path)
 {
-	int fd;
+	int	fd;
 
 	if (ft_strnstr(&path[ft_strlen(path) - 4], ".cub", 4) == NULL)
 		return (printf("Error : wrong file extension\n"), -1);

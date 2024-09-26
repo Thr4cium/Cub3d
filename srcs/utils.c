@@ -6,16 +6,16 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:18:17 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/26 08:51:18 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:20:09 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
 
-char *ft_strdup_trim(char *line)
+char	*ft_strdup_trim(char *line)
 {
-	char *trimmed_line;
-	char *ret;
+	char	*trimmed_line;
+	char	*ret;
 
 	trimmed_line = ft_strtrim(line, "\n");
 	if (!trimmed_line)
@@ -24,35 +24,36 @@ char *ft_strdup_trim(char *line)
 	free(trimmed_line);
 	return (ret);
 }
-void    free_textures(t_game *game)
+
+void	free_textures(t_game *game)
 {
-    if (game->no_img)
-    {
-        mlx_destroy_image(game->mlx_ptr, game->no_img->ptr);
-        free(game->no_img);
-    }
-    if (game->so_img)
-    {
-        mlx_destroy_image(game->mlx_ptr, game->so_img->ptr);
-        free(game->so_img);
-    }
-    if (game->we_img)
-    {
-        mlx_destroy_image(game->mlx_ptr, game->we_img->ptr);
-        free(game->we_img);
-    }
-    if (game->ea_img)
-    {
-        mlx_destroy_image(game->mlx_ptr, game->ea_img->ptr);
-        free(game->ea_img);
-    }
+	if (game->no_img)
+	{
+		mlx_destroy_image(game->mlx_ptr, game->no_img->ptr);
+		free(game->no_img);
+	}
+	if (game->so_img)
+	{
+		mlx_destroy_image(game->mlx_ptr, game->so_img->ptr);
+		free(game->so_img);
+	}
+	if (game->we_img)
+	{
+		mlx_destroy_image(game->mlx_ptr, game->we_img->ptr);
+		free(game->we_img);
+	}
+	if (game->ea_img)
+	{
+		mlx_destroy_image(game->mlx_ptr, game->ea_img->ptr);
+		free(game->ea_img);
+	}
 }
 
 void	free_all(t_game *game)
 {
-	int i;
+	int	i;
 
-    free_textures(game);
+	free_textures(game);
 	i = 0;
 	while (game->map->map[i])
 	{
@@ -72,17 +73,18 @@ void	free_all(t_game *game)
 	if (game->map)
 		free(game->map);
 }
-int end_game(t_game *game)
+
+int	end_game(t_game *game)
 {
-    free_all(game);
-    mlx_destroy_image(game->mlx_ptr, game->img->ptr);
-    mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-    mlx_destroy_display(game->mlx_ptr);
+	free_all(game);
+	mlx_destroy_image(game->mlx_ptr, game->img->ptr);
+	mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+	mlx_destroy_display(game->mlx_ptr);
 	if (game->img)
 		free(game->img);
 	if (game->mlx_ptr)
 		free(game->mlx_ptr);
-    exit(0);
+	exit(0);
 }
 
 void	my_mlx_pixel_put(t_my_img *img, int x, int y, int color)
@@ -90,6 +92,5 @@ void	my_mlx_pixel_put(t_my_img *img, int x, int y, int color)
 	char	*dst;
 
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
-

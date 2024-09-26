@@ -6,15 +6,15 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:02:43 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/22 15:39:26 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/26 09:22:12 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
 
-t_map   *init_map(void)
+t_map	*init_map(void)
 {
-	t_map    *map;
+	t_map	*map;
 
 	map = malloc(sizeof(t_map));
 	if (!map)
@@ -33,10 +33,11 @@ t_map   *init_map(void)
 	return (map);
 }
 
-bool are_texture_filled(t_map *map)
+bool	are_texture_filled(t_map *map)
 {
-	if (!map->no_texture || !map->so_texture || !map->we_texture || !map->ea_texture \
-			|| map->ground_color == 0 || map->sky_color == 0)
+	if (!map->no_texture || !map->so_texture \
+		|| !map->we_texture || !map->ea_texture \
+		|| map->ground_color == 0 || map->sky_color == 0)
 		return (false);
 	return (true);
 }
@@ -55,14 +56,15 @@ bool	is_line_is_map(char *line)
 		return (true);
 	return (false);
 }
-bool    is_line_only_map(char *line)
+
+bool	is_line_only_map(char *line)
 {
-    while (*line)
-    {
-        if (*line != ' ' && *line != '1' && *line != '0' && *line != 'N' \
-            && *line != 'S' && *line != 'W' && *line != 'E')
-            return (false);
-        line++;
-    }
-    return (true);
+	while (*line)
+	{
+		if (*line != ' ' && *line != '1' && *line != '0' && *line != 'N' \
+			&& *line != 'S' && *line != 'W' && *line != 'E')
+			return (false);
+		line++;
+	}
+	return (true);
 }

@@ -6,12 +6,11 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:01:09 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/26 08:18:58 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:17:19 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
-
 
 int	get_texture_information(t_map *map, int fd)
 {
@@ -28,12 +27,12 @@ int	get_texture_information(t_map *map, int fd)
 			map->we_texture = ft_strdup_trim(line + 3);
 		else if (ft_strncmp(line, "EA", 2) == 0)
 			map->ea_texture = ft_strdup_trim(line + 3);
-		else if (ft_strncmp(line, "C " , 2) == 0)
+		else if (ft_strncmp(line, "C ", 2) == 0)
 			map->sky_color = rgb_to_int(line + 1);
 		else if (ft_strncmp(line, "F ", 2) == 0)
 			map->ground_color = rgb_to_int(line + 1);
 		else if (!is_line_only_empty(line) && !is_line_is_map(line))
-			return (free(line), printf("Error : wrong texture information\n"), -1);
+			return (free(line), printf("Wrong texture information\n"), -1);
 		if (are_texture_filled(map))
 			return (free(line), 0);
 		free(line);
@@ -44,7 +43,7 @@ int	get_texture_information(t_map *map, int fd)
 
 int	check_texture_information(t_map *map)
 {
-	int fd;
+	int	fd;
 
 	printf("no_texture : %s\n", map->no_texture);
 	fd = open(map->no_texture, O_RDONLY);
@@ -74,7 +73,7 @@ int	check_texture_information(t_map *map)
 int	check_color_information(t_map *map)
 {
 	if (map->ground_color < 0 || map->sky_color < 0)
-		return (printf("Error : wrong color information\n"), -1);	
+		return (printf("Error : wrong color information\n"), -1);
 	return (0);
 }
 
@@ -82,32 +81,32 @@ int	rgb_to_int(char *line)
 {
 	int		i;
 	int		j;
-	char	color[4] = {0};
 	int		rgb;
+	char	color[4];
 
 	while (*line == ' ')
 		line++;
+	ft_bzero(color, 4);
 	i = 0;
 	j = 0;
 	rgb = 0;
 	while (*line && j < 3)
 	{
-		while (*line != ',' && *line != '\n' && i  < 3)
+		while (*line != ',' && *line != '\n' && i < 3)
 		{
 			if (!ft_isdigit(*line))
-				return (printf("Error : wrong color information\n"), -1);	
+				return (printf("Error : wrong color information\n"), -1);
 			color[i++] = *line++;
 		}
-		rgb = rgb_to_int_tool(j, color, rgb);
+		rgb = rgb_to_int_tool(j++, color, rgb);
 		ft_bzero(color, 4);
 		i = 0;
-		j++;
 		line++;
 	}
 	return (rgb);
 }
 
-int rgb_to_int_tool(int j, char *color, int rgb)
+int	rgb_to_int_tool(int j, char *color, int rgb)
 {
 	if (!color)
 		return (printf("Error : wrong color information\n"), -1);

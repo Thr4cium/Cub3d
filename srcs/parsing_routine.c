@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 10:42:22 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/26 08:19:08 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/09/26 09:45:31 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	actualise_map(t_map *map)
 {
-	size_t i;
-	size_t j;
-	size_t max;
+	size_t	i;
+	size_t	j;
+	size_t	max;
 
 	i = 0;
 	max = 0;
@@ -35,7 +35,6 @@ void	actualise_map(t_map *map)
 
 int	parsing(char *path, t_game *game)
 {
-
 	game->map = init_map();
 	if (!game->map)
 		return (-1);
@@ -47,9 +46,9 @@ int	parsing(char *path, t_game *game)
 	return (0);
 }
 
-int get_information(char *path, t_map *map)
+int	get_information(char *path, t_map *map)
 {
-	int fd;
+	int	fd;
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
@@ -60,7 +59,7 @@ int get_information(char *path, t_map *map)
 		return (-1);
 	if (get_map_information(map, fd) == -1)
 		return (-1);
-	if (check_map_information(map) == -1)\
+	if (check_map_information(map) == -1)
 		return (-1);
 	return (0);
 }
@@ -68,7 +67,7 @@ int get_information(char *path, t_map *map)
 int	get_map_information(t_map *map, int fd)
 {
 	char	*line;
-	char 	*trimmed_line;
+	char	*trimmed_line;
 
 	line = get_next_line(fd);
 	while (line)
@@ -93,19 +92,19 @@ int	get_map_information(t_map *map, int fd)
 	return (0);
 }
 
-char **map_addline(char **map, char *line)
+char	**map_addline(char **map, char *line)
 {
-	int i;
-	char **new_map;
+	int		i;
+	char	**new_map;
 
 	printf("line : %s\n", line);
 	i = 0;
 	if (map)
 		while (map[i])
 			i++;
-	new_map = ft_calloc(sizeof(char *) , i + 2);
+	new_map = ft_calloc(sizeof(char *), i + 2);
 	if (!new_map)
-		return (NULL);	
+		return (NULL);
 	i = 0;
 	if (map)
 	{
