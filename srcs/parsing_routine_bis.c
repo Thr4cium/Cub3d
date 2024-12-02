@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:17:12 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/26 09:44:18 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/12/02 11:21:53 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int	check_map_validity(t_map *map)
 	size_t	i;
 	size_t	j;
 
-	i = 0;
-	while (map->map[i])
+	i = -1;
+	while (map->map[++i])
 	{
 		j = 0;
 		while (map->map[i][j])
@@ -58,12 +58,12 @@ int	check_map_validity(t_map *map)
 				if (i == 0 || i == map->map_y - 1)
 					return (printf("Error : map is not closed\n"), -1);
 				if (map->map[i][j + 1] == ' ' || map->map[i][j - 1] == ' ' \
+					|| ft_strlen(map->map[i + 1]) - 1 < j || ft_strlen(map->map[i - 1]) - 1 < j \
 					|| map->map[i + 1][j] == ' ' || map->map[i - 1][j] == ' ')
 					return (printf("Error : map is not closed\n"), -1);
 			}
 			j++;
 		}
-		i++;
 	}
 	return (0);
 }

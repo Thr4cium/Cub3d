@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:02:43 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/26 09:22:12 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/12/02 14:59:53 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,17 @@ bool	is_line_only_empty(char *line)
 
 bool	is_line_is_map(char *line)
 {
-	if (strchr(line, '0') || strchr(line, '1') || strchr(line, 'N') \
-		|| strchr(line, 'S') || strchr(line, 'W') || strchr(line, 'E'))
-		return (true);
-	return (false);
+	int i;
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != '1' && line[i] != ' ' && line[i] != 'E' \
+			&& line[i] != 'N' && line[i] != 'S' && line[i] != 'W' \
+				&& line[i] != '0')
+				return (false);
+		i++;
+	}
+	return (true);
 }
 
 bool	is_line_only_map(char *line)

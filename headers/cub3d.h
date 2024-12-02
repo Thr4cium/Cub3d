@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/26 10:11:24 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/12/02 16:14:38 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,9 +162,14 @@ int		check_path(char *path);
 void	actualise_map(t_map *map);
 int		parsing(char *path, t_game *game);
 int		get_information(char *path, t_map *map);
-int		get_map_information(t_map *map, int fd);
+int		get_map_information(t_map *map, char **array, int i);
 char	**map_addline(char **map, char *line);
 
+// parsing_edge_case
+int	check_textures_keys(char *line, char *str, int n);
+int	check_edge_cases(char **array);
+char	**copy_file(int fd);
+void	free_array(char **array);
 
 // parsing_tools
 
@@ -193,7 +198,7 @@ bool    is_there_wall(t_game *game, t_move move);
 int		update_game(t_game *game);
 
 // texture_informations
-int		get_texture_information(t_map *map, int fd);
+int		get_texture_information(t_map *map, char **array);
 int 	check_texture_information(t_map *map);
 int		check_color_information(t_map *map);
 int		rgb_to_int(char *line);

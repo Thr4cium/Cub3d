@@ -6,7 +6,7 @@
 #    By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/12 08:27:52 by rolamber          #+#    #+#              #
-#    Updated: 2024/09/26 10:27:07 by rolamber         ###   ########.fr        #
+#    Updated: 2024/12/02 14:27:29 by rolamber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ GNL_DIR = gnl/
 LIB_DIR = libft/
 
 SRC = $(addsuffix .c, $(addprefix srcs/, $(PARSING) $(RAYCAST) $(DISPLAY)))
-PARSING = parsing_routine parsing_routine_bis parsing_tools texture_informations main init_vectors
+PARSING = parsing_edge_case parsing_routine parsing_routine_bis parsing_tools texture_informations main init_vectors
 RAYCAST = ray_cast_utils ray_cast texture_loading
 DISPLAY = display_game render movement display_utils utils
 OBJ = $(SRC:.c=.o)
@@ -36,9 +36,10 @@ GNL_OBJS = $(GNL:.c=.o)
 
 all: $(NAME)
 
+libft/libft.a :
+	@make -C $(LIB_DIR)
 
-$(NAME): $(OBJ) $(GNL_OBJS)
-	@make -C $(LIB_DIR) > /dev/null
+$(NAME): $(OBJ) $(GNL_OBJS) libft/libft.a
 	$(AR) libgnl.a $(GNL_OBJS) 
 	$(CC) $(OBJ) $(LDFLAGS) -o $@
 
@@ -53,13 +54,13 @@ clean:
 	rm -rf $(OBJ)
 	rm -rf $(DEP)
 	rm -rf $(GNL_OBJS)
+	rm -rf libgnl.a
 	@echo "CLEAN"
 
 fclean: clean
 	@make fclean -C $(LIB_DIR) > /dev/null
 	@echo "🧹 ${LIB_DIR}"
 	@rm -f $(NAME)
-	@rm -f libgnl.a
 	@echo "FCLEAN"
 
 re: fclean all

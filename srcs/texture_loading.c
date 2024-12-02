@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 16:18:59 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/26 10:22:02 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/12/02 11:05:46 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,5 @@ int	load_textures(t_game *game)
 	game->ea_img = create_texture(game, game->map->ea_texture);
 	if (!game->ea_img)
 		return (perror("malloc no texture failed\n"), -1);
-	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, \
-		game->no_img->ptr, 0, 0);
-	sleep(2);
 	return (0);
 }

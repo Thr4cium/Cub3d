@@ -6,38 +6,39 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:01:09 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/26 10:22:11 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/12/02 16:06:34 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
 
-int	get_texture_information(t_map *map, int fd)
+int	get_texture_information(t_map *map, char **array)
 {
-	char	*line;
+	int i;
 
-	line = get_next_line(fd);
-	while (line)
+	i = 0;
+	while (array[i])
 	{
-		if (ft_strncmp(line, "NO", 2) == 0)
-			map->no_texture = ft_strdup_trim(line + 3);
-		else if (ft_strncmp(line, "SO", 2) == 0)
-			map->so_texture = ft_strdup_trim(line + 3);
-		else if (ft_strncmp(line, "WE", 2) == 0)
-			map->we_texture = ft_strdup_trim(line + 3);
-		else if (ft_strncmp(line, "EA", 2) == 0)
-			map->ea_texture = ft_strdup_trim(line + 3);
-		else if (ft_strncmp(line, "C ", 2) == 0)
-			map->sky_color = rgb_to_int(line + 1);
-		else if (ft_strncmp(line, "F ", 2) == 0)
-			map->ground_color = rgb_to_int(line + 1);
-		else if (!is_line_only_empty(line) && !is_line_is_map(line))
-			return (free(line), printf("Wrong texture information\n"), -1);
+		printf("actual line : %s\n", array[i]);
+		if (ft_strncmp(array[i], "NO ", 3) == 0)
+			map->no_texture = ft_strdup_trim(array[i] + 3);
+		else if (ft_strncmp(array[i], "SO ", 3) == 0)
+			map->so_texture = ft_strdup_trim(array[i] + 3);
+		else if (ft_strncmp(array[i], "WE ", 3) == 0)
+			map->we_texture = ft_strdup_trim(array[i] + 3);
+		else if (ft_strncmp(array[i], "EA ", 3) == 0)
+			map->ea_texture = ft_strdup_trim(array[i] + 3);
+		else if (ft_strncmp(array[i], "C ", 2) == 0)
+			map->sky_color = rgb_to_int(array[i] + 1);
+		else if (ft_strncmp(array[i], "F ", 2) == 0)
+			map->ground_color = rgb_to_int(array[i] + 1);
+		else if (!is_line_only_empty(array[i]) && !is_line_is_map(array[i]))
+			return (free_array(array), printf("Wrong texture information\n"), -1);
 		if (are_texture_filled(map))
-			return (free(line), 0);
-		free(line);
-		line = get_next_line(fd);
+			return (free_array(array), i);
+		i++;
 	}
+	printf("actual line : %s\n", array[i]);
 	return (printf("Error : no texture informations found\n"), -1);
 }
 

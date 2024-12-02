@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 10:42:22 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/26 10:22:15 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/12/02 16:50:44 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,45 +48,49 @@ int	parsing(char *path, t_game *game)
 
 int	get_information(char *path, t_map *map)
 {
-	int	fd;
+	int		fd;
+	int		i;
+	char	**array;
 
+	array = NULL;
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (perror("open"), -1);
-	if (get_texture_information(map, fd) == -1)
+	array = copy_file(fd);
+	close(fd);
+	if (!array)
+		return (perror("malloc"), -1);
+	if (check_edge_cases(array) == -1)
+		return (-1);
+	i = get_texture_information(map, array);
+	if (i == -1)
 		return (-1);
 	if (check_texture_information(map) == -1)
 		return (-1);
-	if (get_map_information(map, fd) == -1)
+	if (get_map_information(map, array, i) == -1)
 		return (-1);
 	if (check_map_information(map) == -1)
 		return (-1);
 	return (0);
 }
 
-int	get_map_information(t_map *map, int fd)
+int	get_map_information(t_map *map, char **array, int i)
 {
-	char	*line;
 	char	*trimmed_line;
 
-	line = get_next_line(fd);
-	while (line)
+	while (array[i])
 	{
-		while (is_line_only_empty(line))
-		{
-			free(line);
-			line = get_next_line(fd);
-		}
-		trimmed_line = ft_strtrim(line, "\n");
+		while (is_line_only_empty(array[i]))
+			i++;
+		trimmed_line = ft_strtrim(array[i], "\n");
 		if (!trimmed_line)
 			return (perror("malloc"), -1);
 		map->map = map_addline(map->map, trimmed_line);
-		free(line);
 		if (!map->map)
 			return (perror("malloc"), -1);
-		line = get_next_line(fd);
+		i++;
 	}
-	free(line);
+	free_array(array);
 	actualise_map(map);
 	return (0);
 }
@@ -108,12 +112,12 @@ char	**map_addline(char **map, char *line)
 	{
 		while (map[i])
 		{
-			new_map[i] = map[i];
+			new_map[i] = ft_strdup(map[i]);
 			i++;
 		}
 	}
-	new_map[i] = line;
+	new_map[i] = ft_strdup(line);
 	new_map[i + 1] = NULL;
-	free(map);
+	free_array(map);
 	return (new_map);
 }

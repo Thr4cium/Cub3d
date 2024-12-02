@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:18:17 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/26 10:20:09 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/12/02 14:34:51 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,13 @@ void	free_all(t_game *game)
 
 	free_textures(game);
 	i = 0;
-	while (game->map->map[i])
+	if (game->map->map)
 	{
-		free(game->map->map[i]);
-		i++;
+		while (game->map->map[i])
+		{
+			free(game->map->map[i]);
+			i++;
+		}
 	}
 	if (game->map->map)
 		free(game->map->map);

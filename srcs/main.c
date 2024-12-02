@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:24:17 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/26 09:39:45 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/12/02 11:42:01 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ void	init_game_struct(t_game *game)
 	game->dir_y = 0;
 	game->plane_x = 0;
 	game->plane_y = 0.66;
+	game->so_img = NULL;
+	game->no_img = NULL;
+	game->ea_img = NULL;
+	game->we_img = NULL;
 	i = 0;
 	while (i < 256)
 		game->keys[i++] = false;
@@ -80,7 +84,7 @@ int	main(int ac, char **av)
 	if (parsing(av[1], &game) == -1)
 	{
 		free_all(&game);
-		return (printf("Error\nParsing failed\n"), 1);
+		return (printf("Error : Parsing failed\n"), 1);
 	}
 	init_mlx(&game);
 	if (load_textures(&game) == -1)
