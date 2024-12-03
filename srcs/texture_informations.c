@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:01:09 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/02 16:06:34 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:35:51 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	get_texture_information(t_map *map, char **array)
 	i = 0;
 	while (array[i])
 	{
-		printf("actual line : %s\n", array[i]);
 		if (ft_strncmp(array[i], "NO ", 3) == 0)
 			map->no_texture = ft_strdup_trim(array[i] + 3);
 		else if (ft_strncmp(array[i], "SO ", 3) == 0)
@@ -35,10 +34,9 @@ int	get_texture_information(t_map *map, char **array)
 		else if (!is_line_only_empty(array[i]) && !is_line_is_map(array[i]))
 			return (free_array(array), printf("Wrong texture information\n"), -1);
 		if (are_texture_filled(map))
-			return (free_array(array), i);
+			return (i);
 		i++;
 	}
-	printf("actual line : %s\n", array[i]);
 	return (printf("Error : no texture informations found\n"), -1);
 }
 

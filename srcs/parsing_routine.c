@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 10:42:22 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/02 16:50:44 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:38:50 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ int	get_information(char *path, t_map *map)
 	if (i == -1)
 		return (-1);
 	if (check_texture_information(map) == -1)
-		return (-1);
+		return (free_array(array), -1);
 	if (get_map_information(map, array, i) == -1)
-		return (-1);
+		return (free_array(array), -1);
 	if (check_map_information(map) == -1)
 		return (-1);
 	return (0);
@@ -78,6 +78,7 @@ int	get_map_information(t_map *map, char **array, int i)
 {
 	char	*trimmed_line;
 
+	i++;
 	while (array[i])
 	{
 		while (is_line_only_empty(array[i]))

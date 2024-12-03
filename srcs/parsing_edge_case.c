@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 12:44:08 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/02 16:53:05 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:35:53 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void    free_array(char **array)
     {
         while (array[i] != NULL)
         {
-            printf("I free this : %s\n", array[i]);
             free(array[i]);
             i++;
         }
@@ -65,7 +64,6 @@ int check_edge_cases(char **array)
     i = 0;
 	while (array[i])
 	{
-        printf("actual line first edit : %s\n", array[i]);
 		if (check_textures_keys(array[i], "NO ", 3) == -1)
             return (free_array(array), -1);
 		else if (check_textures_keys(array[i], "SO ", 3) == -1)
@@ -79,7 +77,7 @@ int check_edge_cases(char **array)
 		else if (check_textures_keys(array[i], "F ", 2) == -1)
 			return (free_array(array), -1);
 		if (is_line_is_map(array[i]))
-            return (free_array(array), 0);
+            return (0);
 		i++;
 	}
     return (0);
@@ -94,7 +92,6 @@ char    **copy_file(int fd)
     line = get_next_line(fd);
     while (line)
     {
-        printf("copy line %s", line);
         array = map_addline(array, line);
         free(line);
         line = get_next_line(fd);

@@ -6,7 +6,7 @@
 #    By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/12 08:27:52 by rolamber          #+#    #+#              #
-#    Updated: 2024/12/02 14:27:29 by rolamber         ###   ########.fr        #
+#    Updated: 2024/12/03 15:47:08 by rolamber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,12 +27,12 @@ SRC = $(addsuffix .c, $(addprefix srcs/, $(PARSING) $(RAYCAST) $(DISPLAY)))
 PARSING = parsing_edge_case parsing_routine parsing_routine_bis parsing_tools texture_informations main init_vectors
 RAYCAST = ray_cast_utils ray_cast texture_loading
 DISPLAY = display_game render movement display_utils utils
-OBJ = $(SRC:.c=.o)
+OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 DEP = $(OBJ:.o=.d)
 
 GNL = $(addsuffix .c, $(addprefix gnl/, $(GNL_SRCS)))
 GNL_SRCS = get_next_line get_next_line_utils
-GNL_OBJS = $(GNL:.c=.o)
+GNL_OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(GNL:.c=.o)))
 
 all: $(NAME)
 
@@ -43,7 +43,12 @@ $(NAME): $(OBJ) $(GNL_OBJS) libft/libft.a
 	$(AR) libgnl.a $(GNL_OBJS) 
 	$(CC) $(OBJ) $(LDFLAGS) -o $@
 
-%.o: %.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) -I $(INC_DIR) -Ilibmlx -c $< -o $@ -g3
+
+$(OBJ_DIR)/%.o: $(GNL_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -I $(INC_DIR) -Ilibmlx -c $< -o $@ -g3
 
 -include $(DEP)
@@ -51,9 +56,8 @@ $(NAME): $(OBJ) $(GNL_OBJS) libft/libft.a
 clean:
 	@make clean -C $(LIB_DIR) > /dev/null
 	@echo "🧹 ${LIB_DIR}"
-	rm -rf $(OBJ)
+	rm -rf $(OBJ_DIR)
 	rm -rf $(DEP)
-	rm -rf $(GNL_OBJS)
 	rm -rf libgnl.a
 	@echo "CLEAN"
 
