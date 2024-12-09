@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+         #
+#    By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/12 08:27:52 by rolamber          #+#    #+#              #
-#    Updated: 2024/12/03 15:47:08 by rolamber         ###   ########.fr        #
+#    Updated: 2024/12/09 19:53:42 by magrondi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ GNL_DIR = gnl/
 LIB_DIR = libft/
 
 SRC = $(addsuffix .c, $(addprefix srcs/, $(PARSING) $(RAYCAST) $(DISPLAY)))
-PARSING = parsing_edge_case parsing_routine parsing_routine_bis parsing_tools texture_informations main init_vectors
+PARSING = parsing_edge_case parsing_routine parsing_routine_bis parsing_tools texture_informations main init_vectors assign_spawn_direction
 RAYCAST = ray_cast_utils ray_cast texture_loading
 DISPLAY = display_game render movement display_utils utils
 OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))

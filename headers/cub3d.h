@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/02 16:14:38 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/12/09 19:57:32 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,22 @@
 # define SCREEN_HEIGHT 1080
 # define PI 3.1415926535
 # define MINIMAP_RANGE 5
+
+# ifndef NORTH_ANGLE
+#  define NORTH_ANGLE (3 * PI / 2)
+# endif
+
+# ifndef WEST_ANGLE
+#  define WEST_ANGLE PI
+# endif
+
+# ifndef SOUTH_ANGLE
+#  define SOUTH_ANGLE (PI / 2)
+# endif
+
+# ifndef EAST_ANGLE
+#  define EAST_ANGLE 0
+# endif
 
 typedef struct s_ray
 {
