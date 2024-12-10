@@ -31,7 +31,8 @@ void	dda_algorithm(t_game *game, t_ray *ray)
 			ray->mapY += ray->stepY;
 			ray->side = 1;
 		}
-		if (game->map->map[ray->mapY][ray->mapX] == '1')
+		if (ray->mapX < 0 || ray->mapX >=  || ray->mapY < 0 || ray->mapY >= 1980
+			|| game->map->map[ray->mapY][ray->mapX] == '1')
 			hit = true;
 	}
 	ray->perpWallDist = (ray->sideDistY - ray->deltaDistY);

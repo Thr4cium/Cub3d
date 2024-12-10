@@ -33,6 +33,14 @@
 # define PI 3.1415926535
 # define MINIMAP_RANGE 5
 
+# ifndef MV_SPEED
+#  define MV_SPEED 0.12
+# endif
+
+# ifndef ROT_SPEED
+#  define ROT_SPEED 0.04
+# endif
+
 # ifndef NORTH_ANGLE
 #  define NORTH_ANGLE (3 * PI / 2)
 # endif
@@ -48,6 +56,16 @@
 # ifndef EAST_ANGLE
 #  define EAST_ANGLE 0
 # endif
+
+typedef struct s_keys {
+	bool	w;
+	bool	a;
+	bool	s;
+	bool	d;
+	bool	left;
+	bool	right;
+	bool	esc;
+}	t_keys;
 
 typedef struct s_ray
 {
@@ -107,6 +125,7 @@ typedef struct s_game
 {
 	t_map		*map;
 	t_my_img	*img;
+	t_keys		*keys;
 	void	*win_ptr;
 	void	*mlx_ptr;
 	t_texture		*so_img;
@@ -124,7 +143,6 @@ typedef struct s_game
 	double  center_x;
 	double  center_y;
 	bool	key_pressed;
-	bool	keys[256];
 }				t_game;
 
 
@@ -133,7 +151,9 @@ typedef enum e_move
 	UP,
 	DOWN,
 	LEFT,
-	RIGHT
+	RIGHT,
+	ROTATE_LEFT,
+	ROTATE_RIGHT
 }				t_move;
 
 // main
@@ -162,8 +182,8 @@ void    init_dir_vectors(t_game *game);
 
 // movement
 int		process_mouse_motion(t_game *game);
-int		key_input(int keycode, t_game *game);
-int		key_release(int keycode, t_game *game);
+int		handle_keypress(int keycode, t_game *game);
+int		handle_keyrelease(int keycode, t_game *game);
 void    move(t_game *game, t_move move);
 void    move_mouse(t_game *game, t_move move, int delta);
 

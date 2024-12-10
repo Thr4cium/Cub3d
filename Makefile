@@ -26,7 +26,7 @@ LIB_DIR = libft/
 SRC = $(addsuffix .c, $(addprefix srcs/, $(PARSING) $(RAYCAST) $(DISPLAY)))
 PARSING = parsing_edge_case parsing_routine parsing_routine_bis parsing_tools texture_informations main init_vectors assign_spawn_direction
 RAYCAST = ray_cast_utils ray_cast texture_loading
-DISPLAY = display_game render movement display_utils utils
+DISPLAY = display_game render movement display_utils utils move_rotate
 OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 DEP = $(OBJ:.o=.d)
 

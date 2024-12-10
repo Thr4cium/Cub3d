@@ -12,6 +12,8 @@
 
 #include "../headers/cub3d.h"
 
+int	assign_spawn_direction(t_game *game, char direction);
+
 void	get_player_initial_position(t_game *game)
 {
 	int	i;
@@ -24,15 +26,8 @@ void	get_player_initial_position(t_game *game)
 		j = 0;
 		while (game->map->map[i][j])
 		{
-			if (game->map->map[i][j] == 'N' || game->map->map[i][j] == 'S' \
-				|| game->map->map[i][j] == 'E' || game->map->map[i][j] == 'W')
-			{
-				game->pos_x = (double)j;
-				game->pos_y = (double)i;
-				game->pos_x += 0.5;
-				game->pos_y += 0.5;
+			if (assign_spawn_direction(game, game->map->map[i][j]))
 				return ;
-			}
 			j++;
 		}
 		i++;

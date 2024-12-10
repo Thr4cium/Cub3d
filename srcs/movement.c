@@ -40,25 +40,41 @@ int	process_mouse_motion(t_game *game)
 	return (delta_x);
 }
 
-int	key_input(int keycode, t_game *game)
+int	handle_keypress(int keycode, t_game *game)
 {
 	if (keycode == XK_Escape)
-		end_game(game);
-	if (keycode >= 0 && keycode < 256)
-	{
-		game->key_pressed = true;
-		game->keys[keycode] = true;
-	}
+		game->keys->esc = true;
+	if (keycode == XK_w || keycode == XK_z)
+		game->keys->w = true;
+	if (keycode == XK_s)
+		game->keys->s = true;
+	if (keycode == XK_a || keycode == XK_q)
+		game->keys->a = true;
+	if (keycode == XK_d)
+		game->keys->d = true;
+	if (keycode == XK_Left)
+		game->keys->left = true;
+	if (keycode == XK_Right)
+		game->keys->right = true;
 	return (0);
 }
 
-int	key_release(int keycode, t_game *game)
+int	handle_keyrelease(int keycode, t_game *game)
 {
-	if (keycode >= 0 && keycode < 256)
-	{
-		game->key_pressed = false;
-		game->keys[keycode] = false;
-	}
+	if (keycode == XK_Escape)
+		game->keys->esc = false;
+	if (keycode == XK_w || keycode == XK_z)
+		game->keys->w = false;
+	if (keycode == XK_s)
+		game->keys->s = false;
+	if (keycode == XK_a || keycode == XK_q)
+		game->keys->a = false;
+	if (keycode == XK_d)
+		game->keys->d = false;
+	if (keycode == XK_Left)
+		game->keys->left = false;
+	if (keycode == XK_Right)
+		game->keys->right = false;
 	return (0);
 }
 

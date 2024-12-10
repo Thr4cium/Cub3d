@@ -14,8 +14,6 @@
 
 void	init_game_struct(t_game *game)
 {
-	int	i;
-
 	game->mouse_x = 0;
 	game->map = NULL;
 	game->pos_x = 0;
@@ -28,9 +26,13 @@ void	init_game_struct(t_game *game)
 	game->no_img = NULL;
 	game->ea_img = NULL;
 	game->we_img = NULL;
-	i = 0;
-	while (i < 256)
-		game->keys[i++] = false;
+	game->keys->esc = false;
+	game->keys->w = false;
+	game->keys->s = false;
+	game->keys->a = false;
+	game->keys->d = false;
+	game->keys->left = false;
+	game->keys->right = false;
 }
 
 void	init_mlx(t_game *game)
@@ -52,8 +54,8 @@ void	init_mlx(t_game *game)
 void	game_loop(t_game *game)
 {
 	mlx_hook(game->win_ptr, 17, 0, &end_game, game);
-	mlx_hook(game->win_ptr, KeyPress, KeyPressMask, &key_input, game);
-	mlx_hook(game->win_ptr, KeyRelease, KeyReleaseMask, &key_release, game);
+	mlx_hook(game->win_ptr, KeyPress, KeyPressMask, &handle_keypress, game);
+	mlx_hook(game->win_ptr, KeyRelease, KeyReleaseMask, &handle_keyrelease, game);
 	mlx_loop_hook(game->mlx_ptr, &update_game, game);
 	mlx_loop(game->mlx_ptr);
 }
@@ -75,11 +77,13 @@ void	print_map_info(t_game *game)
 int	main(int ac, char **av)
 {
 	t_game	game;
+	t_keys	keys;
 
 	if (ac != 2)
 		return (printf("Error\nInvalid number of arguments\n"), 1);
 	if (check_path(av[1]) == -1)
 		return (printf("Error\nInvalid path\n"), 1);
+	game.keys = &keys;
 	init_game_struct(&game);
 	if (parsing(av[1], &game) == -1)
 	{
