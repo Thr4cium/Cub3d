@@ -6,7 +6,7 @@
 /*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:13:34 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/26 10:12:01 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/12/10 20:28:31 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,65 +38,86 @@ void	print_rays(t_game *game)
 		my_mlx_pixel_put(game->img, x0 + xdir * i, y0 + ydir * i, 0x0000FF00);
 		i++;
 	}
-	ray_casting(game, (PI / 2) / SCREEN_WIDTH);
+	ray_casting(game);
 }
 
-void	ray_casting(t_game *game, double angle_increment)
-{
-	int		i;
-	double	basevdir_x;
-	double	basevdir_y;
-	double	vdir_x;
-	double	vdir_y;
 
-	i = 0;
-	basevdir_x = (game->dir_x * cos(-PI / 4) - game->dir_y * sin(-PI / 4));
-	basevdir_y = (game->dir_x * sin(-PI / 4) + game->dir_y * cos(-PI / 4));
-	while (i < SCREEN_WIDTH)
+// void	ray_casting(t_game *game, double angle_increment)
+// {
+// 	int		i;
+// 	double	basevdir_x;
+// 	double	basevdir_y;
+// 	double	vdir_x;
+// 	double	vdir_y;
+
+// 	i = 0;
+// 	basevdir_x = (game->dir_x * cos(-PI / 4) - game->dir_y * sin(-PI / 4));
+// 	basevdir_y = (game->dir_x * sin(-PI / 4) + game->dir_y * cos(-PI / 4));
+// 	while (i < SCREEN_WIDTH)
+// 	{
+// 		vdir_x = (basevdir_x * cos(angle_increment * i) \
+// 			- basevdir_y * sin(angle_increment * i));
+// 		vdir_y = (basevdir_x * sin(angle_increment * i) \
+// 			+ basevdir_y * cos(angle_increment * i));
+// 		if (ray_cast(game, vdir_x, vdir_y, i) == -1)
+// 			return ;
+// 		i++;
+// 	}
+// }
+
+void ray_casting(t_game *game)
+{
+	t_ray		ray;
+	int			x;
+	double		half_fov_radians;
+	double		camera_x;
+
+	half_fov_radians = (60 * PI / 180.0) / 2.0;
+	x = 0;
+	while (x < SCREEN_WIDTH)
 	{
-		vdir_x = (basevdir_x * cos(angle_increment * i) \
-			- basevdir_y * sin(angle_increment * i));
-		vdir_y = (basevdir_x * sin(angle_increment * i) \
-			+ basevdir_y * cos(angle_increment * i));
-		if (ray_cast(game, vdir_x, vdir_y, i) == -1)
-			return ;
-		i++;
+		camera_x = ((2.0 * x) / SCREEN_WIDTH - 1.0)
+			* tan(half_fov_radians);
+		ray.Vdir_x = (game->dir_x
+				+ game->plane_x * camera_x);
+		ray.Vdir_y	 = (game->dir_y
+				+ game->plane_y * camera_x);
+		ray_cast(game, &ray, x);
+		x ++;
 	}
 }
 
-int	ray_cast(t_game *game, double Vdir_x, double Vdir_y, int i)
+int	ray_cast(t_game *game, t_ray *ray, int i)
 {
-	t_ray	ray;
-
-	init_ray(game, &ray, Vdir_x, Vdir_y);
-	dda_algorithm(game, &ray);
-	define_wall_line(game, &ray, i);
+	init_ray(game, ray);
+	dda_algorithm(game, ray);
+	define_wall_line(game, ray, i);
 	return (0);
 }
 
-void	init_ray(t_game *game, t_ray *ray, double Vdir_x, double Vdir_y)
+void	init_ray(t_game *game, t_ray *ray)
 {
 	ray->mapX = (int)game->pos_x;
 	ray->mapY = (int)game->pos_y;
 	ray->stepY = 0;
 	ray->stepX = 0;
 	ray->side = 0;
-	if (Vdir_x == 0)
+	if (ray->Vdir_x == 0)
 		ray->deltaDistX = 1e30;
 	else
-		ray->deltaDistX = fabs(1 / Vdir_x);
-	if (Vdir_y == 0)
+		ray->deltaDistX = fabs(1 / ray->Vdir_x);
+	if (ray->deltaDistY == 0)
 		ray->deltaDistY = 1e30;
 	else
-		ray->deltaDistY = fabs(1 / Vdir_y);
-	ray->Vdir_x = Vdir_x;
-	ray->Vdir_y = Vdir_y;
-	init_ray2(game, ray, Vdir_x, Vdir_y);
+		ray->deltaDistY = fabs(1 / ray->Vdir_y);
+	ray->Vdir_x = ray->Vdir_x ;
+	ray->Vdir_y = ray->Vdir_y;
+	init_ray2(game, ray);
 }
 
-void	init_ray2(t_game *game, t_ray *ray, double Vdir_x, double Vdir_y)
+void	init_ray2(t_game *game, t_ray *ray)
 {
-	if (Vdir_x < 0)
+	if (ray->Vdir_x < 0)
 	{
 		ray->stepX = -1;
 		ray->sideDistX = (game->pos_x - ray->mapX) * ray->deltaDistX;
@@ -106,7 +127,7 @@ void	init_ray2(t_game *game, t_ray *ray, double Vdir_x, double Vdir_y)
 		ray->stepX = 1;
 		ray->sideDistX = (ray->mapX + 1.0 - game->pos_x) * ray->deltaDistX;
 	}
-	if (Vdir_y < 0)
+	if (ray->Vdir_y < 0)
 	{
 		ray->stepY = -1;
 		ray->sideDistY = (game->pos_y - ray->mapY) * ray->deltaDistY;
