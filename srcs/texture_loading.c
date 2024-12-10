@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_loading.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 16:18:59 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/02 11:05:46 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:22:42 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ void	get_player_initial_position(t_game *game)
 		j = 0;
 		while (game->map->map[i][j])
 		{
+			game->pos_x = (double)j;
+			game->pos_y = (double)i;
+			game->pos_x += 0.5;
+			game->pos_y += 0.5;
 			if (assign_spawn_direction(game, game->map->map[i][j]))
 				return ;
 			j++;
