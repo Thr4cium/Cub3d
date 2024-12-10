@@ -228,10 +228,10 @@ int		get_color(t_texture *texture, t_ray *ray, int x, int delta);
 
 // ray cast
 void	print_rays(t_game *game);
-void    ray_casting(t_game *game, double angle_increment);
-int		ray_cast(t_game *game, double Vdir_x, double Vdir_y, int i);
-void    init_ray(t_game *game, t_ray *ray, double Vdir_x, double Vdir_y);
-void    init_ray2(t_game *game, t_ray *ray, double Vdir_x, double Vdir_y);
+void    ray_casting(t_game *game);
+int		ray_cast(t_game *game, t_ray *ray, int i);
+void    init_ray(t_game *game, t_ray *ray);
+void    init_ray2(t_game *game, t_ray *ray);
 
 // render
 bool    is_there_wall(t_game *game, t_move move);
