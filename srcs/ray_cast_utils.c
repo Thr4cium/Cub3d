@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_cast_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 16:39:59 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/26 09:50:58 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:15:06 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ void	dda_algorithm(t_game *game, t_ray *ray)
 			ray->mapY += ray->stepY;
 			ray->side = 1;
 		}
-		if (ray->mapX < 0 || ray->mapX >=  || ray->mapY < 0 || ray->mapY >= 1980
-			|| game->map->map[ray->mapY][ray->mapX] == '1')
+		if (game->map->map[ray->mapY][ray->mapX] == '1')
 			hit = true;
 	}
 	ray->perpWallDist = (ray->sideDistY - ray->deltaDistY);
