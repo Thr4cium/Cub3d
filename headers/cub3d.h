@@ -33,12 +33,16 @@
 # define PI 3.1415926535
 # define MINIMAP_RANGE 5
 
+# ifndef MLX_CROSS_CODE
+#  define MLX_CROSS_CODE 17
+# endif
+
 # ifndef MV_SPEED
 #  define MV_SPEED 0.12
 # endif
 
 # ifndef ROT_SPEED
-#  define ROT_SPEED 0.04
+#  define ROT_SPEED 0.09
 # endif
 
 # ifndef NORTH_ANGLE
