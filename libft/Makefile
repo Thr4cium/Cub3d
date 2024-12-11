@@ -22,6 +22,7 @@ SRCS = 	./src/ft_itoa.c \
 		./src/ft_putnbr_fd.c \
 		./src/ft_putstr_fd.c \
 		./src/ft_strlen.c \
+		./src/free_tab.c \
 		./src/ft_strtrim.c \
 		./src/ft_tolower.c \
 		./src/ft_toupper.c \
@@ -61,6 +62,7 @@ SRCS = 	./src/ft_itoa.c \
 		./src/ft_lstclear.c \
 		./src/ft_lstiter.c \
 		./src/ft_lstmap.c \
+		./src/ft_strcmp.c \
 		./src/ft_isspace.c \
 		./gnl/get_next_line.c \
 		./gnl/get_next_line_utils.c \

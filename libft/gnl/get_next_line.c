@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-char	*buffswap(char *buffer)
+static	char	*buffswap(char *buffer)
 {
 	char	*final_buffer;
 	int		i;
@@ -39,7 +39,7 @@ char	*buffswap(char *buffer)
 	return (final_buffer);
 }
 
-char	*buff_join(char *buffer, char *next_buff)
+static	char	*buff_join(char *buffer, char *next_buff)
 {
 	char	*new_buff;
 
@@ -48,7 +48,7 @@ char	*buff_join(char *buffer, char *next_buff)
 	return (new_buff);
 }
 
-char	*ft_line(char *buffer)
+static	char	*ft_line(char *buffer)
 {
 	int		i;
 	char	*line;
@@ -69,7 +69,7 @@ char	*ft_line(char *buffer)
 	return (line);
 }
 
-char	*buffcheck(char *buffer, int fd)
+static	char	*buffcheck(char *buffer, int fd)
 {
 	char	*next_buff;
 	int		end_or_error;
