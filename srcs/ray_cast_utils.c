@@ -19,24 +19,24 @@ void	dda_algorithm(t_game *game, t_ray *ray)
 	hit = false;
 	while (hit == false)
 	{
-		if (ray->sideDistX < ray->sideDistY)
+		if (ray->side_dist_x < ray->side_dist_y)
 		{
-			ray->sideDistX += ray->deltaDistX;
-			ray->mapX += ray->stepX;
+			ray->side_dist_x += ray->delta_dist_x;
+			ray->map_x += ray->step_x;
 			ray->side = 0;
 		}
 		else
 		{
-			ray->sideDistY += ray->deltaDistY;
-			ray->mapY += ray->stepY;
+			ray->side_dist_y += ray->delta_dist_y;
+			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (game->map->map[ray->mapY][ray->mapX] == '1')
+		if (game->map->map[ray->map_y][ray->map_x] == '1')
 			hit = true;
 	}
-	ray->perpWallDist = (ray->sideDistY - ray->deltaDistY);
+	ray->perp_wall_dist = (ray->side_dist_y - ray->delta_dist_y);
 	if (ray->side == 0)
-		ray->perpWallDist = (ray->sideDistX - ray->deltaDistX);
+		ray->perp_wall_dist = (ray->side_dist_x - ray->delta_dist_x);
 }
 
 void	define_wall_line(t_game *game, t_ray *ray, int x)
@@ -44,14 +44,14 @@ void	define_wall_line(t_game *game, t_ray *ray, int x)
 	int	lineheight;
 
 	if (ray->side == 0)
-		ray->wallX = game->pos_y + ray->perpWallDist * ray->Vdir_y;
+		ray->wall_x = game->pos_y + ray->perp_wall_dist * ray->ray_dir_y;
 	else
-		ray->wallX = game->pos_x + ray->perpWallDist * ray->Vdir_x;
-	ray->wallX -= floor(ray->wallX);
-	lineheight = (int)(SCREEN_HEIGHT / ray->perpWallDist);
-	ray->drawStart = -lineheight / 2 + SCREEN_HEIGHT / 2;
-	ray->drawEnd = lineheight / 2 + SCREEN_HEIGHT / 2;
-	draw_ground_and_sky(game, x, ray->drawStart, ray->drawEnd);
+		ray->wall_x = game->pos_x + ray->perp_wall_dist * ray->ray_dir_x;
+	ray->wall_x -= floor(ray->wall_x);
+	lineheight = (int)(SCREEN_HEIGHT / ray->perp_wall_dist);
+	ray->draw_start = -lineheight / 2 + SCREEN_HEIGHT / 2;
+	ray->draw_end = lineheight / 2 + SCREEN_HEIGHT / 2;
+	draw_ground_and_sky(game, x, ray->draw_start, ray->draw_end);
 	draw_scaled_wall(game, x, ray);
 }
 
@@ -61,25 +61,25 @@ void	draw_scaled_wall(t_game *game, int x, t_ray *ray)
 	int	delta;
 	int	i;
 
-	delta = ray->drawEnd - ray->drawStart;
-	if (ray->drawStart < 0)
-		ray->drawStart = 0;
-	if (ray->drawEnd >= SCREEN_HEIGHT)
-		ray->drawEnd = SCREEN_HEIGHT - 1;
+	delta = ray->draw_end - ray->draw_start;
+	if (ray->draw_start < 0)
+		ray->draw_start = 0;
+	if (ray->draw_end >= SCREEN_HEIGHT)
+		ray->draw_end = SCREEN_HEIGHT - 1;
 	i = 0;
-	while (ray->drawStart < ray->drawEnd)
+	while (ray->draw_start < ray->draw_end)
 	{
-		if (ray->side == 1 && ray->stepY == -1)
+		if (ray->side == 1 && ray->step_y == -1)
 			color = get_color(game->no_img, ray, i, delta);
-		else if (ray->side == 1 && ray->stepY == 1)
+		else if (ray->side == 1 && ray->step_y == 1)
 			color = get_color(game->so_img, ray, i, delta);
-		else if (ray->side == 0 && ray->stepX == -1)
+		else if (ray->side == 0 && ray->step_x == -1)
 			color = get_color(game->we_img, ray, i, delta);
-		else if (ray->side == 0 && ray->stepX == 1)
+		else if (ray->side == 0 && ray->step_x == 1)
 			color = get_color(game->ea_img, ray, i, delta);
-		secure_my_mlx_pixel_put2(game->img, x, ray->drawStart, color);
+		secure_my_mlx_pixel_put2(game->img, x, ray->draw_start, color);
 		i++;
-		ray->drawStart++;
+		ray->draw_start++;
 	}
 }
 
@@ -109,10 +109,10 @@ int	get_color(t_texture *texture, t_ray *ray, int x, int delta)
 	int		texy;
 	int		y;
 
-	texx = ray->wallX * texture->width;
-	if (ray->side == 0 && ray->Vdir_x > 0)
+	texx = ray->wall_x * texture->width;
+	if (ray->side == 0 && ray->ray_dir_x > 0)
 		texx = texture->width - texx - 1;
-	if (ray->side == 1 && ray->Vdir_y < 0)
+	if (ray->side == 1 && ray->ray_dir_y < 0)
 		texx = texture->width - texx - 1;
 	if (delta > SCREEN_HEIGHT)
 	{

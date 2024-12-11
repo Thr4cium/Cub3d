@@ -55,18 +55,14 @@ bool	is_there_wall(t_game *game, t_move move)
 
 int	update_game(t_game *game)
 {
-	// int	delta_x;
+	int	delta_x;
 
-	// delta_x = process_mouse_motion(game);
+	delta_x = process_mouse_motion(game);
 	process_input(game);
-	// if (game->keys[XK_Left])
-	// 	rotate(game, -ROT_SPEED);
-	// if (game->keys[XK_Right])
-	// 	rotate(game, ROT_SPEED);
-	// if (game->mouse_x == -1)
-	// 	move_mouse(game, LEFT, delta_x);
-	// else if (game->mouse_x == 1)
-	// 	move_mouse(game, RIGHT, delta_x);
+	if (game->mouse_x == -1)
+		move_mouse(game, LEFT, delta_x);
+	else if (game->mouse_x == 1)
+		move_mouse(game, RIGHT, delta_x);
 	display_game(game);
 	return (0);
 }

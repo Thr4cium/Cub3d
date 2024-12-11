@@ -55,7 +55,8 @@ void	game_loop(t_game *game)
 {
 	mlx_hook(game->win_ptr, MLX_CROSS_CODE, 0, &end_game, game);
 	mlx_hook(game->win_ptr, KeyPress, KeyPressMask, &handle_keypress, game);
-	mlx_hook(game->win_ptr, KeyRelease, KeyReleaseMask, &handle_keyrelease, game);
+	mlx_hook(game->win_ptr, KeyRelease, KeyReleaseMask,
+		&handle_keyrelease, game);
 	mlx_loop_hook(game->mlx_ptr, &update_game, game);
 	mlx_loop(game->mlx_ptr);
 }

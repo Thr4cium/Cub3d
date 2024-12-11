@@ -6,7 +6,7 @@ void	move_player(t_game *game, float move_x, float move_y)
 	float		new_y;
 
 	new_x = game->pos_x + (move_x * MV_SPEED);
-	new_y =	game->pos_y + (move_y * MV_SPEED);
+	new_y = game->pos_y + (move_y * MV_SPEED);
 	if (game->map->map[(int)new_y][(int)new_x] == '1')
 		return ;
 	if (game->map->map[(int)game->pos_y][(int)new_x] != '1')

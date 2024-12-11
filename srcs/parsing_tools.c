@@ -51,14 +51,15 @@ bool	is_line_only_empty(char *line)
 
 bool	is_line_is_map(char *line)
 {
-	int i;
+	int	i;
+
 	i = 0;
 	while (line[i])
 	{
 		if (line[i] != '1' && line[i] != ' ' && line[i] != 'E' \
 			&& line[i] != 'N' && line[i] != 'S' && line[i] != 'W' \
 				&& line[i] != '0')
-				return (false);
+			return (false);
 		i++;
 	}
 	return (true);

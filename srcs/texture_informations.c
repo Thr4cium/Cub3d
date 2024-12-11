@@ -14,7 +14,7 @@
 
 int	get_texture_information(t_map *map, char **array)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (array[i])
@@ -32,7 +32,8 @@ int	get_texture_information(t_map *map, char **array)
 		else if (ft_strncmp(array[i], "F ", 2) == 0)
 			map->ground_color = rgb_to_int(array[i] + 1);
 		else if (!is_line_only_empty(array[i]) && !is_line_is_map(array[i]))
-			return (free_array(array), printf("Wrong texture information\n"), -1);
+			return (free_array(array),
+				printf("Wrong texture information\n"), -1);
 		if (are_texture_filled(map))
 			return (i);
 		i++;
