@@ -10,63 +10,78 @@
 #                                                                              #
 # **************************************************************************** #
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror 
-LDFLAGS = -Llibft -lft -L. -lgnl -lm -lbsd -Llibmlx -lmlx -lXext -lX11 -g3
-AR = ar rcs
+NAME				= 	cub3D
 
-NAME = cub3D
+MINIMAP				= 	1
 
-SRC_DIR = srcs/
-OBJ_DIR = objs/
-INC_DIR = headers/
-GNL_DIR = gnl/
-LIB_DIR = libft/
+LIBFT_AR_PATH 		= 	./libft/libft.a
+LIBFT 				= 	libft
 
-SRC = $(addsuffix .c, $(addprefix srcs/, $(PARSING) $(RAYCAST) $(DISPLAY)))
-PARSING = parsing_edge_case parsing_routine parsing_routine_bis parsing_tools texture_informations main init_vectors assign_spawn_direction
-RAYCAST = ray_cast_utils ray_cast texture_loading
-DISPLAY = display_game render movement display_utils utils move_rotate
-OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
-DEP = $(OBJ:.o=.d)
+OBJS_DIR			= 	.objs
 
-GNL = $(addsuffix .c, $(addprefix gnl/, $(GNL_SRCS)))
-GNL_SRCS = get_next_line get_next_line_utils
-GNL_OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(GNL:.c=.o)))
+MINILIB 			= 	libmlx
 
-all: $(NAME)
+MLX_LINUX			=	./${MINILIB}/libmlx_Linux.a
+MLX					=	./${MINILIB}/libmlx.a
 
-libft/libft.a :
-	@make -C $(LIB_DIR)
+HEADERS				= 	./headers/cub3d.h ./headers/get_next_line.h
 
-$(NAME): $(OBJ) $(GNL_OBJS) libft/libft.a
-	$(AR) libgnl.a $(GNL_OBJS) 
-	$(CC) $(OBJ) $(LDFLAGS) -o $@
+CC 					= 	cc
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -I $(INC_DIR) -Ilibmlx -c $< -o $@ -g3
+PARSING_SRCS	 	= 	./srcs/parsing/assign_spawn_direction.c \
+						./srcs/parsing/init_vectors.c \
+						./srcs/parsing/parsing_edge_case.c \
+						./srcs/parsing/parsing_routine.c \
+						./srcs/parsing/parsing_routine_bis.c \
+						./srcs/parsing/texture_informations.c \
+						./srcs/parsing/parsing_tools.c \
+						./srcs/parsing/texture_loading.c \
 
-$(OBJ_DIR)/%.o: $(GNL_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -I $(INC_DIR) -Ilibmlx -c $< -o $@ -g3
+RAYCASTING_SRCS		=	./srcs/raycasting/ray_cast.c \
+						./srcs/raycasting/ray_cast_utils.c \
 
--include $(DEP)
+GAME_SRCS			=	./srcs/game/display_game.c \
+						./srcs/game/display_utils.c \
+						./srcs/game/move_rotate.c \
+						./srcs/game/render.c \
+						./srcs/game/movement.c \
 
+SRCS 				=	./srcs/main.c \
+						./srcs/utils.c \
+						${GAME_SRCS} \
+						${RAYCASTING_SRCS} \
+						${PARSING_SRCS} \
+
+OBJS				= ${SRCS:%.c=$(OBJS_DIR)/%.o}
+
+
+CFLAGS				= -Wall -Wextra -Werror
+
+$(OBJS_DIR)/%.o: %.c 	${HEADERS} Makefile
+			@mkdir -p $(dir $@)
+			${CC} ${CFLAGS} -I ./ -c $< -o $@
+
+all:		libft mlx-linux ${NAME}
+
+${NAME}:	${OBJS}
+			${CC} ${CFLAGS} ${OBJS} ${LIBFT_AR_PATH} libgnl.a  ${MLX_LINUX} ${MLX} -lm -lbsd -lXext -lX11 -o ${NAME}
 clean:
-	@make clean -C $(LIB_DIR) > /dev/null
-	@echo "🧹 ${LIB_DIR}"
-	rm -rf $(OBJ_DIR)
-	rm -rf $(DEP)
-	rm -rf libgnl.a
-	@echo "CLEAN"
+			${MAKE} -C ${LIBFT} clean
+			${MAKE} -C ${MINILIB} clean
+			rm -f ${OBJS}
 
-fclean: clean
-	@make fclean -C $(LIB_DIR) > /dev/null
-	@echo "🧹 ${LIB_DIR}"
-	@rm -f $(NAME)
-	@echo "FCLEAN"
+fclean:		clean
+			${MAKE} -C ${LIBFT} fclean
+			rm -f ${NAME}
 
-re: fclean all
+re:			fclean all
 
-.PHONY: all clean fclean re
+libft:	force
+		${MAKE} -C ${LIBFT}
+
+mlx-linux: force
+		${MAKE} -C ${MINILIB}
+
+force:
+
+.PHONY:		all clean fclean re libft force

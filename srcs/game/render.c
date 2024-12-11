@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/cub3d.h"
+#include "../../headers/cub3d.h"
 
 void	rotate(t_game *game, float rotation_speed);
 void	move_player(t_game *game, float move_x, float move_y);
@@ -28,9 +28,9 @@ static	void	process_input(t_game *game)
 	if (game->keys->d)
 		move_player(game, game->plane_x, game->plane_y);
 	if (game->keys->left)
-		rotate(game, -ROT_SPEED);
-	if (game->keys->right)
 		rotate(game, ROT_SPEED);
+	if (game->keys->right)
+		rotate(game, -ROT_SPEED);
 }
 
 bool	is_there_wall(t_game *game, t_move move)

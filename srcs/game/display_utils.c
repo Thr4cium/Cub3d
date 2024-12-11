@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/cub3d.h"
+#include "../../headers/cub3d.h"
 
 int	secure_my_mlx_pixel_put(t_my_img *img, int x, int y, int color)
 {

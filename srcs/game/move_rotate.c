@@ -1,4 +1,4 @@
-#include "../headers/cub3d.h"
+#include "../../headers/cub3d.h"
 
 void	move_player(t_game *game, float move_x, float move_y)
 {
