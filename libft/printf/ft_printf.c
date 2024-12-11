@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "ft_printf.h"
 
-int	convert_management(va_list args, const char c)
+static	int	convert_management(va_list args, const char c)
 {
 	if (c == 'c')
 		return (ft_putchar(va_arg(args, int)));
@@ -33,7 +33,7 @@ int	convert_management(va_list args, const char c)
 	return (-1);
 }
 
-int	convert(const char *s, va_list args, int len)
+static	int	convert(const char *s, va_list args, int len)
 {
 	int	tmp;
 

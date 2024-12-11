@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mxc <mxc@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/20 17:50:14 by mxc               #+#    #+#             */
-/*   Updated: 2023/12/04 16:53:28 by mguy             ###   ########.fr       */
+/*   Created: 2023/11/18 02:18:41 by magrondi          #+#    #+#             */
+/*   Updated: 2023/11/23 16:06:08 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "libft.h"
 
-int	ft_putstr(char const *s, int to_free)
+int	ft_lstsize(t_list *lst)
 {
-	int	len;
+	int			i;
+	t_list		*temp;
 
-	if (s == NULL)
-		return (ft_putstr("(null)", to_free));
-	len = ft_strlen(s);
-	write(1, s, len);
-	if (to_free == 1)
-		free((char *)s);
-	return (len);
+	i = 0;
+	temp = lst;
+	if (!lst)
+		return (i);
+	while (temp)
+	{
+		i ++;
+		temp = temp->next;
+	}
+	return (i);
 }

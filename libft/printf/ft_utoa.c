@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "ft_printf.h"
 
-size_t	find_len(unsigned int n)
+static	size_t	find_len(unsigned int n)
 {
 	size_t	len;
 

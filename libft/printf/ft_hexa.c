@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "ft_printf.h"
 
-int	print_hexa(unsigned int n, int i, int len)
+static	int	print_hexa(unsigned int n, int i, int len)
 {
 	if (n < 16)
 	{

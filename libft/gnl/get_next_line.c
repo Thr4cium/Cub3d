@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/get_next_line.h"
+#include "get_next_line.h"
 
 char	*buffswap(char *buffer)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/get_next_line.h"
+#include "get_next_line.h"
 
 size_t	ftt_strlen(const char *str)
 {

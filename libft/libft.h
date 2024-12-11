@@ -21,6 +21,17 @@
 # include <stdbool.h>
 # include "printf/ft_printf.h"
 
+typedef struct s_list
+{
+	char			*content;
+	char			**static_ref;
+	size_t			index;
+	size_t			length;
+	size_t			linelen;
+	struct s_list	*next;
+	struct s_list	*prev;
+}	t_list;
+
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);
 int				ft_isalnum(int c);
@@ -67,5 +78,14 @@ int				free_tab(char **tab);
 int				realloc_tab(char ***str, int size);
 int				get_tab_size(char **tab);
 int				last_char(char *str);
+t_list		    *ft_lstnew(void *content, size_t index);
+void		    ft_lstadd_front(t_list **lst, t_list *new);
+int			    ft_lstsize(t_list *lst);
+t_list		    *ft_lstlast(t_list *lst);
+void		    ft_lstadd_back(t_list **lst, t_list *new);
+void		    ft_lstdelone(t_list *lst, void (*del)(void *));
+void		    ft_lstclear(t_list **lst, void (*del)(void *));
+void		    ft_lstiter(t_list *lst, void (*f)(void *));
+t_list		    *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 #endif

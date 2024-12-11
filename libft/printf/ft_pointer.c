@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "ft_printf.h"
 
-int	print_pointer(uintptr_t ptr, int len)
+static	int	print_pointer(uintptr_t ptr, int len)
 {
 	if (ptr < 16)
 	{
