@@ -33,7 +33,9 @@ void	init_game_struct(t_game *game)
 	game->keys->d = false;
 	game->keys->left = false;
 	game->keys->right = false;
+	game->keys->is_pristine = true;
 }
+
 // TARGET
 void	init_mlx(t_game *game)
 {

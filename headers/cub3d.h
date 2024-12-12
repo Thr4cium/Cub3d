@@ -83,6 +83,7 @@ typedef struct s_keys {
 	bool	left;
 	bool	right;
 	bool	esc;
+	bool	is_pristine;
 }	t_keys;
 
 typedef struct s_ray

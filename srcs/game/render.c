@@ -57,7 +57,7 @@ int	update_game(t_game *game)
 {
 	int	delta_x;
 
-	if (BONUS)
+	if (BONUS && !game->keys->is_pristine)
 	{
 		delta_x = process_mouse_motion(game);
 		if (game->mouse_x == -1)

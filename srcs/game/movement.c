@@ -56,6 +56,10 @@ int	handle_keypress(int keycode, t_game *game)
 		game->keys->left = true;
 	if (keycode == XK_Right)
 		game->keys->right = true;
+	if (keycode == XK_Escape || keycode == XK_w || keycode == XK_z
+		|| keycode == XK_s || keycode == XK_a || keycode == XK_q
+		|| keycode == XK_d || keycode == XK_Left || keycode == XK_Right)
+		game->keys->is_pristine = false;
 	return (0);
 }
 
