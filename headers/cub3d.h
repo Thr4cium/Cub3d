@@ -58,16 +58,17 @@
 #  define ROT_SPEED 0.09
 # endif
 
+
 # ifndef NORTH_ANGLE
-#  define NORTH_ANGLE 270
+#  define NORTH_ANGLE (3 * 3.1415926535 / 2)
 # endif
 
 # ifndef WEST_ANGLE
-#  define WEST_ANGLE 180
+#  define WEST_ANGLE 3.1415926535
 # endif
 
 # ifndef SOUTH_ANGLE
-#  define SOUTH_ANGLE 90
+#  define SOUTH_ANGLE (3.1415926535 / 2)
 # endif
 
 # ifndef EAST_ANGLE
