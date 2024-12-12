@@ -72,13 +72,13 @@ void	draw_scaled_wall(t_game *game, int x, t_ray *ray)
 	while (ray->draw_start < ray->draw_end)
 	{
 		if (ray->side == 1 && ray->step_y == -1)
-			color = get_color(game->no_img, ray, i, delta);
-		else if (ray->side == 1 && ray->step_y == 1)
 			color = get_color(game->so_img, ray, i, delta);
+		else if (ray->side == 1 && ray->step_y == 1)
+			color = get_color(game->no_img, ray, i, delta);
 		else if (ray->side == 0 && ray->step_x == -1)
-			color = get_color(game->we_img, ray, i, delta);
-		else if (ray->side == 0 && ray->step_x == 1)
 			color = get_color(game->ea_img, ray, i, delta);
+		else if (ray->side == 0 && ray->step_x == 1)
+			color = get_color(game->we_img, ray, i, delta);
 		secure_my_mlx_pixel_put2(game->img, x, ray->draw_start, color);
 		i++;
 		ray->draw_start++;

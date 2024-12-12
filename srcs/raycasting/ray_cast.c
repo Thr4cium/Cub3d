@@ -15,27 +15,27 @@
 void	print_minimap_perp_rays(t_game *game)
 {
 	int		i;
-	double	x0;
-	double	y0;
-	double	xdir;
-	double	ydir;
+	double	x_0;
+	double	y_0;
+	double	x_dir;
+	double	y_dir;
 
 	i = 0;
-	x0 = (SCREEN_WIDTH / 7.1) + game->dir_x * 120;
-	y0 = (SCREEN_HEIGHT / 5.8) + game->dir_y * 120;
-	xdir = (game->dir_x * cos(PI / 2) - game->dir_y * sin(PI / 2));
-	ydir = (game->dir_x * sin(PI / 2) + game->dir_y * cos(PI / 2));
+	x_0 = (SCREEN_WIDTH / 7.1) + game->dir_x * 120;
+	y_0 = (SCREEN_HEIGHT / 5.8) + game->dir_y * 120;
+	x_dir = (game->dir_x * cos(PI / 2) - game->dir_y * sin(PI / 2));
+	y_dir = (game->dir_x * sin(PI / 2) + game->dir_y * cos(PI / 2));
 	while (i < 60)
 	{
-		my_mlx_pixel_put(game->img, x0 + xdir * i, y0 + ydir * i, 0x0000FF00);
+		my_mlx_pixel_put(game->img, x_0 + x_dir * i, y_0 + y_dir * i, 0x0000FF00);
 		i++;
 	}
-	xdir = (game->dir_x * cos(-PI / 2) - game->dir_y * sin(-PI / 2));
-	ydir = (game->dir_x * sin(-PI / 2) + game->dir_y * cos(-PI / 2));
+	x_dir = (game->dir_x * cos(-PI / 2) - game->dir_y * sin(-PI / 2));
+	y_dir = (game->dir_x * sin(-PI / 2) + game->dir_y * cos(-PI / 2));
 	i = 0;
 	while (i < 60)
 	{
-		my_mlx_pixel_put(game->img, x0 + xdir * i, y0 + ydir * i, 0x0000FF00);
+		my_mlx_pixel_put(game->img, x_0 + x_dir * i, y_0 + y_dir * i, 0x0000FF00);
 		i++;
 	}
 }
