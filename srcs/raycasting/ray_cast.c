@@ -12,7 +12,7 @@
 
 #include "../../headers/cub3d.h"
 
-void	print_rays(t_game *game)
+void	print_minimap_perp_rays(t_game *game)
 {
 	int		i;
 	double	x0;
@@ -38,7 +38,6 @@ void	print_rays(t_game *game)
 		my_mlx_pixel_put(game->img, x0 + xdir * i, y0 + ydir * i, 0x0000FF00);
 		i++;
 	}
-	ray_casting(game);
 }
 
 void	ray_casting(t_game *game)

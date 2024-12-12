@@ -34,7 +34,7 @@ void	init_game_struct(t_game *game)
 	game->keys->left = false;
 	game->keys->right = false;
 }
-
+// TARGET
 void	init_mlx(t_game *game)
 {
 	t_my_img	*img;
@@ -85,6 +85,7 @@ int	main(int ac, char **av)
 	if (check_path(av[1]) == -1)
 		return (printf("Error\nInvalid path\n"), 1);
 	game.keys = &keys;
+	printf("BONUS %d\n", BONUS);
 	init_game_struct(&game);
 	if (parsing(av[1], &game) == -1)
 	{

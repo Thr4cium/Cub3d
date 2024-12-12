@@ -14,7 +14,6 @@
 # define CUB3D_H
 # include <math.h>
 # include "../libft/libft.h"
-# include "get_next_line.h"
 # include <mlx.h>
 # include "../libmlx/mlx.h"
 # include "../libmlx/mlx_int.h"
@@ -27,6 +26,10 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <math.h>
+
+# ifndef BONUS
+#  define BONUS 0
+# endif
 
 # ifndef SCREEN_WIDTH
 #  define SCREEN_WIDTH 1920
@@ -182,6 +185,7 @@ void	set_window_color(t_game *game, int color);
 void	print_minimap(t_game *game);
 void	draw_line(t_game *game, int x, int y, int color);
 void	draw_tile(t_game *game, double start_x, double start_y, int color);
+void	print_minimap_perp_rays(t_game *game);
 
 // display_utils
 int		secure_my_mlx_pixel_put(t_my_img *img, int x, int y, int color);

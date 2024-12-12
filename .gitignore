@@ -1,3 +1,5 @@
 *.o
 cub3D
-libgnl.a
+libft.a
+libmlx_Linux.a
+lbmlx.a

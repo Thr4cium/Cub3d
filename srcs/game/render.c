@@ -28,9 +28,9 @@ static	void	process_input(t_game *game)
 	if (game->keys->d)
 		move_player(game, game->plane_x, game->plane_y);
 	if (game->keys->left)
-		rotate(game, ROT_SPEED);
-	if (game->keys->right)
 		rotate(game, -ROT_SPEED);
+	if (game->keys->right)
+		rotate(game, ROT_SPEED);
 }
 
 bool	is_there_wall(t_game *game, t_move move)
@@ -57,12 +57,15 @@ int	update_game(t_game *game)
 {
 	int	delta_x;
 
-	delta_x = process_mouse_motion(game);
+	if (BONUS)
+	{
+		delta_x = process_mouse_motion(game);
+		if (game->mouse_x == -1)
+			move_mouse(game, LEFT, delta_x);
+		else if (game->mouse_x == 1)
+			move_mouse(game, RIGHT, delta_x);
+	}
 	process_input(game);
-	if (game->mouse_x == -1)
-		move_mouse(game, LEFT, delta_x);
-	else if (game->mouse_x == 1)
-		move_mouse(game, RIGHT, delta_x);
 	display_game(game);
 	return (0);
 }

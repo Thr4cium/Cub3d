@@ -15,11 +15,15 @@
 int	display_game(t_game *game)
 {
 	set_window_color(game, 0x00303030);
-	print_minimap_background(game, 0x00808080);
-	print_minimap(game);
-	print_player(game, SCREEN_WIDTH / 7.1, SCREEN_HEIGHT / 5.8, 20);
-	draw_line(game, SCREEN_WIDTH / 7.1, SCREEN_HEIGHT / 5.8, 0x0090EE90);
-	print_rays(game);
+	if (BONUS)
+	{
+		print_minimap_background(game, 0x00808080);
+		print_minimap(game);
+		print_player(game, SCREEN_WIDTH / 7.1, SCREEN_HEIGHT / 5.8, 20);
+		draw_line(game, SCREEN_WIDTH / 7.1, SCREEN_HEIGHT / 5.8, 0x0090EE90);
+		print_minimap_perp_rays(game);
+	}
+	ray_casting(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img->ptr, 0, 0);
 	return (0);
 }

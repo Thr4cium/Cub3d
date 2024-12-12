@@ -1,7 +1,8 @@
-- fix relink Makefile libf and main also on headers
+/ fix relink Makefile libf and main also on headers
 - maybe improve error message when texture is not found
-- norm
-- walking throught wall in diag
+~ norm
+/ walking throught wall in diag
 - crash on bad xpm file
-- add bonus in makefile
-- fix eyes fishing
+~ add bonus in makefile
+    - missing minimap
+~ fix eyes fishing
