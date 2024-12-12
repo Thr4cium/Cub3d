@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 16:39:59 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/10 20:35:42 by magrondi         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:21:45 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ void	dda_algorithm(t_game *game, t_ray *ray)
 		if (game->map->map[ray->map_y][ray->map_x] == '1')
 			hit = true;
 	}
-	ray->perp_wall_dist = (ray->side_dist_y - ray->delta_dist_y);
+	ray->perp_wall_dist = (ray->map_y - game->pos_y
+				+ (1 - ray->step_y) / 2) / ray->ray_dir_y;
 	if (ray->side == 0)
-		ray->perp_wall_dist = (ray->side_dist_x - ray->delta_dist_x);
+		ray->perp_wall_dist = (ray->map_x - game->pos_x
+				+ (1 - ray->step_x) / 2) / ray->ray_dir_x;
 }
 
 void	define_wall_line(t_game *game, t_ray *ray, int x)

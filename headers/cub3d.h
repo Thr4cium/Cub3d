@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/09 19:57:32 by magrondi         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:20:09 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define CUB3D_H
 # include <math.h>
 # include "../libft/libft.h"
-# include <mlx.h>
 # include "../libmlx/mlx.h"
 # include "../libmlx/mlx_int.h"
 # include <stdio.h>
@@ -32,11 +31,11 @@
 # endif
 
 # ifndef SCREEN_WIDTH
-#  define SCREEN_WIDTH 1920
+#  define SCREEN_WIDTH 1280
 # endif
 
 # ifndef SCREEN_HEIGHT
-#  define SCREEN_HEIGHT 1080
+#  define SCREEN_HEIGHT 1024
 # endif
 
 # ifndef PI
