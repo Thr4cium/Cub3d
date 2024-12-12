@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_cast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:13:34 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/10 20:28:31 by magrondi         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:42:54 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,6 @@ void	init_ray(t_game *game, t_ray *ray)
 		ray->deltaDistY = 1e30;
 	else
 		ray->deltaDistY = fabs(1 / ray->Vdir_y);
-	ray->Vdir_x = ray->Vdir_x ;
-	ray->Vdir_y = ray->Vdir_y;
 	init_ray2(game, ray);
 }
 
