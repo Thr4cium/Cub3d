@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_informations.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:01:09 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/03 15:35:51 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:22:11 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,19 @@ int	check_texture_information(t_map *map)
 
 	fd = open(map->no_texture, O_RDONLY);
 	if (fd == -1)
-		return (perror("open"), -1);
+		return (perror(map->no_texture), -1);
 	close(fd);
 	fd = open(map->so_texture, O_RDONLY);
 	if (fd == -1)
-		return (perror("open"), -1);
+		return (perror(map->so_texture), -1);
 	close(fd);
 	fd = open(map->we_texture, O_RDONLY);
 	if (fd == -1)
-		return (perror("open"), -1);
+		return (perror(map->we_texture), -1);
 	close(fd);
 	fd = open(map->ea_texture, O_RDONLY);
 	if (fd == -1)
-		return (perror("open"), -1);
+		return (perror(map->ea_texture), -1);
 	close(fd);
 	if (check_color_information(map) == -1)
 		return (-1);
