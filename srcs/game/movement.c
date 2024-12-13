@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:59:18 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/26 11:25:52 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:50:22 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
+
+void	rotate(t_game *game, float rotation_speed);
 
 int	process_mouse_motion(t_game *game)
 {
@@ -84,26 +86,8 @@ int	handle_keyrelease(int keycode, t_game *game)
 
 void	move_mouse(t_game *game, t_move move, int delta_x)
 {
-	double	old_dir_x;
-
-	if (delta_x < 0)
-		delta_x = -delta_x;
-	if (move == RIGHT)
-	{
-		old_dir_x = game->dir_x;
-		game->dir_x = (game->dir_x * cos(PI / 720 * delta_x) \
-			- game->dir_y * sin(PI / 720 * delta_x));
-		game->dir_y = (old_dir_x * sin(PI / 720 * delta_x) \
-			+ game->dir_y * cos(PI / 720 * delta_x));
-	}
-	if (move == LEFT)
-	{
-		old_dir_x = game->dir_x;
-		game->dir_x = (game->dir_x * cos(-PI / 720 * delta_x) \
-			- game->dir_y * sin(-PI / 720 * delta_x));
-		game->dir_y = (old_dir_x * sin(-PI / 720 * delta_x) \
-			+ game->dir_y * cos(-PI / 720 * delta_x));
-	}
+	(void)move;
+	rotate(game, delta_x * 0.001);
 }
 
 void	move(t_game *game, t_move move)

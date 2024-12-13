@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_cast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:13:34 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/10 20:28:31 by magrondi         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:03:32 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	print_minimap_perp_rays(t_game *game)
 	y_dir = (game->dir_x * sin(PI / 2) + game->dir_y * cos(PI / 2));
 	while (i < 60)
 	{
-		my_mlx_pixel_put(game->img, x_0 + x_dir * i, y_0 + y_dir * i, 0x0000FF00);
+		my_mlx_pixel_put(game->img, x_0 + x_dir * i, y_0 + y_dir * i, GREEN);
 		i++;
 	}
 	x_dir = (game->dir_x * cos(-PI / 2) - game->dir_y * sin(-PI / 2));
@@ -35,7 +35,7 @@ void	print_minimap_perp_rays(t_game *game)
 	i = 0;
 	while (i < 60)
 	{
-		my_mlx_pixel_put(game->img, x_0 + x_dir * i, y_0 + y_dir * i, 0x0000FF00);
+		my_mlx_pixel_put(game->img, x_0 + x_dir * i, y_0 + y_dir * i, GREEN);
 		i++;
 	}
 }

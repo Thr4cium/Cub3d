@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/12 16:11:47 by magrondi         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:13:11 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <math.h>
+
+# ifndef GREEN
+#  define GREEN 0x0000FF00
+# endif
 
 # ifndef BONUS
 #  define BONUS 0
@@ -51,31 +55,31 @@
 # endif
 
 # ifndef MV_SPEED
-#  define MV_SPEED 0.42
+#  define MV_SPEED 0.21
 # endif
 
 # ifndef ROT_SPEED
 #  define ROT_SPEED 0.09
 # endif
 
-
 # ifndef NORTH_ANGLE
-#  define NORTH_ANGLE (3 * 3.1415926535 / 2)
+#  define NORTH_ANGLE 270
 # endif
 
 # ifndef WEST_ANGLE
-#  define WEST_ANGLE 3.1415926535
+#  define WEST_ANGLE 180
 # endif
 
 # ifndef SOUTH_ANGLE
-#  define SOUTH_ANGLE (3.1415926535 / 2)
+#  define SOUTH_ANGLE 90
 # endif
 
 # ifndef EAST_ANGLE
 #  define EAST_ANGLE 0
 # endif
 
-typedef struct s_keys {
+typedef struct s_keys
+{
 	bool	w;
 	bool	a;
 	bool	s;
@@ -175,101 +179,100 @@ typedef enum e_move
 }				t_move;
 
 // main
-void	game_loop(t_game *game);
-void	print_map_info(t_game *game);
+void		game_loop(t_game *game);
+void		print_map_info(t_game *game);
 
 // display_game
-int		display_game(t_game *game);
-void	set_window_color(t_game *game, int color);
-void	print_minimap(t_game *game);
-void	draw_line(t_game *game, int x, int y, int color);
-void	draw_tile(t_game *game, double start_x, double start_y, int color);
-void	print_minimap_perp_rays(t_game *game);
+int			display_game(t_game *game);
+void		set_window_color(t_game *game, int color);
+void		print_minimap(t_game *game);
+void		draw_line(t_game *game, int x, int y, int color);
+void		draw_tile(t_game *game, double start_x, double start_y, int color);
+void		print_minimap_perp_rays(t_game *game);
 
 // display_utils
-int		secure_my_mlx_pixel_put(t_my_img *img, int x, int y, int color);
-int		secure_my_mlx_pixel_put2(t_my_img *img, int x, int y, int color);
-void	draw_round(t_game *game, double x, double y, int r);
-void	print_player(t_game *game, int x, int y, int r);
-void	print_minimap_background(t_game *game, int color);
-
-// init_vectors
-void	init_vectors(t_game *game);
-void	init_dir_vectors(t_game *game);
+int			secure_my_mlx_pixel_put(t_my_img *img, int x, int y, int color);
+int			secure_my_mlx_pixel_put2(t_my_img *img, int x, int y, int color);
+void		draw_round(t_game *game, double x, double y, int r);
+void		print_player(t_game *game, int x, int y, int r);
+void		print_minimap_background(t_game *game, int color);
 
 // movement
-int		process_mouse_motion(t_game *game);
-int		handle_keypress(int keycode, t_game *game);
-int		handle_keyrelease(int keycode, t_game *game);
-void	move(t_game *game, t_move move);
-void	move_mouse(t_game *game, t_move move, int delta);
+int			process_mouse_motion(t_game *game);
+int			handle_keypress(int keycode, t_game *game);
+int			handle_keyrelease(int keycode, t_game *game);
+void		move(t_game *game, t_move move);
+void		move_mouse(t_game *game, t_move move, int delta);
 
 // parsing routine bis
-int		check_map_information(t_map *map);
-int		check_map_validity(t_map *map);
-int		check_map_validity_bis(t_map *map);
-int		case_first_last_line(t_map *map);
-int		check_path(char *path);
+int			check_map_information(t_map *map);
+int			check_map_validity(t_map *map);
+int			check_map_validity_bis(t_map *map);
+int			case_first_last_line(t_map *map);
+int			check_path(char *path);
 
 // parsing_routine
-void	actualise_map(t_map *map);
-int		parsing(char *path, t_game *game);
-int		get_information(char *path, t_map *map);
-int		get_map_information(t_map *map, char **array, int i);
-char	**map_addline(char **map, char *line);
+void		actualise_map(t_map *map);
+int			parsing(char *path, t_game *game);
+int			get_information(char *path, t_map *map);
+int			get_map_information(t_map *map, char **array, int i);
+char		**map_addline(char **map, char *line);
 
 // parsing_edge_case
-int		check_textures_keys(char *line, char *str, int n);
-int		check_edge_cases(char **array);
-char	**copy_file(int fd);
-void	free_array(char **array);
+int			check_textures_keys(char *line, char *str, int n);
+int			check_edge_cases(char **array);
+char		**copy_file(int fd);
+void		free_array(char **array);
 
 // parsing_tools
 
-t_map	*init_map(void);
-bool	are_texture_filled(t_map *map);
-bool	is_line_only_empty(char *line);
-bool	is_line_is_map(char *line);
-bool	is_line_only_map(char *line);
+t_map		*init_map(void);
+bool		are_texture_filled(t_map *map);
+bool		is_line_only_empty(char *line);
+bool		is_line_is_map(char *line);
+bool		is_line_only_map(char *line);
 
 // ray_cast utils
-void	dda_algorithm(t_game *game, t_ray *ray);
-void	define_wall_line(t_game *game, t_ray *ray, int x);
-void	draw_scaled_wall(t_game *game, int x, t_ray *ray);
-void	draw_ground_and_sky(t_game *game, int x, int drawStart, int drawEnd);
-int		get_color(t_texture *texture, t_ray *ray, int x, int delta);
+void		dda_algorithm(t_game *game, t_ray *ray);
+void		define_wall_line(t_game *game, t_ray *ray, int x);
+void		draw_scaled_wall(t_game *game, int x, t_ray *ray);
+void		draw_ground_and_sky(t_game *game, int x,
+				int drawStart, int drawEnd);
+int			get_color(t_texture *texture, t_ray *ray, int x, int delta);
 
 // ray cast
-void	print_rays(t_game *game);
-void	ray_casting(t_game *game);
-int		ray_cast(t_game *game, t_ray *ray, int i);
-void	init_ray(t_game *game, t_ray *ray);
-void	init_ray2(t_game *game, t_ray *ray);
+void		print_rays(t_game *game);
+void		ray_casting(t_game *game);
+int			ray_cast(t_game *game, t_ray *ray, int i);
+void		init_ray(t_game *game, t_ray *ray);
+void		init_ray2(t_game *game, t_ray *ray);
 
 // render
-bool	is_there_wall(t_game *game, t_move move);
-int		update_game(t_game *game);
+bool		is_there_wall(t_game *game, t_move move);
+int			update_game(t_game *game);
 
 // texture_informations
-int		get_texture_information(t_map *map, char **array);
-int		check_texture_information(t_map *map);
-int		check_color_information(t_map *map);
-int		rgb_to_int(char *line);
-int		rgb_to_int_tool(int j, char *colorm, int rgb);
+int			get_texture_information(t_map *map, char **array);
+int			check_texture_information(t_map *map);
+int			check_color_information(t_map *map);
+int			rgb_to_int(char *line);
+int			rgb_to_int_tool(int j, char *colorm, int rgb);
 
 // texture_loading
-void	get_player_initial_position(t_game *game);
+void		get_player_initial_position(t_game *game);
 
-t_texture*create_texture(t_game *game, char *path);
-int		access_texture(char *path);
-void	*load_image(char *path, int *width, int *height, t_game *game);
-int		load_textures(t_game *game);
+t_texture	*create_texture(t_game *game, char *path);
+int			access_texture(char *path);
+void		*load_image(char *path, int *width, int *height, t_game *game);
+int			load_textures(t_game *game);
 
 // utils
-char	*ft_strdup_trim(char *line);
-void	free_textures(t_game *game);
-int		end_game(t_game *game);
-void	my_mlx_pixel_put(t_my_img *img, int x, int y, int color);
-void	free_all(t_game *game);
+char		*ft_strdup_trim(char *line);
+void		free_textures(t_game *game);
+int			end_game(t_game *game);
+void		my_mlx_pixel_put(t_my_img *img, int x, int y, int color);
+void		free_all(t_game *game);
+float		radians_to_degrees(float radians);
+float		degrees_to_radians(float degrees);
 
 #endif

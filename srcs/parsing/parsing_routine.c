@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_routine.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 10:42:22 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/03 15:38:50 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:59:52 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	parsing(char *path, t_game *game)
 		return (-1);
 	get_player_initial_position(game);
 	game->tile_size = SCREEN_WIDTH / game->map->map_x;
-	init_vectors(game);
 	return (0);
 }
 

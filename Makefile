@@ -6,7 +6,7 @@
 #    By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/12 08:27:52 by rolamber          #+#    #+#              #
-#    Updated: 2024/12/12 16:12:48 by magrondi         ###   ########.fr        #
+#    Updated: 2024/12/13 16:59:25 by magrondi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,6 @@ HEADERS             =   ./headers/cub3d.h
 CC                  =   cc
 
 PARSING_SRCS        =   ./srcs/parsing/assign_spawn_direction.c \
-                        ./srcs/parsing/init_vectors.c \
                         ./srcs/parsing/parsing_edge_case.c \
                         ./srcs/parsing/parsing_routine.c \
                         ./srcs/parsing/parsing_routine_bis.c \
@@ -45,6 +44,7 @@ GAME_SRCS           =   ./srcs/game/display_game.c \
 
 SRCS                =   ./srcs/main.c \
                         ./srcs/utils.c \
+                        ./srcs/angle_conversion.c \
                         ${GAME_SRCS} \
                         ${RAYCASTING_SRCS} \
                         ${PARSING_SRCS} \

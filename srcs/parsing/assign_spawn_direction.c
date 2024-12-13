@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:51:20 by magrondi          #+#    #+#             */
-/*   Updated: 2024/12/09 19:55:23 by magrondi         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:00:40 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ static	int	assign_angle_direction(t_game *game, float angle)
 int	assign_spawn_direction(t_game *game, char direction)
 {
 	if (direction == 'N')
-		return (assign_angle_direction(game, NORTH_ANGLE));
+		return (assign_angle_direction(game, degrees_to_radians(NORTH_ANGLE)));
 	else if (direction == 'S')
-		return (assign_angle_direction(game, SOUTH_ANGLE));
+		return (assign_angle_direction(game, degrees_to_radians(SOUTH_ANGLE)));
 	else if (direction == 'E')
-		return (assign_angle_direction(game, EAST_ANGLE));
+		return (assign_angle_direction(game, degrees_to_radians(EAST_ANGLE)));
 	else if (direction == 'W')
-		return (assign_angle_direction(game, WEST_ANGLE));
+		return (assign_angle_direction(game, degrees_to_radians(WEST_ANGLE)));
 	return (0);
 }
