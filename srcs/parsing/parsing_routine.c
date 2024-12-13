@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 10:42:22 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/13 16:59:52 by magrondi         ###   ########.fr       */
+/*   Updated: 2024/12/13 18:11:58 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	get_map_information(t_map *map, char **array, int i)
 	actualise_map(map);
 	return (0);
 }
-
+// leak if he crash on second line of futher
 char	**map_addline(char **map, char *line)
 {
 	int		i;
@@ -104,7 +104,7 @@ char	**map_addline(char **map, char *line)
 	if (map)
 		while (map[i])
 			i++;
-	new_map = ft_calloc(sizeof(char *), i + 2);
+		new_map = ft_calloc(sizeof(char *), i + 2);
 	if (!new_map)
 		return (NULL);
 	i = 0;
