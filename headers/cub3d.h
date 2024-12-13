@@ -51,7 +51,7 @@
 # endif
 
 # ifndef MV_SPEED
-#  define MV_SPEED 0.12
+#  define MV_SPEED 0.42
 # endif
 
 # ifndef ROT_SPEED
@@ -175,8 +175,6 @@ typedef enum e_move
 }				t_move;
 
 // main
-void	init_game_struct(t_game *game);
-void	init_mlx(t_game *game);
 void	game_loop(t_game *game);
 void	print_map_info(t_game *game);
 

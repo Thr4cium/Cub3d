@@ -12,8 +12,9 @@
 
 #include "../headers/cub3d.h"
 
-void	init_game_struct(t_game *game)
+static	void	set_game_struct(t_game *game, t_keys *keys)
 {
+	game->keys = keys;
 	game->mouse_x = 0;
 	game->map = NULL;
 	game->pos_x = 0;
@@ -36,14 +37,13 @@ void	init_game_struct(t_game *game)
 	game->keys->is_pristine = true;
 }
 
-// TARGET
-void	init_mlx(t_game *game)
+static	int	init_mlx(t_game *game)
 {
 	t_my_img	*img;
 
 	img = malloc(sizeof(t_my_img));
 	if (!img)
-		return ;
+		return (0);
 	game->img = img;
 	game->mlx_ptr = mlx_init();
 	game->win_ptr = mlx_new_window(game->mlx_ptr, \
@@ -51,6 +51,7 @@ void	init_mlx(t_game *game)
 	img->ptr = mlx_new_image(game->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
 	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel, \
 		&img->line_length, &img->endian);
+	return (1);
 }
 
 void	game_loop(t_game *game)
@@ -86,9 +87,7 @@ int	main(int ac, char **av)
 		return (printf("Error\nInvalid number of arguments\n"), 1);
 	if (check_path(av[1]) == -1)
 		return (printf("Error\nInvalid path\n"), 1);
-	game.keys = &keys;
-	printf("BONUS %d\n", BONUS);
-	init_game_struct(&game);
+	set_game_struct(&game, &keys);
 	if (parsing(av[1], &game) == -1)
 	{
 		free_all(&game);

@@ -57,6 +57,7 @@ char			*ft_strnstr(const char *str, const char *to_find, size_t len);
 int				ft_atoi(const char *str);
 void			*ft_calloc(size_t EltCount, size_t EltSize);
 char			*ft_strdup(char *src);
+void			ft_free(void *ptr);
 
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char *s1, char *s2);
