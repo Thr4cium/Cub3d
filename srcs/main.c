@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:24:17 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/02 11:42:01 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/12/13 18:07:53 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,20 @@ static	int	init_mlx(t_game *game)
 	if (!img)
 		return (0);
 	game->img = img;
-	game->mlx_ptr = mlx_init();
+	game->mlx_ptr = NULL;
+	if (!game->mlx_ptr)
+		return (0);
 	game->win_ptr = mlx_new_window(game->mlx_ptr, \
 		SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D");
+	if (!game->win_ptr)	
+		return (0);
 	img->ptr = mlx_new_image(game->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
+	if (!img->ptr)	
+		return (0);
 	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel, \
 		&img->line_length, &img->endian);
+	if (!img->addr)
+		return (0);
 	return (1);
 }
 
@@ -93,13 +101,16 @@ int	main(int ac, char **av)
 		free_all(&game);
 		return (printf("Error\nParsing failed\n"), 1);
 	}
-	init_mlx(&game);
+	if (!init_mlx(&game))
+	{
+		free_all(&game);
+		return (printf("Error\nMlx failed\n"), 1);
+	}
 	if (load_textures(&game) == -1)
 	{
 		free_all(&game);
 		return (printf("Error\nLoading textures failed\n"), 1);
 	}
 	game_loop(&game);
-	free_all(&game);
-	return (0);
+	return (free_all(&game), 0);
 }
