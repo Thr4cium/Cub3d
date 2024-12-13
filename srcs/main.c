@@ -92,7 +92,7 @@ int	main(int ac, char **av)
 	if (parsing(av[1], &game) == -1)
 	{
 		free_all(&game);
-		return (printf("Error : Parsing failed\n"), 1);
+		return (printf("Error\nParsing failed\n"), 1);
 	}
 	init_mlx(&game);
 	if (load_textures(&game) == -1)

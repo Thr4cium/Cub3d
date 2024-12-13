@@ -33,12 +33,12 @@ int	get_texture_information(t_map *map, char **array)
 			map->ground_color = rgb_to_int(array[i] + 1);
 		else if (!is_line_only_empty(array[i]) && !is_line_is_map(array[i]))
 			return (free_array(array),
-				printf("Wrong texture information\n"), -1);
+				printf("Error\n Wrong texture information\n"), -1);
 		if (are_texture_filled(map))
 			return (i);
 		i++;
 	}
-	return (printf("Error : no texture informations found\n"), -1);
+	return (printf("Error\n no texture informations found\n"), -1);
 }
 
 int	check_texture_information(t_map *map)
@@ -69,7 +69,7 @@ int	check_texture_information(t_map *map)
 int	check_color_information(t_map *map)
 {
 	if (map->ground_color < 0 || map->sky_color < 0)
-		return (printf("Error : wrong color information\n"), -1);
+		return (printf("Error\n wrong color information\n"), -1);
 	return (0);
 }
 
@@ -91,7 +91,7 @@ int	rgb_to_int(char *line)
 		while (*line != ',' && *line != '\n' && i < 3)
 		{
 			if (!ft_isdigit(*line))
-				return (printf("Error : wrong color information\n"), -1);
+				return (printf("Error\n wrong color information\n"), -1);
 			color[i++] = *line++;
 		}
 		rgb = rgb_to_int_tool(j++, color, rgb);
@@ -105,7 +105,7 @@ int	rgb_to_int(char *line)
 int	rgb_to_int_tool(int j, char *color, int rgb)
 {
 	if (!color)
-		return (printf("Error : wrong color information\n"), -1);
+		return (printf("Error\n wrong color information\n"), -1);
 	if (j == 0)
 		rgb = ft_atoi(color) << 16;
 	else if (j == 1)

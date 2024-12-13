@@ -19,7 +19,7 @@ int	check_map_information(t_map *map)
 	int		j;
 
 	if (!map->map)
-		return (printf("Error : no map information\n"), -1);
+		return (printf("Error\n no map information\n"), -1);
 	tmp = map->map;
 	j = 0;
 	i = 0;
@@ -29,9 +29,9 @@ int	check_map_information(t_map *map)
 			|| ft_strsearch(tmp[i], 'W') == 1 || ft_strsearch(tmp[i], 'E') == 1)
 			j++;
 		if (j > 1)
-			return (printf("Error : too many player starting points\n"), -1);
+			return (printf("Error\n too many player starting points\n"), -1);
 		if (!is_line_only_map(tmp[i]))
-			return (printf("Error : wrong map information\n"), -1);
+			return (printf("Error\n wrong map information\n"), -1);
 		i++;
 	}
 	if (check_map_validity(map) == -1 || check_map_validity_bis(map) == -1)
@@ -52,15 +52,15 @@ int	check_map_validity(t_map *map)
 		{
 			if ((j == 0 || j == ft_strlen(map->map[i]) - 1) \
 				&& map->map[i][j] == '0')
-				return (printf("Error : map is not closed\n"), -1);
+				return (printf("Error\n map is not closed\n"), -1);
 			else if (map->map[i][j] == '0')
 			{
 				if (i == 0 || i == map->map_y - 1)
-					return (printf("Error : map is not closed\n"), -1);
+					return (printf("Error\n map is not closed\n"), -1);
 				if (map->map[i][j + 1] == ' ' || map->map[i][j - 1] == ' ' \
 					|| ft_strlen(map->map[i + 1]) - 1 < j || ft_strlen(map->map[i - 1]) - 1 < j \
 					|| map->map[i + 1][j] == ' ' || map->map[i - 1][j] == ' ')
-					return (printf("Error : map is not closed\n"), -1);
+					return (printf("Error\n map is not closed\n"), -1);
 			}
 			j++;
 		}
@@ -75,7 +75,7 @@ int	check_map_validity_bis(t_map *map)
 
 	i = 0;
 	if (case_first_last_line(map) == -1)
-		return (printf("Error : map is not closed\n"), -1);
+		return (printf("Error\n map is not closed\n"), -1);
 	while (map->map[i])
 	{
 		j = 0;
@@ -84,9 +84,9 @@ int	check_map_validity_bis(t_map *map)
 			if (i != ft_strlen(map->map[i]) - 1 && i != 0)
 			{
 				if (map->map[i][j] == '0' && ft_strlen(map->map[i - 1]) <= j)
-					return (printf("Error : map is not closed\n"), -1);
+					return (printf("Error\n map is not closed\n"), -1);
 				if (map->map[i][j] == '0' && ft_strlen(map->map[i + 1]) <= j)
-					return (printf("Error : map is not closed\n"), -1);
+					return (printf("Error\n map is not closed\n"), -1);
 			}
 			j++;
 		}
@@ -122,7 +122,7 @@ int	check_path(char *path)
 	int	fd;
 
 	if (ft_strnstr(&path[ft_strlen(path) - 4], ".cub", 4) == NULL)
-		return (printf("Error : wrong file extension\n"), -1);
+		return (printf("Error\n wrong file extension\n"), -1);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (perror("open"), -1);
