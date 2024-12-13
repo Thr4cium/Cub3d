@@ -53,7 +53,7 @@ int	check_textures_keys(char *line, char *str, int n)
 			f++;
 	}
 	if (no > 1 || so > 1 || we > 1 || ea > 1 || c > 1 || f > 1)
-		return (printf("Error : double keys detected\n"), -1);
+		return (printf("Error\n double keys detected\n"), -1);
 	return (0);
 }
 
