@@ -12,9 +12,15 @@
 
 #include "../headers/cub3d.h"
 
-static	void	set_game_struct(t_game *game, t_keys *keys)
+int		check_arg(int ac, char **av);
+void	set_map_pars(t_map_pars *map_pars);
+void	set_keys(t_keys *keys);
+
+static	void	set_game_struct(t_game *game, t_keys *keys,
+	t_map_pars *map_pars)
 {
 	game->keys = keys;
+	game->map_pars = map_pars;
 	game->mouse_x = 0;
 	game->map = NULL;
 	game->pos_x = 0;
@@ -27,14 +33,8 @@ static	void	set_game_struct(t_game *game, t_keys *keys)
 	game->no_img = NULL;
 	game->ea_img = NULL;
 	game->we_img = NULL;
-	game->keys->esc = false;
-	game->keys->w = false;
-	game->keys->s = false;
-	game->keys->a = false;
-	game->keys->d = false;
-	game->keys->left = false;
-	game->keys->right = false;
-	game->keys->is_pristine = true;
+	set_keys(game->keys);
+	set_map_pars(game->map_pars);
 }
 
 static	int	init_mlx(t_game *game)
@@ -45,15 +45,15 @@ static	int	init_mlx(t_game *game)
 	if (!img)
 		return (0);
 	game->img = img;
-	game->mlx_ptr = NULL;
+	game->mlx_ptr = mlx_init();
 	if (!game->mlx_ptr)
 		return (0);
 	game->win_ptr = mlx_new_window(game->mlx_ptr, \
 		SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D");
-	if (!game->win_ptr)	
+	if (!game->win_ptr)
 		return (0);
 	img->ptr = mlx_new_image(game->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
-	if (!img->ptr)	
+	if (!img->ptr)
 		return (0);
 	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel, \
 		&img->line_length, &img->endian);
@@ -88,14 +88,13 @@ void	print_map_info(t_game *game)
 
 int	main(int ac, char **av)
 {
-	t_game	game;
-	t_keys	keys;
+	t_game			game;
+	t_keys			keys;
+	t_map_pars		map_pars;
 
-	if (ac != 2)
-		return (printf("Error\nInvalid number of arguments\n"), 1);
-	if (check_path(av[1]) == -1)
-		return (printf("Error\nInvalid path\n"), 1);
-	set_game_struct(&game, &keys);
+	if (check_arg(ac, av))
+		return (1);
+	set_game_struct(&game, &keys, &map_pars);
 	if (parsing(av[1], &game) == -1)
 	{
 		free_all(&game);

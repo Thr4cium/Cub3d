@@ -78,6 +78,16 @@
 #  define EAST_ANGLE 0
 # endif
 
+typedef struct s_map_pars
+{
+	int	no;
+	int	so;
+	int	we;
+	int	ea;
+	int	c;
+	int	f;
+}	t_map_pars;
+
 typedef struct s_keys
 {
 	bool	w;
@@ -148,6 +158,7 @@ typedef struct s_game
 {
 	t_map			*map;
 	t_my_img		*img;
+	t_map_pars		*map_pars;
 	t_keys			*keys;
 	void			*win_ptr;
 	void			*mlx_ptr;
@@ -214,13 +225,13 @@ int			check_path(char *path);
 // parsing_routine
 void		actualise_map(t_map *map);
 int			parsing(char *path, t_game *game);
-int			get_information(char *path, t_map *map);
 int			get_map_information(t_map *map, char **array, int i);
 char		**map_addline(char **map, char *line);
 
 // parsing_edge_case
-int			check_textures_keys(char *line, char *str, int n);
-int			check_edge_cases(char **array);
+int			check_textures_keys(char *line, char *str, int n,
+				t_map_pars *m_pars);
+int			check_edge_cases(char **array, t_map_pars *m_pars);
 char		**copy_file(int fd);
 void		free_array(char **array);
 

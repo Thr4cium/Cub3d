@@ -28,53 +28,47 @@ void	free_array(char **array)
 	}
 }
 
-int	check_textures_keys(char *line, char *str, int n)
+int	check_textures_keys(char *line, char *str, int n, t_map_pars *m_pars)
 {
-	static int	no = 0;
-	static int	so = 0;
-	static int	we = 0;
-	static int	ea = 0;
-	static int	c = 0;
-	static int	f = 0;
-
 	if (ft_strncmp(line, str, n) == 0)
 	{
 		if (ft_strcmp(str, "NO ") == 0)
-			no++;
+			m_pars->no++;
 		else if (ft_strcmp(str, "SO ") == 0)
-			so++;
+			m_pars->so++;
 		else if (ft_strcmp(str, "WE ") == 0)
-			we++;
+			m_pars->we++;
 		else if (ft_strcmp(str, "EA ") == 0)
-			ea++;
+			m_pars->ea++;
 		else if (ft_strcmp(str, "C ") == 0)
-			c++;
+			m_pars->c++;
 		else if (ft_strcmp(str, "F ") == 0)
-			f++;
+			m_pars->f++;
 	}
-	if (no > 1 || so > 1 || we > 1 || ea > 1 || c > 1 || f > 1)
+	if (m_pars->no > 1 || m_pars->so > 1 || m_pars->we > 1
+		|| m_pars->ea > 1 || m_pars->c > 1 || m_pars->f > 1)
 		return (printf("Error\n double keys detected\n"), -1);
 	return (0);
 }
 
-int	check_edge_cases(char **array)
+int	check_edge_cases(char **array, t_map_pars *m_pars)
 {
 	int	i;
 
 	i = 0;
 	while (array[i])
 	{
-		if (check_textures_keys(array[i], "NO ", 3) == -1)
+		if (check_textures_keys(array[i], "NO ", 3, m_pars) == -1)
 			return (free_array(array), -1);
-		else if (check_textures_keys(array[i], "SO ", 3) == -1)
+		else if (check_textures_keys(array[i], "SO ", 3, m_pars) == -1)
 			return (free_array(array), -1);
-		else if (check_textures_keys(array[i], "WE ", 3) == -1)
+		else if (check_textures_keys(array[i], "WE ", 3, m_pars) == -1)
 			return (free_array(array), -1);
-		else if (check_textures_keys(array[i], "EA ", 3) == -1)
+		else if (check_textures_keys(array[i], "EA ", 3, m_pars) == -1)
 			return (free_array(array), -1);
-		else if (check_textures_keys(array[i], "C ", 2) == -1)
+		else if (check_textures_keys(array[i], "C ", 2, m_pars) == -1)
 			return (free_array(array), -1);
-		else if (check_textures_keys(array[i], "F ", 2) == -1)
+		else if (check_textures_keys(array[i], "F ", 2, m_pars) == -1)
 			return (free_array(array), -1);
 		if (is_line_is_map(array[i]))
 			return (0);

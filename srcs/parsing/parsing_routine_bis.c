@@ -48,7 +48,7 @@ int	check_map_validity(t_map *map)
 	while (map->map[++i])
 	{
 		j = 0;
-		while (map->map[i][j])
+		while (map->map[i][j++])
 		{
 			if ((j == 0 || j == ft_strlen(map->map[i]) - 1) \
 				&& map->map[i][j] == '0')
@@ -58,11 +58,11 @@ int	check_map_validity(t_map *map)
 				if (i == 0 || i == map->map_y - 1)
 					return (printf("Error\n map is not closed\n"), -1);
 				if (map->map[i][j + 1] == ' ' || map->map[i][j - 1] == ' ' \
-					|| ft_strlen(map->map[i + 1]) - 1 < j || ft_strlen(map->map[i - 1]) - 1 < j \
+					|| ft_strlen(map->map[i + 1]) - 1 < j
+					|| ft_strlen(map->map[i - 1]) - 1 < j
 					|| map->map[i + 1][j] == ' ' || map->map[i - 1][j] == ' ')
 					return (printf("Error\n map is not closed\n"), -1);
 			}
-			j++;
 		}
 	}
 	return (0);

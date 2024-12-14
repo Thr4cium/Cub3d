@@ -33,19 +33,7 @@ void	actualise_map(t_map *map)
 	map->map_x = max;
 }
 
-int	parsing(char *path, t_game *game)
-{
-	game->map = init_map();
-	if (!game->map)
-		return (-1);
-	if (get_information(path, game->map) == -1)
-		return (-1);
-	get_player_initial_position(game);
-	game->tile_size = SCREEN_WIDTH / game->map->map_x;
-	return (0);
-}
-
-int	get_information(char *path, t_map *map)
+static	int	get_information(char *path, t_map *map, t_map_pars *m_pars)
 {
 	int		fd;
 	int		i;
@@ -59,7 +47,7 @@ int	get_information(char *path, t_map *map)
 	close(fd);
 	if (!array)
 		return (perror("malloc"), -1);
-	if (check_edge_cases(array) == -1)
+	if (check_edge_cases(array, m_pars) == -1)
 		return (-1);
 	i = get_texture_information(map, array);
 	if (i == -1)
@@ -70,6 +58,18 @@ int	get_information(char *path, t_map *map)
 		return (free_array(array), -1);
 	if (check_map_information(map) == -1)
 		return (-1);
+	return (0);
+}
+
+int	parsing(char *path, t_game *game)
+{
+	game->map = init_map();
+	if (!game->map)
+		return (-1);
+	if (get_information(path, game->map, game->map_pars) == -1)
+		return (-1);
+	get_player_initial_position(game);
+	game->tile_size = SCREEN_WIDTH / game->map->map_x;
 	return (0);
 }
 
@@ -94,6 +94,7 @@ int	get_map_information(t_map *map, char **array, int i)
 	actualise_map(map);
 	return (0);
 }
+
 // leak if he crash on second line of futher
 char	**map_addline(char **map, char *line)
 {
@@ -104,7 +105,7 @@ char	**map_addline(char **map, char *line)
 	if (map)
 		while (map[i])
 			i++;
-		new_map = ft_calloc(sizeof(char *), i + 2);
+	new_map = ft_calloc(sizeof(char *), i + 2);
 	if (!new_map)
 		return (NULL);
 	i = 0;

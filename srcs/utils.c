@@ -55,6 +55,8 @@ void	free_all(t_game *game)
 
 	free_textures(game);
 	i = 0;
+	if (!game->map)
+		return ;
 	while (game->map->map && game->map->map[i])
 	{
 		ft_free(game->map->map[i]);

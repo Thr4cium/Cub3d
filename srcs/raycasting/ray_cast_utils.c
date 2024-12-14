@@ -35,7 +35,7 @@ void	dda_algorithm(t_game *game, t_ray *ray)
 			hit = true;
 	}
 	ray->perp_wall_dist = (ray->map_y - game->pos_y
-				+ (1 - ray->step_y) / 2) / ray->ray_dir_y;
+			+ (1 - ray->step_y) / 2) / ray->ray_dir_y;
 	if (ray->side == 0)
 		ray->perp_wall_dist = (ray->map_x - game->pos_x
 				+ (1 - ray->step_x) / 2) / ray->ray_dir_x;

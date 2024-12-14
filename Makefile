@@ -29,6 +29,7 @@ PARSING_SRCS        =   ./srcs/parsing/assign_spawn_direction.c \
                         ./srcs/parsing/parsing_edge_case.c \
                         ./srcs/parsing/parsing_routine.c \
                         ./srcs/parsing/parsing_routine_bis.c \
+                         ./srcs/parsing/check_arg.c \
                         ./srcs/parsing/texture_informations.c \
                         ./srcs/parsing/parsing_tools.c \
                         ./srcs/parsing/texture_loading.c \
