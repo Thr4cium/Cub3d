@@ -38,7 +38,20 @@ void	get_player_initial_position(t_game *game)
 	}
 }
 
-t_texture	*create_texture(t_game *game, char *path)
+static	void	*load_image(char *path, int *width, int *height, t_game *game)
+{
+	void	*ptr;
+
+	ptr = mlx_xpm_file_to_image(game->mlx_ptr, path, width, height);
+	if (!ptr)
+	{
+		free_all(game);
+		end_game(game);
+	}
+	return (ptr);
+}
+
+static t_texture *create_texture(t_game *game, char *path)
 {
 	t_texture	*texture;
 
@@ -52,11 +65,14 @@ t_texture	*create_texture(t_game *game, char *path)
 	texture->endian = 0;
 	texture->ptr = load_image(path, &texture->width, &texture->height, game);
 	if (!texture->ptr)
-		return (free(texture), NULL);
-	texture->addr = mlx_get_data_addr(texture->ptr, \
-		&texture->bits_per_pixel, &texture->line_length, &texture->endian);
+		return (ft_free(texture), NULL);
+	texture->addr = mlx_get_data_addr(texture->ptr, &texture->bits_per_pixel, &texture->line_length,
+			&texture->endian);
 	if (!texture->addr)
-		return (free(texture), NULL);
+	{
+		mlx_destroy_image(game->mlx_ptr, texture->ptr);
+		return (ft_free(texture), NULL);
+	}
 	return (texture);
 }
 
@@ -69,19 +85,6 @@ int	access_texture(char *path)
 		return (-1);
 	close(fd);
 	return (0);
-}
-
-void	*load_image(char *path, int *width, int *height, t_game *game)
-{
-	void	*ptr;
-
-	ptr = mlx_xpm_file_to_image(game->mlx_ptr, path, width, height);
-	if (!ptr)
-	{
-		free_all(game);
-		end_game(game);
-	}
-	return (ptr);
 }
 
 int	load_textures(t_game *game)

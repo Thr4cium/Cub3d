@@ -81,13 +81,20 @@ char	**copy_file(int fd)
 {
 	char	*line;
 	char	**array;
+	char	**tmp;
 
 	array = NULL;
 	line = get_next_line(fd);
 	while (line)
 	{
-		array = map_addline(array, line);
+		tmp = map_addline(array, line);
 		free(line);
+		if (!tmp)
+		{
+			free_array(array);
+			return (NULL);
+		}
+		array = tmp;
 		line = get_next_line(fd);
 	}
 	return (array);

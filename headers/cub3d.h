@@ -225,7 +225,7 @@ int			check_path(char *path);
 // parsing_routine
 void		actualise_map(t_map *map);
 int			parsing(char *path, t_game *game);
-int			get_map_information(t_map *map, char **array, int i);
+int			get_map_line_information(t_map *map, char **array, int i);
 char		**map_addline(char **map, char *line);
 
 // parsing_edge_case
@@ -271,10 +271,7 @@ int			rgb_to_int_tool(int j, char *colorm, int rgb);
 
 // texture_loading
 void		get_player_initial_position(t_game *game);
-
-t_texture	*create_texture(t_game *game, char *path);
 int			access_texture(char *path);
-void		*load_image(char *path, int *width, int *height, t_game *game);
 int			load_textures(t_game *game);
 
 // utils
