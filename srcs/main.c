@@ -15,6 +15,7 @@
 int		check_arg(int ac, char **av);
 void	set_map_pars(t_map_pars *map_pars);
 void	set_keys(t_keys *keys);
+void	set_img(t_my_img *img);
 
 static	void	set_game_struct(t_game *game, t_keys *keys,
 	t_map_pars *map_pars)
@@ -23,6 +24,9 @@ static	void	set_game_struct(t_game *game, t_keys *keys,
 	game->map_pars = map_pars;
 	game->mouse_x = 0;
 	game->map = NULL;
+	game->img = NULL;
+	game->win_ptr = NULL;
+	game->mlx_ptr = NULL;
 	game->pos_x = 0;
 	game->pos_y = 0;
 	game->dir_x = 0;
@@ -41,14 +45,16 @@ static	int	init_mlx(t_game *game)
 {
 	t_my_img	*img;
 
+	img = NULL;
 	img = malloc(sizeof(t_my_img));
 	if (!img)
 		return (0);
 	game->img = img;
+	set_img(game->img);
 	game->mlx_ptr = mlx_init();
 	if (!game->mlx_ptr)
 		return (0);
-	game->win_ptr = mlx_new_window(game->mlx_ptr, \
+	game->win_ptr = mlx_new_window(game->mlx_ptr,
 		SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D");
 	if (!game->win_ptr)
 		return (0);
@@ -111,5 +117,5 @@ int	main(int ac, char **av)
 		return (printf("Error\nLoading textures failed\n"), 1);
 	}
 	game_loop(&game);
-	return (free_all(&game), 0);
+	return (0);
 }

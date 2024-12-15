@@ -29,7 +29,7 @@ PARSING_SRCS        =   ./srcs/parsing/assign_spawn_direction.c \
                         ./srcs/parsing/parsing_edge_case.c \
                         ./srcs/parsing/parsing_routine.c \
                         ./srcs/parsing/parsing_routine_bis.c \
-                         ./srcs/parsing/check_arg.c \
+                        ./srcs/parsing/check_arg.c \
                         ./srcs/parsing/texture_informations.c \
                         ./srcs/parsing/parsing_tools.c \
                         ./srcs/parsing/texture_loading.c \
@@ -41,6 +41,7 @@ GAME_SRCS           =   ./srcs/game/display_game.c \
                         ./srcs/game/display_utils.c \
                         ./srcs/game/move_rotate.c \
                         ./srcs/game/render.c \
+                        ./srcs/game/clean_mlx.c \
                         ./srcs/game/movement.c \
 
 SRCS                =   ./srcs/main.c \
@@ -52,7 +53,7 @@ SRCS                =   ./srcs/main.c \
 
 OBJS                =   ${SRCS:%.c=$(OBJS_DIR)/%.o}
 
-CFLAGS              =   -Wall -Wextra -Werror
+CFLAGS              =   -Wall -Wextra -Werror -g
 
 CBONUS              =   -Wall -Wextra -Werror -D BONUS=1
 

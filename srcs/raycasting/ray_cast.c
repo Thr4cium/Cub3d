@@ -12,6 +12,8 @@
 
 #include "../../headers/cub3d.h"
 
+void	set_ray(t_ray *ray);
+
 void	print_minimap_perp_rays(t_game *game)
 {
 	int		i;
@@ -49,6 +51,7 @@ void	ray_casting(t_game *game)
 
 	half_fov_radians = (60 * PI / 180.0) / 2.0;
 	x = 0;
+	set_ray(&ray);
 	while (x < SCREEN_WIDTH)
 	{
 		camera_x = ((2.0 * x) / SCREEN_WIDTH - 1.0)
