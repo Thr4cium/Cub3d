@@ -6,11 +6,15 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:01:09 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/13 17:22:11 by magrondi         ###   ########.fr       */
+/*   Updated: 2024/12/16 21:46:23 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
+
+void	assign_variables(int *i, int *j, int *rgb);
+char	*trim_space(char *line);
+bool	check_rgb(char *line);
 
 int	get_texture_information(t_map *map, char **array)
 {
@@ -31,9 +35,6 @@ int	get_texture_information(t_map *map, char **array)
 			map->sky_color = rgb_to_int(array[i] + 1);
 		else if (ft_strncmp(array[i], "F ", 2) == 0)
 			map->ground_color = rgb_to_int(array[i] + 1);
-		else if (!is_line_only_empty(array[i]) && !is_line_is_map(array[i]))
-			return (free_array(array),
-				printf("Error\n Wrong texture information\n"), -1);
 		if (are_texture_filled(map))
 			return (i);
 		i++;
@@ -80,20 +81,15 @@ int	rgb_to_int(char *line)
 	int		rgb;
 	char	color[4];
 
-	while (*line == ' ')
-		line++;
+	line = trim_space(line);
 	ft_bzero(color, 4);
-	i = 0;
-	j = 0;
-	rgb = 0;
+	assign_variables(&i, &j, &rgb);
+	if (!check_rgb(line))
+		return (printf("Error\nwrong color information"), -1);
 	while (*line && j < 3)
 	{
 		while (*line != ',' && *line != '\n' && i < 3)
-		{
-			if (!ft_isdigit(*line))
-				return (printf("Error\n wrong color information\n"), -1);
 			color[i++] = *line++;
-		}
 		rgb = rgb_to_int_tool(j++, color, rgb);
 		ft_bzero(color, 4);
 		i = 0;

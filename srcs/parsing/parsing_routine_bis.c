@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_routine_bis.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:17:12 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/03 15:29:30 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/12/16 21:34:50 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	check_map_information(t_map *map)
 		if (j > 1)
 			return (printf("Error\n too many player starting points\n"), -1);
 		if (!is_line_only_map(tmp[i]))
-			return (printf("Error\n wrong map information\n"), -1);
+			return (printf("Error\nwrong map information\n"), -1);
 		i++;
 	}
 	if (check_map_validity(map) == -1 || check_map_validity_bis(map) == -1)
