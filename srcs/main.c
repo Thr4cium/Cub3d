@@ -55,7 +55,7 @@ static	int	init_mlx(t_game *game)
 	if (!game->mlx_ptr)
 		return (0);
 	game->win_ptr = mlx_new_window(game->mlx_ptr,
-		SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D");
+			SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D");
 	if (!game->win_ptr)
 		return (0);
 	img->ptr = mlx_new_image(game->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);

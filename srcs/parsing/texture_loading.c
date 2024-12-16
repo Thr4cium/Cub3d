@@ -51,7 +51,7 @@ static	void	*load_image(char *path, int *width, int *height, t_game *game)
 	return (ptr);
 }
 
-static t_texture *create_texture(t_game *game, char *path)
+static	t_texture	*create_texture(t_game *game, char *path)
 {
 	t_texture	*texture;
 
@@ -66,8 +66,8 @@ static t_texture *create_texture(t_game *game, char *path)
 	texture->ptr = load_image(path, &texture->width, &texture->height, game);
 	if (!texture->ptr)
 		return (ft_free(texture), NULL);
-	texture->addr = mlx_get_data_addr(texture->ptr, &texture->bits_per_pixel, &texture->line_length,
-			&texture->endian);
+	texture->addr = mlx_get_data_addr(texture->ptr, &texture->bits_per_pixel,
+			&texture->line_length, &texture->endian);
 	if (!texture->addr)
 	{
 		mlx_destroy_image(game->mlx_ptr, texture->ptr);

@@ -1,9 +1,9 @@
-~ norm
-- crash on bad xpm file
-- check parsing validity
+-> check parsing validity
 
-/ maybe improve error message when texture is not found
 X add there_is_wall into mouvement
+/ crash on bad xpm file
+/ norm
+/ maybe improve error message when texture is not found
 / add bonus in makefile
 / fix relink Makefile libf and main also on headers
 / walking throught wall in diag

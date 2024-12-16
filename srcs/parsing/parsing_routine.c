@@ -46,7 +46,7 @@ static	int	get_information(char *path, t_map *map, t_map_pars *m_pars)
 	array = copy_file(fd);
 	close(fd);
 	if (!array)
-		return (perror("malloc"), -1);
+		return (copy_file(-1), perror("malloc"), -1);
 	if (check_edge_cases(array, m_pars) == -1)
 		return (-1);
 	i = get_texture_information(map, array);
@@ -73,7 +73,6 @@ int	parsing(char *path, t_game *game)
 	return (0);
 }
 
-
 int	get_map_line_information(t_map *map, char **array, int i)
 {
 	char	*trimmed_line;
@@ -84,14 +83,14 @@ int	get_map_line_information(t_map *map, char **array, int i)
 		while (array[i] && is_line_only_empty(array[i]))
 			i++;
 		if (!array[i])
-			break;
+			break ;
 		trimmed_line = ft_strtrim(array[i], "\n");
 		if (!trimmed_line)
-			return (free_array(array), perror("malloc"), -1);
+			return (perror("malloc"), -1);
 		map->map = map_addline(map->map, trimmed_line);
 		ft_free(trimmed_line);
 		if (!map->map)
-			return (free_array(array), perror("malloc"), -1);
+			return (perror("malloc"), -1);
 		i++;
 	}
 	free_array(array);
@@ -99,8 +98,6 @@ int	get_map_line_information(t_map *map, char **array, int i)
 	return (0);
 }
 
-
-// leak if he crash on second line of futher
 char	**map_addline(char **map, char *line)
 {
 	int		i;
@@ -109,22 +106,22 @@ char	**map_addline(char **map, char *line)
 	i = 0;
 	while (map && map[i])
 		i++;
-	new_map = NULL;
+	new_map = ft_calloc(sizeof(char *), i + 2);
 	if (!new_map)
 		return (free_array(map), NULL);
 	i = 0;
 	while (map && map[i])
 	{
-		new_map[i] = ft_strdup(map[i]);
-		if (!new_map[i])
-			return (free_array(new_map), NULL);
+		new_map[i] = map[i];
 		i++;
 	}
 	new_map[i] = ft_strdup(line);
 	if (!new_map[i])
-		return (free_array(new_map), NULL);
+	{
+		ft_free(new_map);
+		return (free_array(map), NULL);
+	}
 	new_map[i + 1] = NULL;
-	free_array(map);
+	ft_free(map);
 	return (new_map);
 }
-

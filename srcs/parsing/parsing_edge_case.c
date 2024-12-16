@@ -16,16 +16,19 @@ void	free_array(char **array)
 {
 	int	i;
 
+	if (!array)
+		return ;
 	i = 0;
-	if (array != NULL)
+	while (array && array[i])
 	{
-		while (array[i] != NULL)
+		if (array[i])
 		{
-			free(array[i]);
-			i++;
+			ft_free(array[i]);
+			array[i] = NULL;
 		}
-		free(array);
+		i++;
 	}
+	ft_free(array);
 }
 
 int	check_textures_keys(char *line, char *str, int n, t_map_pars *m_pars)
@@ -91,7 +94,6 @@ char	**copy_file(int fd)
 		free(line);
 		if (!tmp)
 		{
-			free_array(array);
 			return (NULL);
 		}
 		array = tmp;
