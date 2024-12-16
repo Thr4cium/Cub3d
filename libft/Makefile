@@ -10,73 +10,89 @@
 #                                                                              #
 # **************************************************************************** #
 
-DEF_COLOR 	= \033[0;39m
-GRAY 		= \033[0;90m
-RED 		= \033[0;91m
-GREEN 		= \033[0;92m
-YELLOW 		= \033[0;93m
-BLUE 		= \033[0;94m
-MAGENTA 	= \033[0;95m
-CYAN 		= \033[0;96m
-WHITE 		= \033[0;97m
+NAME		= libft.a
 
-BBlack		= \033[1;30m
-BRed		= \033[1;31m
-BGreen		= \033[1;32m
-BYellow		= \033[1;33m
-BBlue		= \033[1;34m
-BPurple		= \033[1;35m
-BCyan		= \033[1;36m
-BWhite		= \033[1;37m
+HEADERS 	= libft.h ./gnl/get_next_line.h ./printf/ft_printf.h 
+
+OBJS_DIR	= .objs
+
+SRCS = 	./src/ft_itoa.c \
+		./src/ft_putchar_fd.c \
+		./src/ft_putendl_fd.c \
+		./src/ft_putnbr_fd.c \
+		./src/ft_putstr_fd.c \
+		./src/ft_strlen.c \
+		./src/free_tab.c \
+		./src/ft_strtrim.c \
+		./src/ft_tolower.c \
+		./src/ft_toupper.c \
+		./src/ft_isprint.c \
+		./src/ft_isascii.c \
+		./src/ft_isalnum.c \
+		./src/ft_isdigit.c \
+		./src/ft_isalpha.c \
+		./src/ft_atoi.c \
+		./src/ft_strncmp.c \
+		./src/ft_strnstr.c \
+		./src/ft_strchr.c \
+		./src/ft_strdup.c \
+		./src/ft_strrchr.c \
+		./src/ft_strcpy.c \
+		./src/ft_memset.c \
+		./src/ft_bzero.c \
+		./src/ft_memcpy.c \
+		./src/ft_memmove.c \
+		./src/ft_memchr.c \
+		./src/ft_memcmp.c \
+		./src/ft_striteri.c \
+		./src/ft_strmapi.c \
+		./src/ft_strlcat.c \
+		./src/ft_substr.c \
+		./src/ft_split.c \
+		./src/ft_strjoin.c \
+		./src/ft_calloc.c \
+		./src/ft_strlcpy.c \
+		./src/ft_lstnew.c \
+		./src/ft_lstadd_front.c \
+		./src/ft_lstsize.c \
+		./src/ft_lstlast.c \
+		./src/ft_lstadd_back.c \
+		./src/ft_lstdelone.c \
+		./src/ft_free.c \
+		./src/ft_lstclear.c \
+		./src/ft_lstiter.c \
+		./src/ft_lstmap.c \
+		./src/ft_strcmp.c \
+		./src/ft_isspace.c \
+		./gnl/get_next_line.c \
+		./gnl/get_next_line_utils.c \
+		./printf/ft_printf.c \
+		./printf/ft_hexa.c \
+		./printf/ft_pointer.c \
+		./printf/ft_putchar.c \
+		./printf/ft_putstr.c \
+		./printf/ft_utoa.c \
 
 
-PRINTF= printf
-INCLUDE	= include
-LIBFT	= libft
-SRC_DIR	= src/
-OBJ_DIR	= obj/
-CC		= cc
-CFLAGS	= -Wall -Werror -Wextra
-AR		= ar rcs
-NAME = libft.a
+OBJS		= ${SRCS:%.c=$(OBJS_DIR)/%.o}
 
-SRC_FILES = last_char get_tab_size ft_isalpha ft_isdigit ft_isalnum ft_isascii ft_isprint ft_isprint ft_strlen ft_memset ft_bzero ft_memcpy ft_memmove ft_strlcpy ft_strlcat ft_toupper ft_tolower ft_strchr ft_strrchr ft_strncmp ft_memchr ft_memcmp ft_strnstr ft_atoi ft_calloc ft_strdup ft_substr ft_strjoin ft_strtrim ft_split ft_itoa ft_strmapi ft_striteri ft_putchar_fd ft_putstr_fd ft_putendl_fd ft_putnbr_fd ft_strcmp ft_int_max ft_int_min ft_strtok ft_strcpy realloc_tab free_tab
-SRC = $($(basename $(notdir $(src))), addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
-OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
-DEP = $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_FILES)))
+CFLAGS		= -Wall -Wextra -Werror 
 
-all: ${NAME}
+all:		${NAME}
 
-$(NAME): $(OBJ)
-	make -C $(PRINTF)
-	cp printf/libftprintf.a .
-	mv libftprintf.a $(NAME)
-	$(AR) $(NAME) $(OBJ)
-	echo "$(BGreen)Libft compilation successful.$(DEF_COLOR)"
+${NAME}:	${OBJS}
+			ar -rsc ${NAME} ${OBJS}
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
-	echo "$(GRAY)Compilation of: $<.$(DEF_COLOR)"
-	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@ -g3
-
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
-
--include $(DEP)
+$(OBJS_DIR)/%.o: %.c 	${HEADERS} Makefile
+			@mkdir -p $(dir $@)
+			${CC} ${CFLAGS} -I ./ -c $< -o $@
 
 clean:
-	make clean -C $(PRINTF)
-	echo "$(BLUE)Libft clean.$(DEF_COLOR)"
-	rm -f $(OBJ)
-	rm -f $(DEP)
+			rm -f ${OBJS}
 
-fclean: clean
-	$(RM) -f $(PRINTF)/libftprintf.a
-	echo "$(BLUE)Libft fclean.$(DEF_COLOR)"
-	rm -f $(NAME)
+fclean:		clean
+			rm -f ${NAME}
 
-re: fclean all
-	echo "$(BLUE)Libft rebuild.$(DEF_COLOR)"
+re:			fclean all
 
-.PHONY: re clean fclean all
-
-.SILENT:
+.PHONY:		all clean fclean re

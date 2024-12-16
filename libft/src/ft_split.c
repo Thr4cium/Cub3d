@@ -68,7 +68,7 @@ char	**ft_split(char *s, char c)
 	char	**tab;
 	size_t	nb_words;
 
-	if(!s)
+	if (!s)
 		return (NULL);
 	i = 0;
 	n = 0;
