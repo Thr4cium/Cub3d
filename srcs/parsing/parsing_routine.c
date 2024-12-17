@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 10:42:22 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/13 18:11:58 by magrondi         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:27:40 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static	int	get_information(char *path, t_map *map, t_map_pars *m_pars)
 		return (-1);
 	i = get_texture_information(map, array);
 	if (i == -1)
-		return (-1);
+		return (free_array(array), -1);
 	if (check_texture_information(map) == -1)
 		return (free_array(array), -1);
 	if (get_map_line_information(map, array, i) == -1)
