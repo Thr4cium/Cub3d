@@ -81,7 +81,7 @@ int	rgb_to_int(char *line)
 	int		rgb;
 	char	color[4];
 
-	line = trim_space(line);
+	line++;
 	ft_bzero(color, 4);
 	assign_variables(&i, &j, &rgb);
 	if (!check_rgb(line))

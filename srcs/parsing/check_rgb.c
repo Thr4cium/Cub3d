@@ -44,35 +44,6 @@ static	bool	is_8_bit(char *line)
 	return (true);
 }
 
-static	bool	has_max_3_digits(char *line)
-{
-	size_t	i;
-	size_t	x;
-	size_t	comma_count;
-
-	i = 0;
-	comma_count = 0;
-	while (line && line[i - 1] && line[i])
-	{
-		x = 0;
-		while (line[i + x] && line[i + x] != ',')
-			x ++;
-		comma_count++;
-		if (x > 3)
-			return (false);
-		if (comma_count >= 2)
-		{
-			i += x + 1;
-			while (line[i + x] && line[i + x] != '\n')
-				x ++;
-			if (x > 3)
-				return (false);
-		}
-		i += x + 1;
-	}
-	return (true);
-}
-
 bool	check_rgb(char *line)
 {
 	size_t	i;
@@ -80,7 +51,7 @@ bool	check_rgb(char *line)
 
 	comma_count = 0;
 	i = 0;
-	if (!is_8_bit(line) || !has_max_3_digits(line))
+	if (!is_8_bit(line))
 		return (false);
 	while (line[i])
 	{
