@@ -68,7 +68,7 @@ static	int	init_mlx(t_game *game)
 	return (1);
 }
 
-void	game_loop(t_game *game)
+static	void	game_loop(t_game *game)
 {
 	mlx_hook(game->win_ptr, MLX_CROSS_CODE, 0, &end_game, game);
 	mlx_hook(game->win_ptr, KeyPress, KeyPressMask, &handle_keypress, game);
@@ -76,20 +76,6 @@ void	game_loop(t_game *game)
 		&handle_keyrelease, game);
 	mlx_loop_hook(game->mlx_ptr, &update_game, game);
 	mlx_loop(game->mlx_ptr);
-}
-
-void	print_map_info(t_game *game)
-{
-	int	i;
-
-	i = 0;
-	while (game->map->map[i])
-	{
-		printf("%s\n", game->map->map[i]);
-		i++;
-	}
-	printf("g color : %d\n", game->map->ground_color);
-	printf("s color : %d\n", game->map->sky_color);
 }
 
 int	main(int ac, char **av)

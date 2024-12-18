@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:52:53 by magrondi          #+#    #+#             */
-/*   Updated: 2024/12/16 21:45:28 by magrondi         ###   ########.fr       */
+/*   Updated: 2024/12/17 19:00:47 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static	bool	has_max_3_digits(char *line)
 
 	i = 0;
 	comma_count = 0;
-	while (line && line[i])
+	while (line && line[i - 1] && line[i])
 	{
 		x = 0;
 		while (line[i + x] && line[i + x] != ',')

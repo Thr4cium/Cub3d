@@ -14,6 +14,8 @@
 
 void	clean_mlx(t_game *game)
 {
+	if (!game)
+		return ;
 	if (game->img && game->img->ptr && game->mlx_ptr)
 		mlx_destroy_image(game->mlx_ptr, game->img->ptr);
 	if (game->win_ptr)

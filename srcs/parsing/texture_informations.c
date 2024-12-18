@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:01:09 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/16 21:46:23 by magrondi         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:19:10 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	get_texture_information(t_map *map, char **array)
 			return (i);
 		i++;
 	}
-	return (printf("Error\n no texture informations found\n"), -1);
+	return (printf("Error\nno texture informations found\n"), -1);
 }
 
 int	check_texture_information(t_map *map)
@@ -70,7 +70,7 @@ int	check_texture_information(t_map *map)
 int	check_color_information(t_map *map)
 {
 	if (map->ground_color < 0 || map->sky_color < 0)
-		return (printf("Error\n wrong color information\n"), -1);
+		return (printf("Error\nwrong color information\n"), -1);
 	return (0);
 }
 
@@ -85,7 +85,7 @@ int	rgb_to_int(char *line)
 	ft_bzero(color, 4);
 	assign_variables(&i, &j, &rgb);
 	if (!check_rgb(line))
-		return (printf("Error\nwrong color information"), -1);
+		return (printf("Error\nwrong color information\n"), -1);
 	while (*line && j < 3)
 	{
 		while (*line != ',' && *line != '\n' && i < 3)
@@ -101,7 +101,7 @@ int	rgb_to_int(char *line)
 int	rgb_to_int_tool(int j, char *color, int rgb)
 {
 	if (!color)
-		return (printf("Error\n wrong color information\n"), -1);
+		return (printf("Error\nwrong color information\n"), -1);
 	if (j == 0)
 		rgb = ft_atoi(color) << 16;
 	else if (j == 1)

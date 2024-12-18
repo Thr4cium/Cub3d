@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 16:59:05 by magrondi          #+#    #+#             */
-/*   Updated: 2024/12/13 16:59:06 by magrondi         ###   ########.fr       */
+/*   Updated: 2024/12/17 19:00:36 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@ void	move_player(t_game *game, float move_x, float move_y)
 	float		new_x;
 	float		new_y;
 
-	new_x = game->pos_x + (move_x * MV_SPEED);
-	new_y = game->pos_y + (move_y * MV_SPEED);
-	if (game->map->map[(int)new_y][(int)new_x] == '1')
-		return ;
+	new_x = game->pos_x + (move_x * (MV_SPEED * 1.5));
+	new_y = game->pos_y + (move_y * (MV_SPEED * 1.5));
 	if (game->map->map[(int)game->pos_y][(int)new_x] != '1')
 		game->pos_x = new_x;
 	if (game->map->map[(int)new_y][(int)game->pos_x] != '1')

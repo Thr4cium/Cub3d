@@ -29,6 +29,8 @@ char	*ft_strdup_trim(char *line)
 
 void	free_textures(t_game *game)
 {
+	if (!game)
+		return ;
 	if (game->no_img)
 	{
 		mlx_destroy_image(game->mlx_ptr, game->no_img->ptr);
