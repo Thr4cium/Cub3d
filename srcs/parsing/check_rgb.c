@@ -6,13 +6,13 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:52:53 by magrondi          #+#    #+#             */
-/*   Updated: 2024/12/17 19:00:47 by magrondi         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:12:48 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
 
-void	assign_variables(int *i, int *j, int *rgb)
+void	assign_variables(size_t *i, size_t *j, int *rgb)
 {
 	*i = 0;
 	*j = 0;

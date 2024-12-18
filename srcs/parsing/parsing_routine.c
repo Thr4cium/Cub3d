@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 10:42:22 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/17 17:27:40 by magrondi         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:10:02 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	get_map_line_information(t_map *map, char **array, int i)
 
 char	**map_addline(char **map, char *line)
 {
-	int		i;
+	size_t	i;
 	char	**new_map;
 
 	i = 0;
