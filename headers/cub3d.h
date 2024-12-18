@@ -189,10 +189,6 @@ typedef enum e_move
 	ROTATE_RIGHT
 }				t_move;
 
-// main
-void		game_loop(t_game *game);
-void		print_map_info(t_game *game);
-
 // display_game
 int			display_game(t_game *game);
 void		set_window_color(t_game *game, int color);

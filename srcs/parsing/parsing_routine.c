@@ -20,7 +20,7 @@ void	actualise_map(t_map *map)
 
 	i = 0;
 	max = 0;
-	while (map->map[i])
+	while (map->map && map->map[i])
 	{
 		j = 0;
 		while (map->map[i][j])
