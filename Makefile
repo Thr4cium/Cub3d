@@ -6,7 +6,7 @@
 #    By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/12 08:27:52 by rolamber          #+#    #+#              #
-#    Updated: 2024/12/16 18:00:54 by magrondi         ###   ########.fr        #
+#    Updated: 2024/12/19 14:44:22 by magrondi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ PARSING_SRCS        =   ./srcs/parsing/assign_spawn_direction.c \
                         ./srcs/parsing/texture_informations.c \
                         ./srcs/parsing/parsing_tools.c \
                         ./srcs/parsing/check_rgb.c \
+                        ./srcs/parsing/set_struct.c \
                         ./srcs/parsing/texture_loading.c \
 
 RAYCASTING_SRCS     =   ./srcs/raycasting/ray_cast.c \

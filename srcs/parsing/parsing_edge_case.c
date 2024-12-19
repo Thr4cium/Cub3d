@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_edge_case.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 12:44:08 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/03 15:35:53 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/12/19 15:06:49 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
+
+char	**check_file_w_h(char **gnl_reuslt);
 
 void	free_array(char **array)
 {
@@ -95,12 +97,10 @@ char	**copy_file(int fd)
 		if (!tmp)
 		{
 			free_array(array);
-			get_next_line(-1);
-			return (NULL);
+			return (get_next_line(-1), NULL);
 		}
 		array = tmp;
 		line = get_next_line(fd);
 	}
-	get_next_line(-1);
-	return (array);
+	return (get_next_line(-1), check_file_w_h(array));
 }

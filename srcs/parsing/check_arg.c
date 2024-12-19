@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:48:21 by magrondi          #+#    #+#             */
-/*   Updated: 2024/12/16 17:48:21 by magrondi         ###   ########.fr       */
+/*   Updated: 2024/12/19 15:05:10 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,60 +15,59 @@
 int	check_arg(int ac, char **av)
 {
 	if (ac != 2 && ac != 3)
-		return (printf("Error\n wrong number of arguments\n"), -1);
+		return (printf("Error\nwrong number of arguments\n"), -1);
 	if (ac == 3 && ft_strncmp(av[2], "--save", 7) != 0)
-		return (printf("Error\n wrong argument\n"), -1);
+		return (printf("Error\nwrong argument\n"), -1);
 	if (check_path(av[1]) == -1)
 		return (-1);
 	return (0);
 }
 
-void	set_keys(t_keys *keys)
+static	bool	has_reach_max_width(int i, char **gnl_reuslt)
 {
-	keys->esc = false;
-	keys->w = false;
-	keys->s = false;
-	keys->a = false;
-	keys->d = false;
-	keys->left = false;
-	keys->right = false;
-	keys->is_pristine = true;
+	if (ft_strlen(gnl_reuslt[i]) > FILE_MAX_WIDTH)
+	{
+		printf("Error\nfile width need to be less then ");
+		printf("%d\n", FILE_MAX_WIDTH);
+		free_array(gnl_reuslt);
+		return (true);
+	}
+	return (false);
 }
 
-void	set_map_pars(t_map_pars *map_pars)
+static	bool	has_reach_max_height(int i, char **gnl_reuslt)
 {
-	map_pars->no = 0;
-	map_pars->so = 0;
-	map_pars->we = 0;
-	map_pars->ea = 0;
-	map_pars->c = 0;
-	map_pars->f = 0;
+	if (i > FILE_MAX_HEIGHT)
+	{
+		printf("Error\nfile height need to be less then ");
+		printf("%d\n", FILE_MAX_HEIGHT);
+		free_array(gnl_reuslt);
+		return (true);
+	}
+	return (false);
 }
 
-void	set_img(t_my_img *img)
+char	**check_file_w_h(char **gnl_reuslt)
 {
-	img->ptr = NULL;
-	img->addr = NULL;
-	img->bits_per_pixel = 0;
-	img->line_length = 0;
-	img->endian = 0;
-}
+	int	i;
+	int	j;
 
-void	set_ray(t_ray *ray)
-{
-	ray->side_dist_x = 0;
-	ray->side_dist_y = 0;
-	ray->delta_dist_x = 0;
-	ray->delta_dist_y = 0;
-	ray->perp_wall_dist = 0;
-	ray->wall_x = 0;
-	ray->ray_dir_x = 0;
-	ray->ray_dir_y = 0;
-	ray->map_x = 0;
-	ray->map_y = 0;
-	ray->step_x = 0;
-	ray->step_y = 0;
-	ray->side = 0;
-	ray->draw_start = 0;
-	ray->draw_end = 0;
+	if (!gnl_reuslt)
+		return (NULL);
+	i = 0;
+	while (gnl_reuslt[i])
+	{
+		j = 0;
+		if (has_reach_max_height(i, gnl_reuslt))
+			return (NULL);
+		while (gnl_reuslt[i][j])
+		{
+			if (has_reach_max_width(i, gnl_reuslt))
+				return (NULL);
+			j++;
+		}
+
+		i++;
+	}
+	return (gnl_reuslt);
 }
