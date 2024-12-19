@@ -46,7 +46,7 @@ static	int	get_information(char *path, t_map *map, t_map_pars *m_pars)
 	array = copy_file(fd);
 	close(fd);
 	if (!array)
-		return (copy_file(-1), perror("malloc"), -1);
+		return (perror("malloc"), -1);
 	if (check_edge_cases(array, m_pars) == -1)
 		return (-1);
 	i = get_texture_information(map, array);
@@ -106,9 +106,14 @@ char	**map_addline(char **map, char *line)
 	i = 0;
 	while (map && map[i])
 		i++;
-	new_map = ft_calloc(sizeof(char *), i + 2);
+	static int	x = 0;
+	x ++;
+	if (x == 17)
+		new_map = NULL;
+	else
+		new_map = ft_calloc(sizeof(char *), i + 2);
 	if (!new_map)
-		return (free_array(map), NULL);
+		return (NULL);
 	i = 0;
 	while (map && map[i])
 	{

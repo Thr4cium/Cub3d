@@ -14,7 +14,7 @@
 
 void	free_array(char **array)
 {
-	int	i;
+	size_t	i;
 
 	if (!array)
 		return ;
@@ -91,13 +91,16 @@ char	**copy_file(int fd)
 	while (line)
 	{
 		tmp = map_addline(array, line);
-		free(line);
+		ft_free(line);
 		if (!tmp)
 		{
+			free_array(array);
+			get_next_line(-1);
 			return (NULL);
 		}
 		array = tmp;
 		line = get_next_line(fd);
 	}
+	get_next_line(-1);
 	return (array);
 }
