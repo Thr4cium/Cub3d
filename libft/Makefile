@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mguy <mguy@student.42.fr>                  +#+  +:+       +#+         #
+#    By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/06 16:04:47 by mguy              #+#    #+#              #
-#    Updated: 2024/07/23 16:38:29 by mguy             ###   ########.fr        #
+#    Updated: 2024/12/19 18:00:14 by magrondi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRCS = 	./src/ft_itoa.c \
 		./src/ft_memchr.c \
 		./src/ft_memcmp.c \
 		./src/ft_striteri.c \
+		./src/ft_strsearch.c \
 		./src/ft_strmapi.c \
 		./src/ft_strlcat.c \
 		./src/ft_substr.c \

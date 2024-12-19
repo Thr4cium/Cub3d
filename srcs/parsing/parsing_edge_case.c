@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 12:44:08 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/19 15:06:49 by magrondi         ###   ########.fr       */
+/*   Updated: 2024/12/19 19:51:53 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,40 @@ int	check_edge_cases(char **array, t_map_pars *m_pars)
 	return (0);
 }
 
+char	**map_addline(char **map, char *line)
+{
+	size_t	i;
+	char	**new_map;
+
+	i = 0;
+	while (map && map[i])
+		i++;
+	new_map = ft_calloc(sizeof(char *), i + 2);
+	if (!new_map)
+		return (NULL);
+	i = 0;
+	while (map && map[i])
+	{
+		new_map[i] = map[i];
+		i++;
+	}
+	new_map[i] = ft_strdup(line);
+	if (!new_map[i])
+	{
+		ft_free(new_map);
+		return (NULL);
+	}
+	new_map[i + 1] = NULL;
+	ft_free(map);
+	return (new_map);
+}
+
 char	**copy_file(int fd)
 {
 	char	*line;
 	char	**array;
 	char	**tmp;
+	char	*has_crash;
 
 	array = NULL;
 	line = get_next_line(fd);
@@ -100,7 +129,15 @@ char	**copy_file(int fd)
 			return (get_next_line(-1), NULL);
 		}
 		array = tmp;
-		line = get_next_line(fd);
+		has_crash = line;
+		static int x = 0;
+		x ++;
+		if (x == 3)
+			line = NULL;
+		else
+			line = get_next_line(fd);
+		if (!line && !has_crash)
+			get_next_line(-1);
 	}
-	return (get_next_line(-1), check_file_w_h(array));
+	return (check_file_w_h(array));
 }

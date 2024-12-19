@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:52:53 by magrondi          #+#    #+#             */
-/*   Updated: 2024/12/18 16:12:48 by magrondi         ###   ########.fr       */
+/*   Updated: 2024/12/19 17:50:44 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static	bool	is_8_bit(char *line)
 	int		rgb;
 	size_t	i;
 
+	if (!line)
+		return (false);
 	i = 0;
 	while (line[i])
 	{
@@ -38,8 +40,10 @@ static	bool	is_8_bit(char *line)
 		if (rgb < 0 || rgb > 255)
 			return (false);
 		while (ft_isdigit(line[i]))
-			i ++;
-		i ++;
+			i++;
+		if (line[i] == '\0')
+			break ;
+		i++;
 	}
 	return (true);
 }

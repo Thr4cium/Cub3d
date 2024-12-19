@@ -3,92 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/21 11:16:09 by rolamber          #+#    #+#             */
-/*   Updated: 2024/08/21 16:08:42 by rolamber         ###   ########.fr       */
+/*   Created: 2023/11/29 13:13:08 by magrondi          #+#    #+#             */
+/*   Updated: 2024/01/22 17:57:45 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ftt_strlen(const char *str)
+char	*ft_strjoin_gnl(char *s1, char *s2)
 {
-	size_t	i;
+	size_t		result_index;
+	size_t		cpy_index;
+	char		*result;
+	size_t		linelen;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-char	*ftt_strjoin(char const *s1, char const *s2)
-{
-	char	*str;
-	int		i;
-	int		j;
-
-	if (!s1 || !s2)
-		return (NULL);
-	str = ftt_calloc(sizeof(char), ftt_strlen(s1) + ftt_strlen(s2) + 1);
-	if (!str)
-		return (NULL);
-	i = -1;
-	while (s1[++i])
-		str[i] = s1[i];
-	j = -1;
-	while (s2[++j])
-		str[i + j] = s2[j];
-	return (str);
-}
-
-int	ft_strsearch(char *s1, char c)
-{
-	char	*str;
-
-	str = s1;
-	while (*str)
+	linelen = (ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (linelen > INT_MAX)
+		return (ft_reset_malloc(s1), NULL);
+	result = (char *) malloc(sizeof(char) * linelen);
+	if (!result)
 	{
-		if (*str == c)
-			return (1);
-		str++;
+		ft_reset_malloc(s1);
+		return (NULL);
 	}
-	return (0);
+	result_index = 0;
+	cpy_index = 0;
+	while (cpy_index < ft_strlen(s1))
+		result[result_index++] = s1[cpy_index++];
+	cpy_index = 0;
+	while (cpy_index < ft_strlen(s2))
+		result[result_index++] = s2[cpy_index++];
+	result[result_index] = '\0';
+	ft_reset_malloc(s1);
+	return (result);
 }
 
-char	*ftt_substr(char *s1, int start, int end)
+void	ft_reset_malloc(void *ptr)
 {
-	char	*str;
-	int		i;
-
-	i = 0;
-	if (!s1 || !s1[0])
-		return (NULL);
-	str = ftt_calloc(sizeof(char), (end - start + 2));
-	if (!str)
-		return (NULL);
-	while (start <= end)
+	if (ptr != NULL)
 	{
-		str[i] = s1[start];
-		i++;
-		start++;
+		free(ptr);
+		ptr = NULL;
 	}
-	return (str);
-}
-
-void	*ftt_calloc(size_t count, size_t size)
-{
-	char	*buff;
-	size_t	i;
-
-	i = 0;
-	buff = malloc(count * size);
-	if (!buff)
-		return (NULL);
-	while (i < count * size)
-	{
-		buff[i] = 0;
-		i++;
-	}
-	return (buff);
 }

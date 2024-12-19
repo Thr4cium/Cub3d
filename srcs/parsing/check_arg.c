@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:48:21 by magrondi          #+#    #+#             */
-/*   Updated: 2024/12/19 15:05:10 by magrondi         ###   ########.fr       */
+/*   Updated: 2024/12/19 15:06:30 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ char	**check_file_w_h(char **gnl_reuslt)
 				return (NULL);
 			j++;
 		}
-
 		i++;
 	}
 	return (gnl_reuslt);

@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:01:09 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/18 16:12:55 by magrondi         ###   ########.fr       */
+/*   Updated: 2024/12/19 17:50:54 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,15 @@ int	rgb_to_int(char *line)
 		return (printf("Error\nwrong color information\n"), -1);
 	while (*line && j < 3)
 	{
-		while (*line != ',' && *line != '\n' && i < 3)
+		while (*line && *line != ',' && *line != '\n' && i < 3)
 			color[i++] = *line++;
+		if (*line == '\0')
+			break ;
 		rgb = rgb_to_int_tool(j++, color, rgb);
 		ft_bzero(color, 4);
 		i = 0;
-		line++;
+		if (*line == ',' || *line == '\n')
+			line++;
 	}
 	return (rgb);
 }
