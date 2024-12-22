@@ -6,13 +6,13 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:01:09 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/17 17:19:10 by magrondi         ###   ########.fr       */
+/*   Updated: 2024/12/19 17:50:54 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
 
-void	assign_variables(int *i, int *j, int *rgb);
+void	assign_variables(size_t *i, size_t *j, int *rgb);
 char	*trim_space(char *line);
 bool	check_rgb(char *line);
 
@@ -76,10 +76,10 @@ int	check_color_information(t_map *map)
 
 int	rgb_to_int(char *line)
 {
-	int		i;
-	int		j;
-	int		rgb;
-	char	color[4];
+	size_t		i;
+	size_t		j;
+	int			rgb;
+	char		color[4];
 
 	line++;
 	ft_bzero(color, 4);
@@ -88,12 +88,15 @@ int	rgb_to_int(char *line)
 		return (printf("Error\nwrong color information\n"), -1);
 	while (*line && j < 3)
 	{
-		while (*line != ',' && *line != '\n' && i < 3)
+		while (*line && *line != ',' && *line != '\n' && i < 3)
 			color[i++] = *line++;
+		if (*line == '\0')
+			break ;
 		rgb = rgb_to_int_tool(j++, color, rgb);
 		ft_bzero(color, 4);
 		i = 0;
-		line++;
+		if (*line == ',' || *line == '\n')
+			line++;
 	}
 	return (rgb);
 }

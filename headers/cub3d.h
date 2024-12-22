@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/13 17:13:11 by magrondi         ###   ########.fr       */
+/*   Updated: 2024/12/19 17:36:16 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <math.h>
+
+# ifndef FILE_MAX_HEIGHT
+#  define FILE_MAX_HEIGHT 250
+# endif
+
+# ifndef FILE_MAX_WIDTH
+#  define FILE_MAX_WIDTH 250
+# endif
 
 # ifndef GREEN
 #  define GREEN 0x0000FF00
@@ -222,7 +230,6 @@ int			check_path(char *path);
 void		actualise_map(t_map *map);
 int			parsing(char *path, t_game *game);
 int			get_map_line_information(t_map *map, char **array, int i);
-char		**map_addline(char **map, char *line);
 
 // parsing_edge_case
 int			check_textures_keys(char *line, char *str, int n,

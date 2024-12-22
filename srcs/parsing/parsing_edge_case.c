@@ -3,18 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_edge_case.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 12:44:08 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/03 15:35:53 by rolamber         ###   ########.fr       */
+/*   Updated: 2024/12/19 19:51:53 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
 
+char	**check_file_w_h(char **gnl_reuslt);
+
 void	free_array(char **array)
 {
-	int	i;
+	size_t	i;
 
 	if (!array)
 		return ;
@@ -80,6 +82,34 @@ int	check_edge_cases(char **array, t_map_pars *m_pars)
 	return (0);
 }
 
+char	**map_addline(char **map, char *line)
+{
+	size_t	i;
+	char	**new_map;
+
+	i = 0;
+	while (map && map[i])
+		i++;
+	new_map = ft_calloc(sizeof(char *), i + 2);
+	if (!new_map)
+		return (NULL);
+	i = 0;
+	while (map && map[i])
+	{
+		new_map[i] = map[i];
+		i++;
+	}
+	new_map[i] = ft_strdup(line);
+	if (!new_map[i])
+	{
+		ft_free(new_map);
+		return (NULL);
+	}
+	new_map[i + 1] = NULL;
+	ft_free(map);
+	return (new_map);
+}
+
 char	**copy_file(int fd)
 {
 	char	*line;
@@ -91,13 +121,14 @@ char	**copy_file(int fd)
 	while (line)
 	{
 		tmp = map_addline(array, line);
-		free(line);
+		ft_free(line);
 		if (!tmp)
 		{
-			return (NULL);
+			free_array(array);
+			return (get_next_line(-1), NULL);
 		}
 		array = tmp;
 		line = get_next_line(fd);
 	}
-	return (array);
+	return (check_file_w_h(array));
 }

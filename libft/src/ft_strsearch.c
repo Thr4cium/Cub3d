@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strsearch.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 13:12:58 by magrondi          #+#    #+#             */
-/*   Updated: 2023/12/13 13:51:08 by magrondi         ###   ########.fr       */
+/*   Created: 2024/12/19 17:58:56 by magrondi          #+#    #+#             */
+/*   Updated: 2024/12/19 17:59:50 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "../libft.h"
 
-# include <limits.h>
-# include "../libft.h"
+int	ft_strsearch(char *s1, char c)
+{
+	char	*str;
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 5
-# endif
-
-char	*get_next_line(int fd);
-char	*ft_read_file(int fd, char *buffer);
-char	*ft_strjoin_gnl(char *s1, char *s2);
-char	*ft_trim_buffer(char *buffer, char *line);
-char	*ft_cpy_current_line(char *buffer);
-void	ft_reset_malloc(void *ptr);
-
-#endif
+	str = s1;
+	while (*str)
+	{
+		if (*str == c)
+			return (1);
+		str++;
+	}
+	return (0);
+}

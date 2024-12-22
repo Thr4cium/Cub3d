@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mguy <mguy@student.42lyon.fr>              +#+  +:+       +#+        */
+/*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 20:20:32 by mguy              #+#    #+#             */
-/*   Updated: 2024/08/01 00:43:00 by mguy             ###   ########.fr       */
+/*   Updated: 2024/12/19 18:19:06 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void			ft_striteri(char *s, void (*f)(unsigned int, char*));
 void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char *s, int fd);
 void			ft_putendl_fd(char *s, int fd);
+int				ft_strsearch(char *s1, char c);
 void			ft_putnbr_fd(int n, int fd);
 int				ft_int_max(char const *s);
 int				ft_int_min(char const *s);
