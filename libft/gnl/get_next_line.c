@@ -110,8 +110,7 @@ char	*ft_trim_buffer(char *buffer, char *line)
 	str = (char *) malloc(sizeof(char) * (ft_strlen(trim_buffer) + 1));
 	if (!str)
 	{
-		ft_reset_malloc(&line);
-		ft_reset_malloc(buffer);
+		ft_reset_malloc(line);
 		return (NULL);
 	}
 	i ++;

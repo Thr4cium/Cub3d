@@ -115,7 +115,6 @@ char	**copy_file(int fd)
 	char	*line;
 	char	**array;
 	char	**tmp;
-	char	*has_crash;
 
 	array = NULL;
 	line = get_next_line(fd);
@@ -129,15 +128,7 @@ char	**copy_file(int fd)
 			return (get_next_line(-1), NULL);
 		}
 		array = tmp;
-		has_crash = line;
-		static int x = 0;
-		x ++;
-		if (x == 3)
-			line = NULL;
-		else
-			line = get_next_line(fd);
-		if (!line && !has_crash)
-			get_next_line(-1);
+		line = get_next_line(fd);
 	}
 	return (check_file_w_h(array));
 }
