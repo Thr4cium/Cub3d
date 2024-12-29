@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:13:04 by magrondi          #+#    #+#             */
-/*   Updated: 2024/12/19 18:34:57 by magrondi         ###   ########.fr       */
+/*   Updated: 2024/12/29 19:45:26 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*get_next_line(int fd)
 		ft_reset_malloc(buffer);
 		return (NULL);
 	}
-	buffer = ft_trim_buffer(buffer, line);
+	buffer = ft_trim_buffer(buffer);
 	return (line);
 }
 
@@ -93,30 +93,25 @@ char	*ft_cpy_current_line(char *buffer)
 	return (line);
 }
 
-char	*ft_trim_buffer(char *buffer, char *line)
+char	*ft_trim_buffer(char *buffer)
 {
-	size_t		i;
-	size_t		j;
-	char		*str;
-	char		*trim_buffer;
+	size_t	i;
+	size_t	j;
+	char	*new_buffer;
 
 	i = 0;
-	trim_buffer = ft_strchr(buffer, '\n');
-	if (!trim_buffer || !trim_buffer[i])
-	{
-		ft_reset_malloc(buffer);
-		return (NULL);
-	}
-	str = (char *) malloc(sizeof(char) * (ft_strlen(trim_buffer) + 1));
-	if (!str)
-	{
-		ft_reset_malloc(line);
-		return (NULL);
-	}
-	i ++;
+	while (buffer[i] && buffer[i] != '\n')
+		i++;
+	if (!buffer[i])
+		return (ft_free(buffer), NULL);
+	new_buffer = (char *)malloc(sizeof(char) * (ft_strlen(buffer) - i));
+	if (!new_buffer)
+		return (ft_free(buffer), NULL);
+	i++;
 	j = 0;
-	while (trim_buffer[i])
-		str[j++] = trim_buffer[i++];
-	str[j] = '\0';
-	return (ft_reset_malloc(buffer), str);
+	while (buffer[i])
+		new_buffer[j++] = buffer[i++];
+	new_buffer[j] = '\0';
+	ft_free(buffer);
+	return (new_buffer);
 }
