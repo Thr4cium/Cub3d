@@ -12,6 +12,8 @@
 
 #include "../../headers/cub3d.h"
 
+bool	hole_next_to_player(t_game *game);
+
 void	actualise_map(t_map *map)
 {
 	size_t	i;
@@ -33,7 +35,7 @@ void	actualise_map(t_map *map)
 	map->map_x = max;
 }
 
-static	int	get_information(char *path, t_map *map, t_map_pars *m_pars)
+static	int	get_information(char *path, t_game *game)
 {
 	int		fd;
 	int		i;
@@ -47,16 +49,16 @@ static	int	get_information(char *path, t_map *map, t_map_pars *m_pars)
 	close(fd);
 	if (!array)
 		return (perror("malloc"), -1);
-	if (check_edge_cases(array, m_pars) == -1)
+	if (check_edge_cases(array, game->map_pars) == -1)
 		return (-1);
-	i = get_texture_information(map, array);
+	i = get_texture_information(game->map, array);
 	if (i == -1)
 		return (free_array(array), -1);
-	if (check_texture_information(map) == -1)
+	if (check_texture_information(game->map) == -1)
 		return (free_array(array), -1);
-	if (get_map_line_information(map, array, i) == -1)
+	if (get_map_line_information(game->map, array, i) == -1)
 		return (free_array(array), -1);
-	if (check_map_information(map) == -1)
+	if (check_map_information(game->map) == -1)
 		return (-1);
 	return (0);
 }
@@ -66,9 +68,11 @@ int	parsing(char *path, t_game *game)
 	game->map = init_map();
 	if (!game->map)
 		return (-1);
-	if (get_information(path, game->map, game->map_pars) == -1)
+	if (get_information(path, game) == -1)
 		return (-1);
 	get_player_initial_position(game);
+	if (hole_next_to_player(game))
+		return (-1);
 	game->tile_size = SCREEN_WIDTH / game->map->map_x;
 	return (0);
 }
