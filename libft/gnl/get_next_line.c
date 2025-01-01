@@ -12,60 +12,7 @@
 
 #include "get_next_line.h"
 
-char	*get_next_line(int fd)
-{
-	char		*line;
-	static char	*buffer;
-
-	if (fd == -1)
-		return (ft_free(buffer), NULL);
-	if (fd < 0 || read(fd, 0, 0) < 0 || BUFFER_SIZE >= INT_MAX
-		|| BUFFER_SIZE <= 0 || fd > 1024)
-		return (NULL);
-	line = NULL;
-	buffer = ft_read_file(fd, buffer);
-	if (!buffer)
-	{
-		ft_free(buffer);
-		return (NULL);
-	}
-	line = ft_cpy_current_line(buffer);
-	if (!line)
-	{
-		ft_reset_malloc(line);
-		ft_reset_malloc(buffer);
-		return (NULL);
-	}
-	buffer = ft_trim_buffer(buffer);
-	return (line);
-}
-
-char	*ft_read_file(int fd, char *buffer)
-{
-	char	*tmp_buffer;
-	int		byte_read;
-
-	byte_read = 1;
-	tmp_buffer = (char *) malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!tmp_buffer)
-		return (ft_free(buffer), NULL);
-	ft_bzero(tmp_buffer, (BUFFER_SIZE + 1));
-	while (!ft_strchr(tmp_buffer, '\n') && byte_read != 0)
-	{
-		byte_read = read(fd, tmp_buffer, BUFFER_SIZE);
-		if (byte_read < 0)
-		{
-			ft_reset_malloc(tmp_buffer);
-			ft_reset_malloc(buffer);
-			return (NULL);
-		}
-		tmp_buffer[byte_read] = '\0';
-		buffer = ft_strjoin_gnl(buffer, tmp_buffer);
-	}
-	return (ft_reset_malloc(tmp_buffer), buffer);
-}
-
-char	*ft_cpy_current_line(char *buffer)
+static	char	*ft_cpy_current_line(char *buffer)
 {
 	size_t		i;
 	char		*line;
@@ -93,7 +40,32 @@ char	*ft_cpy_current_line(char *buffer)
 	return (line);
 }
 
-char	*ft_trim_buffer(char *buffer)
+static	char	*ft_read_file(int fd, char *buffer)
+{
+	char	*tmp_buffer;
+	int		byte_read;
+
+	byte_read = 1;
+	tmp_buffer = (char *) malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!tmp_buffer)
+		return (ft_free(buffer), NULL);
+	ft_bzero(tmp_buffer, (BUFFER_SIZE + 1));
+	while (!ft_strchr(tmp_buffer, '\n') && byte_read != 0)
+	{
+		byte_read = read(fd, tmp_buffer, BUFFER_SIZE);
+		if (byte_read < 0)
+		{
+			ft_reset_malloc(tmp_buffer);
+			ft_reset_malloc(buffer);
+			return (NULL);
+		}
+		tmp_buffer[byte_read] = '\0';
+		buffer = ft_strjoin_gnl(buffer, tmp_buffer);
+	}
+	return (ft_reset_malloc(tmp_buffer), buffer);
+}
+
+static	char	*ft_trim_buffer(char *buffer)
 {
 	size_t	i;
 	size_t	j;
@@ -114,4 +86,32 @@ char	*ft_trim_buffer(char *buffer)
 	new_buffer[j] = '\0';
 	ft_free(buffer);
 	return (new_buffer);
+}
+
+char	*get_next_line(int fd)
+{
+	char		*line;
+	static char	*buffer;
+
+	if (fd == -1)
+		return (ft_free(buffer), NULL);
+	if (fd < 0 || read(fd, 0, 0) < 0 || BUFFER_SIZE >= INT_MAX
+		|| BUFFER_SIZE <= 0 || fd > 1024)
+		return (NULL);
+	line = NULL;
+	buffer = ft_read_file(fd, buffer);
+	if (!buffer)
+	{
+		ft_free(buffer);
+		return (NULL);
+	}
+	line = ft_cpy_current_line(buffer);
+	if (!line)
+	{
+		ft_reset_malloc(line);
+		ft_reset_malloc(buffer);
+		return (NULL);
+	}
+	buffer = ft_trim_buffer(buffer);
+	return (line);
 }

@@ -19,7 +19,7 @@ int	check_map_information(t_map *map)
 	int		j;
 
 	if (!map->map)
-		return (printf("Error\n no map information\n"), -1);
+		return (printf("Error\nno map information\n"), -1);
 	tmp = map->map;
 	j = 0;
 	i = 0;
@@ -29,11 +29,13 @@ int	check_map_information(t_map *map)
 			|| ft_strsearch(tmp[i], 'W') == 1 || ft_strsearch(tmp[i], 'E') == 1)
 			j++;
 		if (j > 1)
-			return (printf("Error\n too many player starting points\n"), -1);
+			return (printf("Error\ntoo many player starting points\n"), -1);
 		if (!is_line_only_map(tmp[i]))
 			return (printf("Error\nwrong map information\n"), -1);
 		i++;
 	}
+	if (j == 0)
+		return (printf("Error\nthere is no player position\n"), -1);
 	if (check_map_validity(map) == -1 || check_map_validity_bis(map) == -1)
 		return (-1);
 	return (0);
@@ -52,16 +54,16 @@ int	check_map_validity(t_map *map)
 		{
 			if ((j == 0 || j == ft_strlen(map->map[i]) - 1) \
 				&& map->map[i][j] == '0')
-				return (printf("Error\n map is not closed\n"), -1);
+				return (printf("Error\nmap is not closed\n"), -1);
 			else if (map->map[i][j] == '0')
 			{
 				if (i == 0 || i == map->map_y - 1)
-					return (printf("Error\n map is not closed\n"), -1);
+					return (printf("Error\nmap is not closed\n"), -1);
 				if (map->map[i][j + 1] == ' ' || map->map[i][j - 1] == ' ' \
 					|| ft_strlen(map->map[i + 1]) - 1 < j
 					|| ft_strlen(map->map[i - 1]) - 1 < j
 					|| map->map[i + 1][j] == ' ' || map->map[i - 1][j] == ' ')
-					return (printf("Error\n map is not closed\n"), -1);
+					return (printf("Error\nmap is not closed\n"), -1);
 			}
 		}
 	}
