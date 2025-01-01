@@ -88,6 +88,8 @@ bool	hole_next_to_player(t_game *game)
 	if (map[p_y][p_x + 1] != '1' && map[p_y][p_x + 1] != '0')
 		return (printf("Error\nInvalid element to the right of the player\n"),
 			true);
+	if (p_y + 1 >= (int) game->map->map_y)
+		return (printf("Error\nInvalid element below the player\n"), true);
 	if (map[p_y + 1][p_x] != '1' && map[p_y + 1][p_x] != '0')
 		return (printf("Error\nInvalid element below the player\n"), true);
 	return (false);
