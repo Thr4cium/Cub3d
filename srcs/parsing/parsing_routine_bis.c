@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_routine_bis.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:17:12 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/16 21:34:50 by magrondi         ###   ########.fr       */
+/*   Updated: 2025/01/03 12:34:59 by rolamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	check_map_validity(t_map *map)
 	i = -1;
 	while (map->map[++i])
 	{
-		j = 0;
-		while (map->map[i][j++])
+		j = -1;
+		while (map->map[i][++j])
 		{
 			if ((j == 0 || j == ft_strlen(map->map[i]) - 1) \
 				&& map->map[i][j] == '0')
