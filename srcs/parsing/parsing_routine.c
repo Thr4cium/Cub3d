@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_routine.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 10:42:22 by rolamber          #+#    #+#             */
-/*   Updated: 2025/01/07 17:02:24 by rolamber         ###   ########.fr       */
+/*   Updated: 2025/01/23 22:12:08 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ int	get_map_line_information(t_map *map, char **array, int i)
 		if (!trimmed_line)
 			return (perror("malloc"), -1);
 		map->map = add_line(map->map, trimmed_line);
-		printf("%s\n", trimmed_line);
 		ft_free(trimmed_line);
 		if (!map->map)
 			return (perror("malloc"), -1);
