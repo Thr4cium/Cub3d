@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/19 17:36:16 by magrondi         ###   ########.fr       */
+/*   Updated: 2025/01/24 00:33:36 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,15 @@
 # include "../libft/libft.h"
 # include "../libmlx/mlx.h"
 # include "../libmlx/mlx_int.h"
+# include "macros.h"
+# include "player.h"
+# include "map_pars.h"
+# include "keys.h"
+# include "texture.h"
+# include "map.h"
+# include "my_img.h"
+# include "ray.h"
+# include "game.h"
 # include <stdio.h>
 # include <X11/keysym.h>
 # include <stdlib.h>
@@ -25,167 +34,6 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <math.h>
-
-# ifndef FILE_MAX_HEIGHT
-#  define FILE_MAX_HEIGHT 250
-# endif
-
-# ifndef FILE_MAX_WIDTH
-#  define FILE_MAX_WIDTH 250
-# endif
-
-# ifndef GREEN
-#  define GREEN 0x0000FF00
-# endif
-
-# ifndef BONUS
-#  define BONUS 0
-# endif
-
-# ifndef SCREEN_WIDTH
-#  define SCREEN_WIDTH 1280
-# endif
-
-# ifndef SCREEN_HEIGHT
-#  define SCREEN_HEIGHT 1024
-# endif
-
-# ifndef PI
-#  define PI 3.1415926535
-# endif
-
-# ifndef MINIMAP_RANGE
-#  define MINIMAP_RANGE 5
-# endif
-
-# ifndef MLX_CROSS_CODE
-#  define MLX_CROSS_CODE 17
-# endif
-
-# ifndef MV_SPEED
-#  define MV_SPEED 0.21
-# endif
-
-# ifndef ROT_SPEED
-#  define ROT_SPEED 0.09
-# endif
-
-# ifndef NORTH_ANGLE
-#  define NORTH_ANGLE 270
-# endif
-
-# ifndef WEST_ANGLE
-#  define WEST_ANGLE 180
-# endif
-
-# ifndef SOUTH_ANGLE
-#  define SOUTH_ANGLE 90
-# endif
-
-# ifndef EAST_ANGLE
-#  define EAST_ANGLE 0
-# endif
-
-typedef struct s_map_pars
-{
-	int	no;
-	int	so;
-	int	we;
-	int	ea;
-	int	c;
-	int	f;
-}	t_map_pars;
-
-typedef struct s_keys
-{
-	bool	w;
-	bool	a;
-	bool	s;
-	bool	d;
-	bool	left;
-	bool	right;
-	bool	esc;
-	bool	is_pristine;
-}	t_keys;
-
-typedef struct s_ray
-{
-	double	side_dist_x;
-	double	side_dist_y;
-	double	delta_dist_x;
-	double	delta_dist_y;
-	double	perp_wall_dist;
-	double	wall_x;
-	double	ray_dir_x;
-	double	ray_dir_y;
-	int		map_x;
-	int		map_y;
-	int		step_x;
-	int		step_y;
-	int		side;
-	int		draw_start;
-	int		draw_end;
-}	t_ray;
-
-typedef struct s_my_img
-{
-	void	*ptr;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}			t_my_img;
-
-typedef struct s_map
-{
-	int		res_x;
-	int		res_y;
-	char	*no_texture;
-	char	*so_texture;
-	char	*we_texture;
-	char	*ea_texture;
-	char	**map;
-	int		ground_color;
-	int		sky_color;
-	size_t	map_x;
-	size_t	map_y;
-}				t_map;
-
-typedef struct s_texture
-{
-	void	*ptr;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	int		width;
-	int		height;
-}			t_texture;
-
-typedef struct s_game
-{
-	t_map			*map;
-	t_my_img		*img;
-	t_map_pars		*map_pars;
-	t_keys			*keys;
-	void			*win_ptr;
-	void			*mlx_ptr;
-	t_texture		*so_img;
-	t_texture		*no_img;
-	t_texture		*we_img;
-	t_texture		*ea_img;
-	double			mouse_x;
-	double			pos_x;
-	double			pos_y;
-	double			dir_x;
-	double			dir_y;
-	double			plane_x;
-	double			plane_y;
-	int				tile_size;
-	double			center_x;
-	double			center_y;
-	bool			key_pressed;
-}				t_game;
 
 typedef enum e_move
 {

@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   angle_conversion.c                                 :+:      :+:    :+:   */
+/*   player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/13 15:15:09 by magrondi          #+#    #+#             */
-/*   Updated: 2025/01/24 00:35:07 by magrondi         ###   ########.fr       */
+/*   Created: 2025/01/23 22:50:57 by magrondi          #+#    #+#             */
+/*   Updated: 2025/01/23 22:51:34 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/cub3d.h"
+#ifndef PLAYER_H
+# define PLAYER_H
 
-float	radians_to_degrees(float radians)
+typedef struct s_player
 {
-	return (radians * (180.0 / M_PI));
-}
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+}			t_player;
 
-float	degrees_to_radians(float degrees)
-{
-	return (degrees * (M_PI / 180.0));
-}
+#endif

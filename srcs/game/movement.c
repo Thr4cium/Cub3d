@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 12:59:18 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/13 16:50:22 by magrondi         ###   ########.fr       */
+/*   Updated: 2025/01/23 22:34:04 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,33 +88,4 @@ void	move_mouse(t_game *game, t_move move, int delta_x)
 {
 	(void)move;
 	rotate(game, delta_x * 0.001);
-}
-
-void	move(t_game *game, t_move move)
-{
-	double	old_dir_x;
-
-	if (move == UP && !is_there_wall(game, UP))
-	{
-		game->pos_x += game->dir_x * 0.1;
-		game->pos_y += game->dir_y * 0.1;
-	}
-	if (move == DOWN && !is_there_wall(game, DOWN))
-	{
-		game->pos_x -= game->dir_x * 0.1;
-		game->pos_y -= game->dir_y * 0.1;
-	}
-	if (move == RIGHT)
-	{
-		old_dir_x = game->dir_x;
-		game->dir_x = (game->dir_x * cos(PI / 45) - game->dir_y * sin(PI / 45));
-		game->dir_y = (old_dir_x * sin(PI / 45) + game->dir_y * cos(PI / 45));
-	}
-	if (move == LEFT)
-	{
-		old_dir_x = game->dir_x;
-		game->dir_x = (game->dir_x * cos(-PI / 45) \
-			- game->dir_y * sin(-PI / 45));
-		game->dir_y = (old_dir_x * sin(-PI / 45) + game->dir_y * cos(-PI / 45));
-	}
 }

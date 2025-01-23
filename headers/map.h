@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   angle_conversion.c                                 :+:      :+:    :+:   */
+/*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/13 15:15:09 by magrondi          #+#    #+#             */
-/*   Updated: 2025/01/24 00:35:07 by magrondi         ###   ########.fr       */
+/*   Created: 2025/01/24 00:29:41 by magrondi          #+#    #+#             */
+/*   Updated: 2025/01/24 00:30:07 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/cub3d.h"
+#ifndef MAP_H
+# define MAP_H
 
-float	radians_to_degrees(float radians)
-{
-	return (radians * (180.0 / M_PI));
-}
+# include <stddef.h>
 
-float	degrees_to_radians(float degrees)
+typedef struct s_map
 {
-	return (degrees * (M_PI / 180.0));
-}
+	int		res_x;
+	int		res_y;
+	char	*no_texture;
+	char	*so_texture;
+	char	*we_texture;
+	char	*ea_texture;
+	char	**map;
+	int		ground_color;
+	int		sky_color;
+	size_t	map_x;
+	size_t	map_y;
+}				t_map;
+
+#endif

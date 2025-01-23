@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:13:34 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/13 17:03:32 by magrondi         ###   ########.fr       */
+/*   Updated: 2025/01/24 00:35:41 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ void	print_minimap_perp_rays(t_game *game)
 	i = 0;
 	x_0 = (SCREEN_WIDTH / 7.1) + game->dir_x * 120;
 	y_0 = (SCREEN_HEIGHT / 5.8) + game->dir_y * 120;
-	x_dir = (game->dir_x * cos(PI / 2) - game->dir_y * sin(PI / 2));
-	y_dir = (game->dir_x * sin(PI / 2) + game->dir_y * cos(PI / 2));
+	x_dir = (game->dir_x * cos(M_PI / 2) - game->dir_y * sin(M_PI / 2));
+	y_dir = (game->dir_x * sin(M_PI / 2) + game->dir_y * cos(M_PI / 2));
 	while (i < 60)
 	{
 		my_mlx_pixel_put(game->img, x_0 + x_dir * i, y_0 + y_dir * i, GREEN);
 		i++;
 	}
-	x_dir = (game->dir_x * cos(-PI / 2) - game->dir_y * sin(-PI / 2));
-	y_dir = (game->dir_x * sin(-PI / 2) + game->dir_y * cos(-PI / 2));
+	x_dir = (game->dir_x * cos(-M_PI / 2) - game->dir_y * sin(-M_PI / 2));
+	y_dir = (game->dir_x * sin(-M_PI / 2) + game->dir_y * cos(-M_PI / 2));
 	i = 0;
 	while (i < 60)
 	{
@@ -49,7 +49,7 @@ void	ray_casting(t_game *game)
 	double		half_fov_radians;
 	double		camera_x;
 
-	half_fov_radians = (60 * PI / 180.0) / 2.0;
+	half_fov_radians = (60 * M_PI / 180.0) / 2.0;
 	x = 0;
 	set_ray(&ray);
 	while (x < SCREEN_WIDTH)

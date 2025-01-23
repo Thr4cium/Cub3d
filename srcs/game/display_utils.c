@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 16:35:56 by rolamber          #+#    #+#             */
-/*   Updated: 2024/12/13 17:35:44 by magrondi         ###   ########.fr       */
+/*   Updated: 2025/01/24 00:35:18 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void	draw_round(t_game *game, double x, double y, int r)
 	y1 = 0;
 	while (i < 360)
 	{
-		x1 = r * cos(i * PI / 180);
-		y1 = r * sin(i * PI / 180);
+		x1 = r * cos(i * M_PI / 180);
+		y1 = r * sin(i * M_PI / 180);
 		if (x1 <= 0)
 			while (x1 <= 0)
 				my_mlx_pixel_put(game->img, x + x1++, y + y1, 0x00FF0000);

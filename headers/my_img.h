@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   angle_conversion.c                                 :+:      :+:    :+:   */
+/*   my_img.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/13 15:15:09 by magrondi          #+#    #+#             */
-/*   Updated: 2025/01/24 00:35:07 by magrondi         ###   ########.fr       */
+/*   Created: 2025/01/24 00:30:40 by magrondi          #+#    #+#             */
+/*   Updated: 2025/01/24 00:31:15 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/cub3d.h"
+#ifndef MY_IMG_H
+# define MY_IMG_H
 
-float	radians_to_degrees(float radians)
+typedef struct s_my_img
 {
-	return (radians * (180.0 / M_PI));
-}
+	void	*ptr;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}			t_my_img;
 
-float	degrees_to_radians(float degrees)
-{
-	return (degrees * (M_PI / 180.0));
-}
+#endif

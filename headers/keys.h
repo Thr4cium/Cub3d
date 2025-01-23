@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   angle_conversion.c                                 :+:      :+:    :+:   */
+/*   keys.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/13 15:15:09 by magrondi          #+#    #+#             */
-/*   Updated: 2025/01/24 00:35:07 by magrondi         ###   ########.fr       */
+/*   Created: 2025/01/23 22:54:00 by magrondi          #+#    #+#             */
+/*   Updated: 2025/01/23 23:50:59 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/cub3d.h"
+#ifndef KEYS_H
+# define KEYS_H
 
-float	radians_to_degrees(float radians)
+typedef struct s_keys
 {
-	return (radians * (180.0 / M_PI));
-}
+	bool	w;
+	bool	a;
+	bool	s;
+	bool	d;
+	bool	left;
+	bool	right;
+	bool	esc;
+	bool	is_pristine;
+}	t_keys;
 
-float	degrees_to_radians(float degrees)
-{
-	return (degrees * (M_PI / 180.0));
-}
+#endif

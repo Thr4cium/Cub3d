@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:32:51 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/26 11:25:04 by rolamber         ###   ########.fr       */
+/*   Updated: 2025/01/23 22:26:25 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,6 @@ static	void	process_input(t_game *game)
 		rotate(game, -ROT_SPEED);
 	if (game->keys->right)
 		rotate(game, ROT_SPEED);
-}
-
-bool	is_there_wall(t_game *game, t_move move)
-{
-	int	x;
-	int	y;
-
-	if (move == UP)
-	{
-		x = game->pos_x + game->dir_x * 0.2;
-		y = game->pos_y + game->dir_y * 0.2;
-	}
-	if (move == DOWN)
-	{
-		x = game->pos_x - game->dir_x * 0.2;
-		y = game->pos_y - game->dir_y * 0.2;
-	}
-	if (game->map->map[(int)y][(int)x] == '1')
-		return (true);
-	return (false);
 }
 
 int	update_game(t_game *game)

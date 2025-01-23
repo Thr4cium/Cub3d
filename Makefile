@@ -6,7 +6,7 @@
 #    By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/12 08:27:52 by rolamber          #+#    #+#              #
-#    Updated: 2024/12/19 14:44:22 by magrondi         ###   ########.fr        #
+#    Updated: 2025/01/24 00:34:53 by magrondi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,16 @@ MINILIB             =   libmlx
 
 MLX_AR_PATH         =   ./${MINILIB}/libmlx.a
 
-HEADERS             =   ./headers/cub3d.h
+HEADERS             =   ./headers/cub3d.h \
+                        ./headers/game.h \
+                        ./headers/keys.h \
+                        ./headers/macros.h \
+                        ./headers/map.h \
+                        ./headers/map_pars.h \
+                        ./headers/my_img.h \
+                        ./headers/player.h \
+                        ./headers/ray.h \
+                        ./headers/texture.h \
 
 CC                  =   cc
 

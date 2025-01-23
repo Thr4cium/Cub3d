@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   angle_conversion.c                                 :+:      :+:    :+:   */
+/*   map_pars.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/13 15:15:09 by magrondi          #+#    #+#             */
-/*   Updated: 2025/01/24 00:35:07 by magrondi         ###   ########.fr       */
+/*   Created: 2025/01/23 22:53:06 by magrondi          #+#    #+#             */
+/*   Updated: 2025/01/23 22:53:44 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/cub3d.h"
+#ifndef MAP_PARS_H
+# define MAP_PARS_H
 
-float	radians_to_degrees(float radians)
+typedef struct s_map_pars
 {
-	return (radians * (180.0 / M_PI));
-}
+	int	no;
+	int	so;
+	int	we;
+	int	ea;
+	int	c;
+	int	f;
+}	t_map_pars;
 
-float	degrees_to_radians(float degrees)
-{
-	return (degrees * (M_PI / 180.0));
-}
+#endif
