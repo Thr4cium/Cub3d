@@ -6,12 +6,16 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 22:51:49 by magrondi          #+#    #+#             */
-/*   Updated: 2025/01/24 00:31:37 by magrondi         ###   ########.fr       */
+/*   Updated: 2025/01/24 02:15:25 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MACROS_H
 # define MACROS_H
+
+# ifndef FOV
+#  define FOV 60
+# endif
 
 # ifndef FILE_MAX_HEIGHT
 #  define FILE_MAX_HEIGHT 250
@@ -67,6 +71,10 @@
 
 # ifndef EAST_ANGLE
 #  define EAST_ANGLE 0
+# endif
+
+# ifndef ONE_DEGREE_IN_RADIANS
+#  define ONE_DEGREE_IN_RADIANS 0.0174533
 # endif
 
 #endif

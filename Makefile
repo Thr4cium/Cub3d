@@ -6,7 +6,7 @@
 #    By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/12 08:27:52 by rolamber          #+#    #+#              #
-#    Updated: 2025/01/24 00:34:53 by magrondi         ###   ########.fr        #
+#    Updated: 2025/01/24 00:55:36 by magrondi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,6 @@ HEADERS             =   ./headers/cub3d.h \
                         ./headers/map.h \
                         ./headers/map_pars.h \
                         ./headers/my_img.h \
-                        ./headers/player.h \
                         ./headers/ray.h \
                         ./headers/texture.h \
 

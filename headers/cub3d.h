@@ -6,18 +6,16 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2025/01/24 00:33:36 by magrondi         ###   ########.fr       */
+/*   Updated: 2025/01/24 00:55:48 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-# include <math.h>
 # include "../libft/libft.h"
 # include "../libmlx/mlx.h"
 # include "../libmlx/mlx_int.h"
 # include "macros.h"
-# include "player.h"
 # include "map_pars.h"
 # include "keys.h"
 # include "texture.h"

@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 00:33:04 by magrondi          #+#    #+#             */
-/*   Updated: 2025/01/24 00:35:53 by magrondi         ###   ########.fr       */
+/*   Updated: 2025/01/24 02:59:27 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,16 @@ typedef struct s_ray
 	int		draw_start;
 	int		draw_end;
 }	t_ray;
+
+typedef struct s_rayon
+{
+	int	step_x;
+	int	step_y;
+	int	hit;
+	int	side;
+	int	distance;
+	int starting_x;
+	int starting_y;
+}	t_rayon;
 
 #endif
