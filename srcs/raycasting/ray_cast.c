@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:13:34 by rolamber          #+#    #+#             */
-/*   Updated: 2025/01/27 10:41:51 by magrondi         ###   ########.fr       */
+/*   Updated: 2025/01/27 10:58:57 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	set_ray(t_ray *ray);
 
 void	compute_wall_inf(t_rayon *ray, t_game *game)
 {
-	double fish_eye_correction;
+	double	fish_eye_correction;
 
 	ray->wall_height = (int)(SCREEN_HEIGHT / ray->perp_wall_dist);
 	ray->draw_start = (SCREEN_HEIGHT / 2) - (ray->wall_height / 2);
@@ -29,10 +29,11 @@ void	compute_wall_inf(t_rayon *ray, t_game *game)
 	ray->step_x = ray->wall_x - game->pos_x;
 	ray->step_y = ray->wall_y - game->pos_y;
 	ray->perp_wall_dist = sqrt(pow(ray->wall_x - game->pos_x, 2)
-		+ pow(ray->wall_y - game->pos_y, 2));
-	fish_eye_correction = (game->dir_x * ray->tmp_dir_x + game->dir_y * ray->tmp_dir_y) /
-		(sqrt(pow(game->dir_x, 2) + pow(game->dir_y, 2)) *
-		 sqrt(pow(ray->tmp_dir_x, 2) + pow(ray->tmp_dir_y, 2)));
+			+ pow(ray->wall_y - game->pos_y, 2));
+	fish_eye_correction = (game->dir_x * ray->tmp_dir_x
+			+ game->dir_y * ray->tmp_dir_y)
+		/ (sqrt(pow(game->dir_x, 2) + pow(game->dir_y, 2))
+			* sqrt(pow(ray->tmp_dir_x, 2) + pow(ray->tmp_dir_y, 2)));
 	ray->perp_wall_dist = (fish_eye_correction * ray->perp_wall_dist);
 	ray->delta_dist_x = (ray->wall_x - game->pos_x) / ray->tmp_dir_x
 		* ray->perp_wall_dist;
