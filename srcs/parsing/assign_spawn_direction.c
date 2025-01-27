@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:51:20 by magrondi          #+#    #+#             */
-/*   Updated: 2025/01/23 22:33:23 by magrondi         ###   ########.fr       */
+/*   Updated: 2025/01/27 02:20:46 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static	int	assign_angle_direction(t_game *game, float angle)
 	game->dir_y = sin((angle));
 	game->plane_x = (-game->dir_y * plane_len);
 	game->plane_y = (game->dir_x * plane_len);
-	printf("dir_x: %f, dir_y: %f, plane_x: %f, plane_y: %f\n", game->dir_x, game->dir_y, game->plane_x, game->plane_y);
 	return (1);
 }
 

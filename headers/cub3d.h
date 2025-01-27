@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 08:30:04 by rolamber          #+#    #+#             */
-/*   Updated: 2025/01/24 00:55:48 by magrondi         ###   ########.fr       */
+/*   Updated: 2025/01/27 04:09:23 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ int			get_color(t_texture *texture, t_ray *ray, int x, int delta);
 
 // ray cast
 void		print_rays(t_game *game);
-void		ray_casting(t_game *game);
 int			ray_cast(t_game *game, t_ray *ray, int i);
 void		init_ray(t_game *game, t_ray *ray);
 void		init_ray2(t_game *game, t_ray *ray);

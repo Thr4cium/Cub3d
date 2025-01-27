@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 15:15:09 by magrondi          #+#    #+#             */
-/*   Updated: 2025/01/24 00:35:07 by magrondi         ###   ########.fr       */
+/*   Updated: 2025/01/27 06:06:51 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ float	degrees_to_radians(float degrees)
 	return (degrees * (M_PI / 180.0));
 }
 
-bool is_integer(double value)
+bool	is_integer(double value)
 {
 	return (fmod(value, 1.0) == 0.0);
 }

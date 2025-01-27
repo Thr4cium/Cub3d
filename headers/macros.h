@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 22:51:49 by magrondi          #+#    #+#             */
-/*   Updated: 2025/01/24 02:15:25 by magrondi         ###   ########.fr       */
+/*   Updated: 2025/01/27 05:39:02 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,14 @@
 
 # ifndef ONE_DEGREE_IN_RADIANS
 #  define ONE_DEGREE_IN_RADIANS 0.0174533
+# endif
+
+# ifndef WHITE_COLOR
+#  define WHITE_COLOR 0x00FFFFFF
+# endif
+
+# ifndef GRAY_COLOR
+#  define GRAY_COLOR 0x00A9A9A9
 # endif
 
 #endif

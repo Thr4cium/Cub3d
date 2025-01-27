@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   display_game.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rolamber <rolamber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 16:06:33 by rolamber          #+#    #+#             */
-/*   Updated: 2024/09/26 09:25:58 by rolamber         ###   ########.fr       */
+/*   Updated: 2025/01/27 04:10:10 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
 
 void	throw_ray(t_game *game);
+void	ray_casting(t_game *game);
 
 int	display_game(t_game *game)
 {
@@ -25,7 +26,8 @@ int	display_game(t_game *game)
 		draw_line(game, SCREEN_WIDTH / 7.1, SCREEN_HEIGHT / 5.8, 0x0090EE90);
 		print_minimap_perp_rays(game);
 	}
-	throw_ray(game);
+	// throw_ray(game);
+	ray_casting(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img->ptr, 0, 0);
 	return (0);
 }
