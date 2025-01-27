@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:13:34 by rolamber          #+#    #+#             */
-/*   Updated: 2025/01/27 08:00:59 by magrondi         ###   ########.fr       */
+/*   Updated: 2025/01/27 10:41:51 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 void	set_ray(t_ray *ray);
 
-void	compute_wall_inf(t_rayon *ray)
+void	compute_wall_inf(t_rayon *ray, t_game *game)
 {
+	double fish_eye_correction;
+
 	ray->wall_height = (int)(SCREEN_HEIGHT / ray->perp_wall_dist);
 	ray->draw_start = (SCREEN_HEIGHT / 2) - (ray->wall_height / 2);
 	if (ray->draw_start < 0)
@@ -23,7 +25,19 @@ void	compute_wall_inf(t_rayon *ray)
 	ray->draw_end = (SCREEN_HEIGHT / 2) + (ray->wall_height / 2);
 	if (ray->draw_end >= SCREEN_HEIGHT)
 		ray->draw_end = SCREEN_HEIGHT - 1;
-	ray->wall_x -= floor(ray->wall_x);
+	(void)game;
+	ray->step_x = ray->wall_x - game->pos_x;
+	ray->step_y = ray->wall_y - game->pos_y;
+	ray->perp_wall_dist = sqrt(pow(ray->wall_x - game->pos_x, 2)
+		+ pow(ray->wall_y - game->pos_y, 2));
+	fish_eye_correction = (game->dir_x * ray->tmp_dir_x + game->dir_y * ray->tmp_dir_y) /
+		(sqrt(pow(game->dir_x, 2) + pow(game->dir_y, 2)) *
+		 sqrt(pow(ray->tmp_dir_x, 2) + pow(ray->tmp_dir_y, 2)));
+	ray->perp_wall_dist = (fish_eye_correction * ray->perp_wall_dist);
+	ray->delta_dist_x = (ray->wall_x - game->pos_x) / ray->tmp_dir_x
+		* ray->perp_wall_dist;
+	ray->delta_dist_y = (ray->wall_height - game->pos_y) / ray->tmp_dir_y
+		* ray->perp_wall_dist;
 }
 
 void	get_wall_position(t_game *game, t_rayon *ray)
@@ -38,14 +52,8 @@ void	get_wall_position(t_game *game, t_rayon *ray)
 		line_x += ray->tmp_dir_x * 0.01;
 		line_y += ray->tmp_dir_y * 0.01;
 	}
-	if (fabs(line_x - game->pos_x) > fabs(line_y - game->pos_y))
-		ray->side = 0;
-	else
-		ray->side = 1;
 	ray->wall_x = line_x;
 	ray->wall_y = line_y;
-	ray->perp_wall_dist = sqrt(pow(line_x - game->pos_x, 2)
-			+ pow(line_y - game->pos_y, 2));
 }
 
 void	print_minimap_perp_rays(t_game *game)
@@ -74,32 +82,6 @@ void	print_minimap_perp_rays(t_game *game)
 		my_mlx_pixel_put(game->img, x_0 + x_dir * i, y_0 + y_dir * i, GREEN);
 		i++;
 	}
-}
-
-int	get_color_test(t_texture *texture, t_rayon *ray, int x, int delta)
-{
-	char	*ptr;
-	int		color;
-	int		texx;
-	int		texy;
-	int		y;
-
-	texx = ray->wall_x * texture->width;
-	if (ray->side == 0 && ray->tmp_dir_x > 0)
-		texx = texture->width - texx - 1;
-	if (ray->side == 1 && ray->tmp_dir_y < 0)
-		texx = texture->width - texx - 1;
-	if (delta > SCREEN_HEIGHT)
-	{
-		y = ((delta - SCREEN_HEIGHT) / 2) * texture->height / delta;
-		texy = y + x * texture->height / delta;
-	}
-	else
-		texy = x * texture->height / delta;
-	ptr = texture->addr + (texy * texture->line_length + \
-		texx * (texture->bits_per_pixel / 8));
-	color = *(unsigned int *)ptr;
-	return (color);
 }
 
 void	draw_wall_test(t_game *game, t_rayon *ray, int x)
@@ -147,7 +129,7 @@ void	ray_casting(t_game *game)
 		ray.tmp_dir_y = (game->dir_y
 				+ game->plane_y * camera_x);
 		get_wall_position(game, &ray);
-		compute_wall_inf(&ray);
+		compute_wall_inf(&ray, game);
 		draw_wall_test(game, &ray, x);
 		x ++;
 	}

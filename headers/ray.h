@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 00:33:04 by magrondi          #+#    #+#             */
-/*   Updated: 2025/01/27 02:24:25 by magrondi         ###   ########.fr       */
+/*   Updated: 2025/01/27 08:58:54 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct s_rayon
 	double	wall_height;
 	int		draw_start;
 	int		draw_end;
+	double	delta_dist_x;
+	double	delta_dist_y;
 }	t_rayon;
 
 #endif
