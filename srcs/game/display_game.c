@@ -12,6 +12,8 @@
 
 #include "../../headers/cub3d.h"
 
+void	throw_ray(t_game *game);
+
 int	display_game(t_game *game)
 {
 	set_window_color(game, 0x00303030);
@@ -23,7 +25,7 @@ int	display_game(t_game *game)
 		draw_line(game, SCREEN_WIDTH / 7.1, SCREEN_HEIGHT / 5.8, 0x0090EE90);
 		print_minimap_perp_rays(game);
 	}
-	ray_casting(game);
+	throw_ray(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img->ptr, 0, 0);
 	return (0);
 }

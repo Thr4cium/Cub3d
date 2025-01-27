@@ -45,6 +45,7 @@ PARSING_SRCS        =   ./srcs/parsing/assign_spawn_direction.c \
                         ./srcs/parsing/texture_loading.c \
 
 RAYCASTING_SRCS     =   ./srcs/raycasting/ray_cast.c \
+                        ./srcs/raycasting/throw_rays.c \
                         ./srcs/raycasting/ray_cast_utils.c \
 
 GAME_SRCS           =   ./srcs/game/display_game.c \

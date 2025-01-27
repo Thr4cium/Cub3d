@@ -42,19 +42,6 @@ void	print_minimap_perp_rays(t_game *game)
 	}
 }
 
-void	ray_casting(t_game *game)
-{
-	t_ray		ray;
-	int			x;
-	double		half_fov_radians;
-	double		camera_x;
-
-	half_fov_radians = (60 * M_PI / 180.0) / 2.0;
-	x = 0;
-	set_ray(&ray);
-	
-}
-
 // int	ray_cast(t_game *game, t_ray *ray, int i)
 // {
 // 	init_ray(game, ray);

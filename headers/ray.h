@@ -13,6 +13,8 @@
 #ifndef RAY_H
 # define RAY_H
 
+# include <stdbool.h>
+
 typedef struct s_ray
 {
 	double	side_dist_x;
@@ -34,13 +36,17 @@ typedef struct s_ray
 
 typedef struct s_rayon
 {
-	int	step_x;
-	int	step_y;
-	int	hit;
-	int	side;
-	int	distance;
-	int starting_x;
-	int starting_y;
+	float	tmp_dir_x;
+	float	tmp_dir_y;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	int		distance;
+	float	wall_x;
+	float	wall_y;
+	double	perp_wall_dist;
+	double	wall_height;
 }	t_rayon;
 
 #endif

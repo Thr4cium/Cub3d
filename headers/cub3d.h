@@ -131,5 +131,6 @@ void		my_mlx_pixel_put(t_my_img *img, int x, int y, int color);
 void		free_all(t_game *game);
 float		radians_to_degrees(float radians);
 float		degrees_to_radians(float degrees);
+bool		is_integer(double value);
 
 #endif

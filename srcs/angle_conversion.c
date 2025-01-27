@@ -21,3 +21,8 @@ float	degrees_to_radians(float degrees)
 {
 	return (degrees * (M_PI / 180.0));
 }
+
+bool is_integer(double value)
+{
+	return (fmod(value, 1.0) == 0.0);
+}
