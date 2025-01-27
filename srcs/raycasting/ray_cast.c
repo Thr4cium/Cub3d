@@ -6,7 +6,7 @@
 /*   By: magrondi <magrondi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:13:34 by rolamber          #+#    #+#             */
-/*   Updated: 2025/01/27 06:07:54 by magrondi         ###   ########.fr       */
+/*   Updated: 2025/01/27 08:00:59 by magrondi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	set_ray(t_ray *ray);
 
-void	compute_distance_and_side(t_rayon *ray)
+void	compute_wall_inf(t_rayon *ray)
 {
 	ray->wall_height = (int)(SCREEN_HEIGHT / ray->perp_wall_dist);
 	ray->draw_start = (SCREEN_HEIGHT / 2) - (ray->wall_height / 2);
@@ -147,7 +147,7 @@ void	ray_casting(t_game *game)
 		ray.tmp_dir_y = (game->dir_y
 				+ game->plane_y * camera_x);
 		get_wall_position(game, &ray);
-		compute_distance_and_side(&ray);
+		compute_wall_inf(&ray);
 		draw_wall_test(game, &ray, x);
 		x ++;
 	}
@@ -165,11 +165,10 @@ void	init_ray(t_game *game, t_ray *ray)
 	else
 		ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
 	if (ray->delta_dist_y == 0)
-		ray->delta_dist_y = 10;
+		ray->delta_dist_y = 1;
 	else
 		ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
 	ray->ray_dir_x = ray->ray_dir_x ;
-	ray->ray_dir_y = ray->ray_dir_y;
 	init_ray2(game, ray);
 }
 
